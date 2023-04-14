@@ -4,6 +4,10 @@ import {
   useAccountInGameInfosQuery,
   useAccountLockupTokensQuery,
   useAccountTokensQuery,
+  useAllTxQuery,
+  useFirstTxQuery,
+  useNftTxQuery,
+  useTokenTxQuery,
 } from '~/api/account-portfolios';
 import { useContractDeposit } from '~/api/contract/change-owner';
 import { useContractList } from '~/api/contract/list';
@@ -21,6 +25,7 @@ import {
 } from '~/components/portfolios';
 
 import { parseLidoStakingAsset } from '~/utils/token';
+import { parseTxHistory } from '~/utils/transactions';
 import { useListingDataState } from '~/states/listing-data';
 
 import { BackButton } from '../components/back-button';
@@ -49,12 +54,39 @@ export const ListingStep2 = () => {
     enabled: !!address,
   });
 
+  const { data: firstTxData } = useFirstTxQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: allTxData } = useAllTxQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: tokenTxData } = useTokenTxQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: nftTxData } = useNftTxQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+
   const tokens = tokenData?.data.data.erc20.data;
   const nfts = tokenData?.data.data.erc721.data;
   const sbts = tokenData?.data.data.poap.data;
 
+  const firstTx = firstTxData?.data.result?.[0];
+  const allTx = allTxData?.data.result;
+  const tokenTx = tokenTxData?.data.result;
+  const nftTx = nftTxData?.data.result;
+
   const lido = tokens?.find(t => t.token.symbol === 'stETH');
   const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];
+  const histories = parseTxHistory({ firstTx, allTx, tokenTx, nftTx });
 
   const {
     writeAsync: listAsync,
@@ -114,7 +146,7 @@ export const ListingStep2 = () => {
             <Divider />
             <PortfolioStakingAssets data={stakingAssets} />
             <Divider />
-            {/* <PortfolioTxHistories data={txHistories?.data} /> */}
+            <PortfolioTxHistories data={histories} />
           </PortfolioInnerWrapper>
         </PortfolioWrapper>
       </ContentWrapper>

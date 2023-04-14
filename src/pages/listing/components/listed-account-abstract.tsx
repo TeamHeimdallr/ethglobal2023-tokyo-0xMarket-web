@@ -35,7 +35,7 @@ export const ListedAccountAbstract = () => {
   });
 
   const tokens = tokenData?.data.data.erc20.data;
-  const nfts = tokenData?.data.data.erc721.data;
+  // const nfts = tokenData?.data.data.erc721.data;
 
   const lido = tokens?.find(t => t.token.symbol === 'stETH');
   const stakingAssets = useMemo(() => (lido ? [parseLidoStakingAsset(lido)] : []), [lido]);
