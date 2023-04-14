@@ -1,17 +1,17 @@
 import tw from 'twin.macro';
 import { useAccount, useDisconnect } from 'wagmi';
 
-import { DropdownBalance } from '~/components/dropdown-balance';
+import { DropdownProfile } from '~/components/dropdown-profile';
 
 import { CURRENCY } from '~/types';
 
 export default {
-  title: 'Components/DropdownBalance',
-  component: DropdownBalance,
+  title: 'Components/DropdownProfile',
+  component: DropdownProfile,
   argTypes: {},
 };
 
-export const _BalanceDropdown = () => {
+export const _DropdownProfile = () => {
   const { address } = useAccount();
 
   const { disconnect } = useDisconnect();
@@ -23,7 +23,7 @@ export const _BalanceDropdown = () => {
 
   return (
     <Wrapper>
-      <DropdownBalance balances={balances} disconnect={disconnect} address={parsedAddress} />
+      <DropdownProfile balances={balances} disconnect={disconnect} address={parsedAddress} />
     </Wrapper>
   );
 };

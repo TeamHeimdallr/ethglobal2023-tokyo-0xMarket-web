@@ -19,7 +19,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   disconnect?: () => void;
 }
 
-export const DropdownBalance = ({ address, balances, disconnect, ...rest }: Props) => {
+export const DropdownProfile = ({ address, balances, disconnect, ...rest }: Props) => {
   const [opened, open] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ export const DropdownBalance = ({ address, balances, disconnect, ...rest }: Prop
             color={COLOR.GRAYSCALE_5().toHexString()}
             width={20}
             height={20}
-          ></IconCopy>
+          />
         </CopyIconWrapper>
       </AddressWrapper>
       {opened && (
