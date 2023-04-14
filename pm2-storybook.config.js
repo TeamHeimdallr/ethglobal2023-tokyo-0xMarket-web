@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: '[storybook server]',
-      script: 'start-storybook -p 6006 -s public --quiet',
+      script: 'sb dev -p 6006 --quiet',
       ignore_watch: ['.'],
       env: {
         REACT_APP_ENABLE_MOCK: true,
