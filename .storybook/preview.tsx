@@ -9,10 +9,10 @@ import { WagmiConfig } from 'wagmi';
 import { client } from '../src/configs/setup-wallet';
 import '../src/styles/build/index.css';
 
-// MSW initialize
 initialize({
   onUnhandledRequest: 'bypass',
 });
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -39,11 +39,11 @@ const preview: Preview = {
   },
   decorators: [
     mswDecorator,
-    Story => (
+    (Story, context) => (
       <WagmiConfig client={client}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <Story />
+            <Story {...context} />
           </BrowserRouter>
         </QueryClientProvider>
       </WagmiConfig>
