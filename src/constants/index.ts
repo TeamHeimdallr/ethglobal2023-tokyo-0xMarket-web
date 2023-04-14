@@ -15,10 +15,10 @@ export const MARKET_CONTRACT_ADDRESS = IS_MAINNET ? '0x' : '0x';
 export const API_URL = IS_LOCAL
   ? 'http://localhost:8080'
   : IS_DEV
-  ? 'https://'
+  ? 'http://localhost:8080'
   : IS_PROD
-  ? 'https://'
-  : 'https://';
+  ? 'http://localhost:8080'
+  : 'http://localhost:8080';
 
 export const CategoriesMap: CategoryMap = {
   [CATEGORIES.GAME]: {

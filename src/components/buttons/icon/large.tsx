@@ -47,7 +47,7 @@ const Wrapper = styled.button<WrapperProps>(({ selected }) => [
     ? css`
         &,
         &:hover {
-          background: transparent !important;
+          background: #333d4b;
           & svg path {
             fill: #ffc875 !important;
           }

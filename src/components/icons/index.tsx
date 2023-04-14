@@ -782,7 +782,7 @@ export const IconNew = ({ color, ...rest }: IconProps) => {
       <circle cx="12" cy="12" r="9" fill={color ?? '#191F28'} />
       <path
         d="M7.5 16.5V7.5H11.2246L14.192 14.6753H14.6194L14.3752 14.8973V7.5H16.5V16.5H12.751L9.78358 9.32466H9.35617L9.60041 9.10274V16.5H7.5Z"
-        fill="white"
+        fill="#000000"
       />
     </svg>
   );
