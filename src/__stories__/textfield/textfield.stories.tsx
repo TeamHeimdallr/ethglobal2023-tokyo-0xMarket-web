@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-import { IconWallet } from '~/components/icons';
+import { IconDallar, IconWallet } from '~/components/icons';
 import { TextField, TextFieldMultiline, TextFieldNumber } from '~/components/textfield';
 
 export default {
@@ -16,7 +16,11 @@ export const _Textfield = () => (
       onChange={value => console.log(value)}
     />
     <TextFieldMultiline onChange={value => console.log(value)} />
-    <TextFieldNumber onChange={value => console.log(value)} />
+    <TextFieldNumber
+      prefixIcon={<IconDallar />}
+      placeholder="Price"
+      onChange={value => console.log(value)}
+    />
   </Wrapper>
 );
 
