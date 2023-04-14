@@ -38,6 +38,7 @@ const preview: Preview = {
     },
   },
   decorators: [
+    mswDecorator,
     Story => (
       <WagmiConfig client={client}>
         <QueryClientProvider client={queryClient}>
