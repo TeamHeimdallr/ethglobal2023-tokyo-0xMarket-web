@@ -1,3 +1,4 @@
+import { ethers } from 'ethers';
 import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 
 import { MARKETPLACE_ABI } from '~/abi/marketplace';
@@ -19,7 +20,7 @@ export const useContractBuy = ({ address }: BuyParam) => {
     ],
 
     chainId: DEFAULT_CHAIN_ID,
-    enabled: !!address && address !== '0x',
+    enabled: !!address && ethers.utils.isAddress(address),
     onError(error) {
       console.log('Error', error);
     },

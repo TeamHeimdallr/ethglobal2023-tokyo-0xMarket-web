@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ethers } from 'ethers';
 import {
   useContractRead,
   useContractWrite,
@@ -24,7 +25,7 @@ export const useContractDeposit = ({ address }: ListParam) => {
       },
     ],
     chainId: DEFAULT_CHAIN_ID,
-    enabled: !!address && address !== '0x',
+    enabled: !!address && ethers.utils.isAddress(address),
     onError(error) {
       console.log('Error', error);
     },
@@ -47,9 +48,8 @@ export const useContractOwnerQuery = ({ address }: ListParam) => {
     abi: TRADABLE_ACCOUNT_ABI,
     functionName: 'owner',
     args: [],
-    enabled: !!address && address !== '0x',
+    enabled: !!address && ethers.utils.isAddress(address),
     onSuccess: data => {
-      console.log(data?.toString());
       if (data) setOwner(data?.toString());
     },
   });

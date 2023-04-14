@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ethers } from 'ethers';
 import {
   useContractRead,
   useContractWrite,
@@ -24,7 +25,7 @@ export const useContractRegister = ({ address }: RegisterParam) => {
       },
     ],
     chainId: DEFAULT_CHAIN_ID,
-    enabled: !!address,
+    enabled: !!address && ethers.utils.isAddress(address),
     onError(error) {
       console.log('Error', error);
     },
@@ -47,7 +48,7 @@ export const useContractRegisterQuery = ({ address }: RegisterParam) => {
     abi: MARKETPLACE_ABI,
     functionName: 'accountRegister',
     args: [address],
-    enabled: !!address,
+    enabled: !!address && ethers.utils.isAddress(address),
     onSuccess: data => {
       console.log(data?.toString());
       if (data) setOwner(data?.toString());

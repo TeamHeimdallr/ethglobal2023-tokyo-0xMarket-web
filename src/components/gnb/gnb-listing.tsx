@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { ethers } from 'ethers';
 import tw from 'twin.macro';
 
 import { useContractOwnerQuery } from '~/api/contract/change-owner';
@@ -35,7 +36,7 @@ export const GnbListing = ({
   const { data } = useListingDataState();
 
   const { refetch, owner } = useContractOwnerQuery({
-    address: (data?.address as `0x${string}`) ?? '0x',
+    address: (data?.address as `0x${string}`) ?? '',
   });
 
   const nextButtonText = useMemo(() => {
@@ -78,8 +79,8 @@ export const GnbListing = ({
   }, [isDepositSuccess, setProgress]);
 
   useEffect(() => {
-    if (data.address !== '0x') refetch();
-  }, [data, data.address, refetch]);
+    if (!!data.address && ethers.utils.isAddress(data.address)) refetch();
+  }, [data.address, refetch]);
 
   return (
     <Wrapper>
