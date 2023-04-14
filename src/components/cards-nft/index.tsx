@@ -24,7 +24,6 @@ export const CardNFT = ({ image, tokenName, tokenId, tokenPrice, sbt = false, ..
           <TokenPriceContent>
             <Value>
               {parseNumberCommaSeperator({ number: tokenPrice.balance, decimalPoint: 2 })}
-              {` `}
             </Value>
             <Currency>{tokenPrice.currency}</Currency>
           </TokenPriceContent>
