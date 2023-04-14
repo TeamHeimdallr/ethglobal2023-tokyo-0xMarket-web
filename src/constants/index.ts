@@ -47,3 +47,13 @@ export const CategoriesMap: CategoryMap = {
     color: COLOR.GENERAL().toHexString(),
   },
 };
+
+export const CHAIN_ID = {
+  GOERLI: 5,
+  POLYGON: 137,
+  ARBITRUM: 42161,
+};
+
+export const DATE_FORMATTER = {
+  MMM_d_yyyy: 'MMM d, yyyy',
+};

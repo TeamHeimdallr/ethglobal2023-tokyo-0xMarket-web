@@ -11,89 +11,52 @@ export default {
 };
 
 export const _CardNFT = () => {
-  const firstNFT = {
-    tokenId: 1456,
-    tokenName: 'Bored Ape Yacht Club',
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    tokenPrice: {
-      balance: 99.99,
-      currency: CURRENCY.ETH,
-    },
-  };
-  const secondNFT = {
-    tokenId: 1457,
-    tokenName: 'Bored Ape Yacht Club',
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    tokenPrice: {
-      balance: 99.99,
-      currency: CURRENCY.ETH,
-    },
-  };
-  const thirdNFT = {
-    tokenId: 1458,
-    tokenName: 'Bored Ape Yacht Club',
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    tokenPrice: {
-      balance: 99.99,
-      currency: CURRENCY.ETH,
-    },
-  };
-  const fourthNFT = {
-    tokenId: 1459,
-    tokenName: 'Bored Ape Yacht Club',
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    tokenPrice: {
-      balance: 99.99,
-      currency: CURRENCY.ETH,
-    },
-  };
-  const firstSBT = {
-    tokenId: 1456,
-    tokenName: 'Bored Ape Yacht Club',
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    sbt: true,
-  };
-  const secondSBT = {
-    tokenId: 1457,
-    tokenName: 'Bored Ape Yacht Club',
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    sbt: true,
-  };
-  const thirdSBT = {
-    tokenId: 1458,
-    tokenName: 'Bored Ape Yacht Club',
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    sbt: true,
-  };
-  const fourthSBT = {
-    tokenId: 1459,
-    tokenName: 'Bored Ape Yacht Club',
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    sbt: true,
-  };
-
   return (
     <Wrapper>
       <CardContainer>
-        <CardNFT {...firstSBT} />
-        <CardNFT {...secondSBT} />
-        <CardNFT {...thirdSBT} />
-        <CardNFT {...fourthSBT} />
+        <CardNFT
+          image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
+          nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
+          tokenValue={{ name: CURRENCY.ETH, value: '230.99' }}
+        />
+        <CardNFT
+          image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
+          nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
+          tokenValue={{ name: CURRENCY.ETH, value: '230.99' }}
+        />
+        <CardNFT
+          image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
+          nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
+          tokenValue={{ name: CURRENCY.ETH, value: '230.99' }}
+        />
+        <CardNFT
+          image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
+          nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
+          tokenValue={{ name: CURRENCY.ETH, value: '230.99' }}
+        />
       </CardContainer>
       <Divider />
       <CardContainer>
-        <CardNFT {...firstNFT} />
-        <CardNFT {...secondNFT} />
-        <CardNFT {...thirdNFT} />
-        <CardNFT {...fourthNFT} />
+        <CardNFT
+          image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
+          nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
+          sbt
+        />
+        <CardNFT
+          image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
+          nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
+          sbt
+        />
+        <CardNFT
+          image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
+          nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
+          sbt
+        />
+        <CardNFT
+          image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
+          nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
+          sbt
+        />
       </CardContainer>
     </Wrapper>
   );

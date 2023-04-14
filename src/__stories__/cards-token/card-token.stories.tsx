@@ -4,6 +4,8 @@ import IconEth from '~/assets/icons/icon-eth.png';
 import IconMatic from '~/assets/icons/icon-matic.png';
 import { CardToken } from '~/components/cards-token';
 
+import { CURRENCY } from '~/types';
+
 export default {
   title: 'Components/CardToken',
   component: CardToken,
@@ -13,9 +15,21 @@ export default {
 export const _CardToken = () => {
   return (
     <Wrapper>
-      <CardToken image={IconEth} tokenAmount={0.00006} tokenName="ETH" tokenValue={1864.93} />
-      <CardToken image={IconMatic} tokenAmount={99.99} tokenName="MATIC" tokenValue={1864.93} />
-      <CardToken image={IconEth} tokenAmount={0.00006} tokenName="ETH" tokenValue={1864.93} />
+      <CardToken
+        image={IconEth}
+        token={{ name: CURRENCY.ETH, value: '0.00006' }}
+        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+      />
+      <CardToken
+        image={IconMatic}
+        token={{ name: CURRENCY.ETH, value: '99.99' }}
+        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+      />
+      <CardToken
+        image={IconEth}
+        token={{ name: CURRENCY.ETH, value: '0.00006' }}
+        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+      />
     </Wrapper>
   );
 };

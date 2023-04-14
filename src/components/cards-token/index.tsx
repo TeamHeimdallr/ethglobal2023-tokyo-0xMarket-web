@@ -3,24 +3,21 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
-import { parseNumberCommaSeperator } from '~/utils/number';
+import { Token } from '~/types';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   image: string;
-  tokenAmount: number;
-  tokenName: string;
-  tokenValue?: number;
+  token: Token;
+  tokenValue: Token;
 }
 
-export const CardToken = ({ image, tokenAmount, tokenName, tokenValue = 0, ...rest }: Props) => {
+export const CardToken = ({ image, token, tokenValue, ...rest }: Props) => {
   return (
     <Wrapper {...rest}>
       <Image src={image} />
       <TokenContent>
-        <Token>{`${tokenAmount} ${tokenName}`}</Token>
-        <TokenValue>
-          {parseNumberCommaSeperator({ number: tokenValue, decimalPoint: 2, prefix: '$' })}
-        </TokenValue>
+        <TokenAmount>{`${token.value} ${token.name}`}</TokenAmount>
+        <TokenValue>{`${tokenValue.name}${tokenValue.value}`}</TokenValue>
       </TokenContent>
     </Wrapper>
   );
@@ -47,7 +44,7 @@ const TokenContent = tw.div`
   flex flex-col
 `;
 
-const Token = tw.div`
+const TokenAmount = tw.div`
   font-sb-14 text-white
 `;
 const TokenValue = tw.div`

@@ -3,32 +3,24 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
-import { parseNumberCommaSeperator } from '~/utils/number';
-
-import { Balance as Price } from '~/types';
+import { NFT, Token } from '~/types';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   image: string;
-  tokenName: string;
-  tokenId: number;
+  nft: NFT;
   sbt?: boolean;
-  tokenPrice?: Price;
+  tokenValue?: Token;
 }
 
-export const CardNFT = ({ image, tokenName, tokenId, tokenPrice, sbt = false, ...rest }: Props) => {
+export const CardNFT = ({ image, nft, tokenValue, sbt = false, ...rest }: Props) => {
   return (
     <Wrapper {...rest}>
       <Image src={image} />
       <TokenContent>
-        <TokenName>{tokenName}</TokenName>
-        <TokenId>#{tokenId}</TokenId>
-        {!sbt && tokenPrice && (
-          <TokenPriceContent>
-            <Value>
-              {parseNumberCommaSeperator({ number: Number(tokenPrice.balance), decimalPoint: 2 })}
-            </Value>
-            <Currency>{` ${tokenPrice.currency}`}</Currency>
-          </TokenPriceContent>
+        <TokenName>{nft.name}</TokenName>
+        <TokenId>#{nft.id}</TokenId>
+        {!sbt && tokenValue && (
+          <TokenPriceContent>{`${tokenValue.value} ${tokenValue.name}`}</TokenPriceContent>
         )}
       </TokenContent>
     </Wrapper>
@@ -62,5 +54,3 @@ const TokenId = tw.span`
 const TokenPriceContent = tw.span`
   text-grayscale-3 font-r-12
 `;
-const Value = tw.span``;
-const Currency = tw.span``;
