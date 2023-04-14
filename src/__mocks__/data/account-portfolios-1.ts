@@ -9,7 +9,6 @@ import { AccountTokenAll, AccountTxHistory } from '~/types';
 import {
   AccountInGameInfo,
   AccountLockupToken,
-  AccountNftSbt,
   AccountStakingAsset,
   CURRENCY,
   LOCKUP_TYPE,
@@ -641,44 +640,6 @@ export const accountTokens: AccountTokenAll = {
     },
   },
 };
-
-export const accountNfts: AccountNftSbt[] = [
-  {
-    id: '1',
-
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    token: { name: 'Bored Ape Yacht Club', id: '1456' },
-    nftValue: { name: CURRENCY.ETH, value: '230.99' },
-    tokenValue: 3000,
-  },
-  {
-    id: '2',
-
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    token: { name: 'Bored Ape Yacht Club', id: '1456' },
-    nftValue: { name: CURRENCY.ETH, value: '230.99' },
-    tokenValue: 3000,
-  },
-];
-
-export const accountSbts: AccountNftSbt[] = [
-  {
-    id: '1',
-
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    token: { name: 'Bored Ape Yacht Club', id: '1456' },
-  },
-  {
-    id: '2',
-
-    image:
-      'https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png',
-    token: { name: 'Bored Ape Yacht Club', id: '1456' },
-  },
-];
 
 export const accountLockupTokens: AccountLockupToken[] = [
   {

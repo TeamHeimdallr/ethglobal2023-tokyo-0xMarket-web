@@ -3,8 +3,6 @@ import tw from 'twin.macro';
 import {
   useAccountInGameInfosQuery,
   useAccountLockupTokensQuery,
-  useAccountNftsQuery,
-  useAccountSbtsQuery,
   useAccountStakingAssetsQuery,
   useAccountTokensQuery,
   useAccountTxHistoriesQuery,
@@ -40,21 +38,12 @@ export const ListingStep2 = () => {
     staleTime: Infinity,
     enabled: !!address,
   });
-  const { data: tokens } = useAccountTokensQuery(address ?? '', {
+  const { data: tokenData } = useAccountTokensQuery(address ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!address,
   });
-  const { data: nfts } = useAccountNftsQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
-  const { data: sbts } = useAccountSbtsQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
+
   const { data: lockupTokens } = useAccountLockupTokensQuery(address ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -70,6 +59,10 @@ export const ListingStep2 = () => {
     staleTime: Infinity,
     enabled: !!address,
   });
+
+  const tokens = tokenData?.data.data.erc20.data;
+  const nfts = tokenData?.data.data.erc721.data;
+  const sbts = tokenData?.data.data.poap.data;
 
   const {
     writeAsync: listAsync,
@@ -119,11 +112,11 @@ export const ListingStep2 = () => {
             <PortfolioTitle>Portfolio</PortfolioTitle>
             <PortfolioInGameInfos data={inGameInfo?.data} />
             <Divider />
-            <PortfolioTokens data={tokens?.data} />
+            <PortfolioTokens data={tokens} />
             <Divider />
-            <PortfolioSbts data={sbts?.data} />
+            <PortfolioSbts data={sbts} />
             <Divider />
-            <PortfolioNfts data={nfts?.data} />
+            <PortfolioNfts data={nfts} />
             <Divider />
             <PortfolioLockupTokens data={lockupTokens?.data} />
             <Divider />

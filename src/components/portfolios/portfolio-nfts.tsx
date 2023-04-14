@@ -14,7 +14,7 @@ export const PortfolioNfts = ({ data }: Props) => {
   const isEmpty = !data || data?.length === 0;
 
   const totalValue = useMemo(
-    // () => data?.reduce((res, d) => (res += d.tokenValue ?? 0), 0) ?? 0,
+    // TODO
     () => 0,
     []
   );

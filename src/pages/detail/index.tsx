@@ -4,8 +4,6 @@ import tw from 'twin.macro';
 import {
   useAccountInGameInfosQuery,
   useAccountLockupTokensQuery,
-  useAccountNftsQuery,
-  useAccountSbtsQuery,
   useAccountStakingAssetsQuery,
   useAccountTokensQuery,
   useAccountTxHistoriesQuery,
@@ -39,16 +37,6 @@ const DetailPage = () => {
     enabled: !!id,
   });
 
-  // const { data: nfts } = useAccountNftsQuery(id ?? '', {
-  //   cacheTime: Infinity,
-  //   staleTime: Infinity,
-  //   enabled: !!id,
-  // });
-  // const { data: sbts } = useAccountSbtsQuery(id ?? '', {
-  //   cacheTime: Infinity,
-  //   staleTime: Infinity,
-  //   enabled: !!id,
-  // });
   const { data: lockupTokens } = useAccountLockupTokensQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,

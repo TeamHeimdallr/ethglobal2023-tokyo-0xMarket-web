@@ -84,15 +84,7 @@ export interface AccountTokenAll {
     };
   };
 }
-export interface AccountNftSbt {
-  id: string;
 
-  image: string;
-  token: NFT;
-
-  nftValue?: Token;
-  tokenValue?: number;
-}
 export interface AccountToken {
   amount: string;
   formattedAmount: number;

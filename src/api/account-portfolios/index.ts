@@ -6,7 +6,6 @@ import { api } from '~/api/axios';
 import {
   AccountInGameInfo,
   AccountLockupToken,
-  AccountNftSbt,
   AccountStakingAsset,
   AccountTokenAll,
   AccountTxHistory,
@@ -18,12 +17,7 @@ interface AccountInGameInfosResponse {
 interface AccountTokensResponse {
   data: AccountTokenAll;
 }
-interface AccountNftsResponse {
-  data: AccountNftSbt[];
-}
-interface AccountSbtsResponse {
-  data: AccountNftSbt[];
-}
+
 interface AccountLockupTokensResponse {
   data: AccountLockupToken[];
 }
@@ -55,26 +49,6 @@ export const useAccountTokensQuery = (
   useQuery<AccountTokensResponse, AxiosError<AccountTokensResponse, null>>(
     ['account-portfolio', 'tokens'],
     async () => (await api.get<AccountTokensResponse>(`/account/${id}/portfolio/tokens`)).data,
-    options
-  );
-
-export const useAccountNftsQuery = (
-  id: string,
-  options?: UseQueryOptions<AccountNftsResponse, AxiosError<AccountNftsResponse, null>>
-) =>
-  useQuery<AccountNftsResponse, AxiosError<AccountNftsResponse, null>>(
-    ['account-portfolio', 'nfts'],
-    async () => (await api.get<AccountNftsResponse>(`/account/${id}/portfolio/nfts`)).data,
-    options
-  );
-
-export const useAccountSbtsQuery = (
-  id: string,
-  options?: UseQueryOptions<AccountSbtsResponse, AxiosError<AccountSbtsResponse, null>>
-) =>
-  useQuery<AccountSbtsResponse, AxiosError<AccountSbtsResponse, null>>(
-    ['account-portfolio', 'sbts'],
-    async () => (await api.get<AccountSbtsResponse>(`/account/${id}/portfolio/sbts`)).data,
     options
   );
 

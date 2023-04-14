@@ -3,8 +3,6 @@ import { rest } from 'msw';
 import {
   accountInGameInfos as accountInGameInfos1,
   accountLockupTokens as accountLockupTokens1,
-  accountNfts as accountNfts1,
-  accountSbts as accountSbts1,
   accountStakingAssets as accountStakingAssets1,
   accountTokens as accountTokens1,
   accountTxHistories as accountTxHistories1,
@@ -12,8 +10,6 @@ import {
 import {
   accountInGameInfos as accountInGameInfos2,
   accountLockupTokens as accountLockupTokens2,
-  accountNfts as accountNfts2,
-  accountSbts as accountSbts2,
   accountStakingAssets as accountStakingAssets2,
   accountTokens as accountTokens2,
   accountTxHistories as accountTxHistories2,
@@ -31,20 +27,6 @@ export const apiAccountPortfolios = [
   rest.get(`${API_URL}/account/:id/portfolio/tokens`, (req, res, ctx) => {
     const id = req.params.id;
     const data = id === '1' ? accountTokens1 : accountTokens2;
-
-    return res(ctx.status(200), ctx.json({ data }));
-  }),
-
-  rest.get(`${API_URL}/account/:id/portfolio/nfts`, (req, res, ctx) => {
-    const id = req.params.id;
-    const data = id === '1' ? accountNfts1 : accountNfts2;
-
-    return res(ctx.status(200), ctx.json({ data }));
-  }),
-
-  rest.get(`${API_URL}/account/:id/portfolio/sbts`, (req, res, ctx) => {
-    const id = req.params.id;
-    const data = id === '1' ? accountSbts1 : accountSbts2;
 
     return res(ctx.status(200), ctx.json({ data }));
   }),

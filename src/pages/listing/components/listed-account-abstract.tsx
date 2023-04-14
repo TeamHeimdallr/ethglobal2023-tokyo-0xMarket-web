@@ -5,7 +5,6 @@ import tw from 'twin.macro';
 
 import {
   useAccountLockupTokensQuery,
-  useAccountNftsQuery,
   useAccountStakingAssetsQuery,
   useAccountTokensQuery,
 } from '~/api/account-portfolios';
@@ -19,22 +18,19 @@ import { useListingDataState } from '~/states/listing-data';
 
 import { CATEGORIES } from '~/types';
 
+import { price } from '~/__mocks__/data/token-price';
 import { CategoriesMap } from '~/constants';
 
 export const ListedAccountAbstract = () => {
   const { data, setData } = useListingDataState();
   const { address, category } = data;
 
-  const { data: tokens } = useAccountTokensQuery(address ?? '', {
+  const { data: tokenData } = useAccountTokensQuery(address ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!address,
   });
-  const { data: nfts } = useAccountNftsQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
+
   const { data: lockupTokens } = useAccountLockupTokensQuery(address ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -46,16 +42,25 @@ export const ListedAccountAbstract = () => {
     enabled: !!address,
   });
 
+  const tokens = tokenData?.data.data.erc20.data;
+  const nfts = tokenData?.data.data.erc721.data;
+
   const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
-  const tokenValue = useMemo(() => {
-    const tokenValue = tokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
-    const nftValue = nfts?.data?.reduce((res, d) => (res += d.tokenValue || 0), 0) ?? 0;
+  const totalValue = useMemo(() => {
+    const tokensValue =
+      tokens?.reduce((res, d) => {
+        const tokenPrice =
+          Number(price.find(p => p.symbol === d.token.symbol)?.lastPriceUSD || 0) || 0;
+
+        return (res += tokenPrice);
+      }, 0) ?? 0;
+    const nftValue = 0; // TODO
     const lockTokenValue = lockupTokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
     const stakingAssetValue =
       stakingAssets?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
 
-    return tokenValue + nftValue + lockTokenValue + stakingAssetValue;
-  }, [lockupTokens?.data, nfts?.data, stakingAssets?.data, tokens?.data]);
+    return tokensValue + nftValue + lockTokenValue + stakingAssetValue;
+  }, [lockupTokens?.data, stakingAssets?.data, tokens]);
 
   return (
     <Wrapper>
@@ -82,7 +87,7 @@ export const ListedAccountAbstract = () => {
       <RightWrapper>
         <TokenValueLabel>Token value</TokenValueLabel>
         <TokenValue>
-          {parseNumberCommaSeperator({ number: tokenValue, decimalPoint: 0, prefix: '$' })}
+          {parseNumberCommaSeperator({ number: totalValue, decimalPoint: 0, prefix: '$' })}
         </TokenValue>
       </RightWrapper>
     </Wrapper>
