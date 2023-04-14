@@ -49,13 +49,11 @@ module.exports = {
       colors: {
         ...defaultTheme.colors,
 
-        blue: '#6680E6',
-        red: '#FA7A84',
-        yellow: '#FFB178',
-        green: '#51BCB9',
+        blue: '#293FFF',
+        red: '#FF6262',
+        yellow: '#FFC875',
 
-        'light-sage': '#B3F19C',
-        'light-violet': '#D8B5FA',
+        'light-blue': '#7E8BFF',
 
         black: '#191F28',
 
@@ -63,12 +61,9 @@ module.exports = {
         'grayscale-6': '#333D4B',
         'grayscale-5': '#515A68',
         'grayscale-4': '#6D7684',
-        'grayscale-3': '#ADB4BE',
-        'grayscale-2': '#EAECEF',
-        'grayscale-1': '#F9FAFB',
-
-        'bar-blue': '#6680e6',
-        'bar-red': '#fa7a84',
+        'grayscale-3': '#ADB3BE',
+        'grayscale-2': '#E5E7EC',
+        'grayscale-1': '#F3F4F5',
 
         white: '#FFFFFF',
       },
