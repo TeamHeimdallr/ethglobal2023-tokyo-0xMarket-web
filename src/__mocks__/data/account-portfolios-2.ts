@@ -21,6 +21,8 @@ import {
   LOCKUP_TYPE,
 } from '~/types';
 
+import { price } from './token-price';
+
 export const accountEthBalance: AccountEthBalance = {
   decimals: '18',
   formatted: '103.51',
@@ -296,7 +298,7 @@ export const accountStakingAssets: AccountStakingAsset[] = [
     id: '1',
     image: IconEth,
     token: { name: CURRENCY.stETH, value: '200' },
-    tokenValue: 400142.93,
+    tokenValue: 200 * Number(price.find(p => p.symbol === 'ETH')?.lastPriceUSD),
     stakedAt: 'Lido',
   },
   // {
