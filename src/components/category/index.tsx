@@ -8,11 +8,11 @@ import { CATEGORIES } from '~/types';
 import { CategoriesMap } from '~/constants';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  category: CATEGORIES;
+  category?: CATEGORIES;
 }
 
 export const Category = ({ category, ...rest }: Props) => {
-  const categoryData = CategoriesMap[category];
+  const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
 
   return (
     <Wrapper color={categoryData.color} {...rest}>

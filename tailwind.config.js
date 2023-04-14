@@ -5,7 +5,7 @@ const spacing = [
   // 0~200
   ...[...Array(200).keys()],
   // 200~300
-  ...[234],
+  ...[222, 234],
   // 300~400
   ...[],
   // 400~500
@@ -15,7 +15,7 @@ const spacing = [
   // 600~700
   ...[],
   // 800~
-  ...[],
+  ...[1440],
 ];
 
 const convertSpacing = spacing =>
@@ -166,11 +166,7 @@ module.exports = {
       }),
       boxShadow: theme => ({
         ...defaultTheme.boxShadow,
-        'button-hover': '0px 2px 12px rgba(102, 128, 230, 0.5)',
-        'button-hover-red': '0px 2px 12px rgba(250, 122, 132, 0.5);',
-        modal: '0px 8px 32px rgba(0, 0, 0, 0.6)',
-        notification: '0px 8px 32px rgba(0, 0, 0, 0.6)',
-        card: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+        card: '0px 4px 20px rgba(41, 63, 255, 0.1)',
       }),
     },
   },
