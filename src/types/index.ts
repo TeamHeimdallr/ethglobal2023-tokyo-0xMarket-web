@@ -13,3 +13,13 @@ export enum CATEGORIES {
   TOKEN = 'TOKEN',
   GENERAL = 'GENERAL',
 }
+
+export interface Balance {
+  currency: CURRENCY;
+  balance: number;
+}
+
+export enum CURRENCY {
+  USD = 'USD',
+  ETH = 'ETH',
+}
