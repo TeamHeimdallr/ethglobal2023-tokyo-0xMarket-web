@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import tw from 'twin.macro';
 
+import iconEmpty from '~/assets/icons/icon-empty.png';
 import { CardNFT } from '~/components/cards-nft';
 
 import { AccountSbt } from '~/types';
@@ -40,7 +41,7 @@ const CardSbt = ({ sbt }: SbtProps) => {
 
   const image = data?.image_url;
 
-  const tokenName = sbt.tokenNfts.metaData.name ?? '';
+  const tokenName = sbt.tokenNfts.metaData.name ?? iconEmpty;
   const tokenId = sbt.tokenId;
 
   return (

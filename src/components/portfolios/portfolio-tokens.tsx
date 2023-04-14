@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import tw from 'twin.macro';
 
+import iconToken from '~/assets/icons/icon-coin.png';
 import { CardToken } from '~/components/cards-token';
 
 import { parseNumberCommaSeperator, parseNumberToString } from '~/utils/number';
@@ -46,7 +47,7 @@ export const PortfolioTokens = ({ data }: Props) => {
             const tokenAmount = parseNumberToString(token.formattedAmount);
             const tokenPrice =
               Number(price.find(p => p.symbol === tokenSymbol)?.lastPriceUSD || 0) || 0;
-            const tokenImage = tokenImages[tokenSymbol];
+            const tokenImage = tokenImages[tokenSymbol] || iconToken;
 
             const tokenValue = token.formattedAmount * tokenPrice;
 

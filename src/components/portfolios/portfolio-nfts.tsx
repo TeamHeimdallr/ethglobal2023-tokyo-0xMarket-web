@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import tw from 'twin.macro';
 
+import iconEmpty from '~/assets/icons/icon-empty.png';
 import { CardNFT } from '~/components/cards-nft';
 
 import { parseNumberCommaSeperator } from '~/utils/number';
@@ -34,7 +35,7 @@ export const PortfolioNfts = ({ data }: Props) => {
           {data?.map(nft => {
             if (!nft.id) return;
 
-            const image = nft.tokenNfts.contentValue?.image?.small || '';
+            const image = nft.tokenNfts.contentValue?.image?.small || iconEmpty;
             const tokenName = (nft.tokenNfts.metaData.name ?? '').replace(/\s?#.*/g, '');
             const tokenId = nft.tokenNfts.tokenId.replace('#', '');
             const tokenValue = '0';
