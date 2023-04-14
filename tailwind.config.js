@@ -66,6 +66,12 @@ module.exports = {
         'grayscale-1': '#F3F4F5',
 
         white: '#FFFFFF',
+
+        game: '#7636FF',
+        whitelist: '#F2F2F2',
+        sbt: '#FF94CE',
+        token: '#FFA869',
+        general: '#44B89C',
       },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
