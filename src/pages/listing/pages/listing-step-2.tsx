@@ -22,6 +22,7 @@ import {
   PortfolioTxHistories,
 } from '~/components/portfolios';
 
+import { parseLidoStakingAsset } from '~/utils/token';
 import { useListingDataState } from '~/states/listing-data';
 
 import { BackButton } from '../components/back-button';
@@ -49,11 +50,7 @@ export const ListingStep2 = () => {
     staleTime: Infinity,
     enabled: !!address,
   });
-  const { data: stakingAssets } = useAccountStakingAssetsQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
+
   const { data: txHistories } = useAccountTxHistoriesQuery(address ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -63,6 +60,9 @@ export const ListingStep2 = () => {
   const tokens = tokenData?.data.data.erc20.data;
   const nfts = tokenData?.data.data.erc721.data;
   const sbts = tokenData?.data.data.poap.data;
+
+  const lido = tokens?.find(t => t.token.symbol === 'stETH');
+  const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];
 
   const {
     writeAsync: listAsync,
@@ -120,7 +120,7 @@ export const ListingStep2 = () => {
             <Divider />
             <PortfolioLockupTokens data={lockupTokens?.data} />
             <Divider />
-            <PortfolioStakingAssets data={stakingAssets?.data} />
+            <PortfolioStakingAssets data={stakingAssets} />
             <Divider />
             <PortfolioTxHistories data={txHistories?.data} />
           </PortfolioInnerWrapper>
