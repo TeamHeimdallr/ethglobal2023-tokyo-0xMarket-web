@@ -15,7 +15,20 @@ export const _Textfield = () => (
       placeholder="Receiving address"
       onChange={value => console.log(value)}
     />
-    <TextFieldMultiline onChange={value => console.log(value)} />
+    <TextFieldMultiline
+      placeholder="Give me a short title that describes the account"
+      onChange={value => console.log(value)}
+    />
+    <TextFieldMultiline
+      border
+      placeholder="Provide a detailed description you’d like to mention"
+      onChange={value => console.log(value)}
+      style={{
+        fontSize: '16px',
+        lineHeight: '24px',
+        fontWeight: 400,
+      }}
+    />
     <TextFieldNumber
       prefixIcon={<IconDallar />}
       placeholder="Price"
