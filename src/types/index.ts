@@ -32,7 +32,9 @@ export interface Token {
 
 export enum CURRENCY {
   ETH = 'ETH',
+  stETH = 'stETH',
   MATIC = 'MATIC',
+  ZRO = 'ZRO',
 }
 
 export enum LOCKUP_TYPE {

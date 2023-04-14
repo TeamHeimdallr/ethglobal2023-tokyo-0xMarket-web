@@ -674,4 +674,9 @@ export const price = [
     symbol: 'sETH2',
     lastPriceUSD: '1911.901224627746478556559737545603',
   },
+  {
+    name: 'StargateToken',
+    symbol: 'STG',
+    lastPriceUSD: '0.88',
+  },
 ];
