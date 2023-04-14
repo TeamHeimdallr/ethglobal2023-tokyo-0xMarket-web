@@ -20,7 +20,7 @@ export const COLOR = {
   WHITE: () => tinyColor('#FFFFFF'),
 
   GAME: () => tinyColor('#7636FF'),
-  WHITELIST: () => tinyColor('#000000'),
+  WHITELIST: () => tinyColor('#F2F2F2'),
   SBT: () => tinyColor('#FF94CE'),
   TOKEN: () => tinyColor('#FFA869'),
   GENERAL: () => tinyColor('#44B89C'),
