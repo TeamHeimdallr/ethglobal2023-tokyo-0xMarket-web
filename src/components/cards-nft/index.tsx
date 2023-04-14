@@ -1,4 +1,6 @@
 import { HTMLAttributes } from 'react';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
 import { parseNumberCommaSeperator } from '~/utils/number';
@@ -23,9 +25,9 @@ export const CardNFT = ({ image, tokenName, tokenId, tokenPrice, sbt = false, ..
         {!sbt && tokenPrice && (
           <TokenPriceContent>
             <Value>
-              {parseNumberCommaSeperator({ number: tokenPrice.balance, decimalPoint: 2 })}
+              {parseNumberCommaSeperator({ number: Number(tokenPrice.balance), decimalPoint: 2 })}
             </Value>
-            <Currency>{tokenPrice.currency}</Currency>
+            <Currency>{` ${tokenPrice.currency}`}</Currency>
           </TokenPriceContent>
         )}
       </TokenContent>
@@ -36,9 +38,18 @@ export const CardNFT = ({ image, tokenName, tokenId, tokenPrice, sbt = false, ..
 const Wrapper = tw.div`
   flex flex-col gap-12
 `;
-const Image = tw.img`
-  w-158 h-158 object-cover rounded-8 border-0 ring-0
-`;
+interface ImageProps {
+  src?: string;
+}
+const Image = styled.div<ImageProps>(({ src }) => [
+  tw`
+    flex-center bg-grayscale-5 bg-center bg-cover bg-no-repeat w-158 h-158 flex-shrink-0 rounded-8 border-0 ring-0
+  `,
+  src &&
+    css`
+      background-image: url(${src});
+    `,
+]);
 const TokenContent = tw.div`
   flex flex-col gap-4
 `;
