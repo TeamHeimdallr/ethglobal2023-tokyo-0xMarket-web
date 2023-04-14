@@ -1,11 +1,15 @@
 import tw from 'twin.macro';
 
 import {
+  ButtonIconLarge,
+  ButtonIconMedium,
+  ButtonIconSmall,
   ButtonLargeDefault,
   ButtonLargePrimary,
   ButtonMediumDefault,
   ButtonMediumPrimary,
 } from '~/components/buttons';
+import { IconFavorites, IconNoti } from '~/components/icons';
 
 export default {
   title: 'Components/Button',
@@ -33,6 +37,21 @@ export const _Button = () => (
       <ButtonMediumDefault text="Text Here" />
       <ButtonMediumDefault text="Text Here" loading />
       <ButtonMediumDefault text="Text Here" disabled />
+    </Wrapper>
+    <Wrapper>
+      <ButtonIconLarge icon={<IconNoti />} />
+      <ButtonIconLarge icon={<IconNoti />} selected />
+      <ButtonIconLarge icon={<IconNoti />} disabled />
+    </Wrapper>
+    <Wrapper>
+      <ButtonIconMedium icon={<IconFavorites />} />
+      <ButtonIconMedium icon={<IconFavorites />} selected />
+      <ButtonIconMedium icon={<IconFavorites />} disabled />
+    </Wrapper>
+    <Wrapper>
+      <ButtonIconSmall icon={<IconFavorites />} />
+      <ButtonIconSmall icon={<IconFavorites />} selected />
+      <ButtonIconSmall icon={<IconFavorites />} disabled />
     </Wrapper>
   </OuterWrapper>
 );
