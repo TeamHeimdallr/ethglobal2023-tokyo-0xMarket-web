@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+  html,
+  body {
+    @apply h-full bg-black text-14;
+  }
+  #root {
+    @apply h-full w-full;
+  }
+
+  /* remove outline */
+  button,
+  input,
+  select {
+    @apply focus:outline-none;
+  }
+
+  /* remove input number up down button */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
+
+  input:focus {
+    border: none !important;
+    outline: none !important;
+  }
+
+  *:focus {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .dark-transition {
+    @apply transition-colors duration-150;
+  }
+}
