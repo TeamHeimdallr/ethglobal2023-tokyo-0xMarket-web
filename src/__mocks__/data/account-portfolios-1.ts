@@ -64,8 +64,8 @@ export const accountTokens: AccountTokenAll = {
           tokenId: '',
           tokenType: 'ERC20',
           token: {
-            name: '$ ClaimUniLP.com',
-            symbol: '$ ClaimUniLP.com - Visit to claim',
+            name: 'staked eth',
+            symbol: 'stETH',
           },
         },
         {

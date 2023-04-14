@@ -4,7 +4,6 @@ import tw from 'twin.macro';
 import {
   useAccountInGameInfosQuery,
   useAccountLockupTokensQuery,
-  useAccountStakingAssetsQuery,
   useAccountTokensQuery,
   useAccountTxHistoriesQuery,
 } from '~/api/account-portfolios';
@@ -21,7 +20,10 @@ import {
   PortfolioTxHistories,
 } from '~/components/portfolios';
 
+import { parseLidoStakingAsset } from '~/utils/token';
+
 import { AccountInfo } from './components/account-info';
+
 const DetailPage = () => {
   const params = useParams();
   const { id } = params;
@@ -42,11 +44,7 @@ const DetailPage = () => {
     staleTime: Infinity,
     enabled: !!id,
   });
-  const { data: stakingAssets } = useAccountStakingAssetsQuery(id ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!id,
-  });
+
   const { data: txHistories } = useAccountTxHistoriesQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -56,6 +54,9 @@ const DetailPage = () => {
   const tokens = tokenData?.data.data.erc20.data;
   const nfts = tokenData?.data.data.erc721.data;
   const sbts = tokenData?.data.data.poap.data;
+
+  const lido = tokens?.find(t => t.token.symbol === 'stETH');
+  const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];
 
   return (
     <Wrapper>
@@ -77,7 +78,7 @@ const DetailPage = () => {
             <Divider />
             <PortfolioLockupTokens data={lockupTokens?.data} />
             <Divider />
-            <PortfolioStakingAssets data={stakingAssets?.data} />
+            <PortfolioStakingAssets data={stakingAssets} />
             <Divider />
             <PortfolioTxHistories data={txHistories?.data} />
           </PortfolioInnerWrapper>

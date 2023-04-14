@@ -164,14 +164,17 @@ export interface AccountLockupToken {
   totalToken?: Token;
   date: Date;
 }
+
 export interface AccountStakingAsset {
   id: string;
 
   image: string;
   token: Token;
   tokenValue: number;
+
   stakedAt: string;
 }
+
 export interface AccountTxHistory {
   id: string;
 
