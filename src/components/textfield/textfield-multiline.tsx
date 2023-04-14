@@ -72,14 +72,14 @@ interface WrapperProps {
 }
 const Wrapper = styled.div<WrapperProps>(({ border, focused }) => [
   tw`
-    flex flex-col items-start px-24 bg-transparent rounded-8
+    flex flex-col items-start bg-transparent rounded-8
   `,
   border
     ? tw`
-      px-24 py-20 border-1 border-transparent border-solid
+      px-24 py-20 border-1 border-grayscale-6 border-solid
     `
     : ``,
-  focused ? tw`border-blue` : ``,
+  border && focused ? tw`border-transparent bg-grayscale-7` : ``,
 ]);
 
 const TextAreaWrapper = tw.div`

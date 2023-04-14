@@ -29,7 +29,7 @@ export const TextFieldNumber = ({ prefixIcon, defaultValue, placeholder, onChang
 
 const Wrapper = styled.div(() => [
   tw`
-   flex w-full px-24 gap-8
+   flex w-full gap-8
   `,
   css`
     & > input {

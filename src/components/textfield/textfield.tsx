@@ -24,7 +24,7 @@ export const TextField = ({ prefixIcon, onChange, ...rest }: Props) => {
 };
 
 const Wrapper = tw.div`
-  flex w-full px-24 gap-8 font-r-16
+  flex w-full gap-8 font-r-16
 `;
 
 const Input = tw.input`
