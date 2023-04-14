@@ -5,17 +5,17 @@ const spacing = [
   // 0~200
   ...[...Array(200).keys()],
   // 200~300
-  ...[200, 208, 218, 220, 232, 240, 242, 248, 254, 261, 270, 272, 278, 279, 294, 296, 299],
+  ...[],
   // 300~400
-  ...[300, 320, 326, 329, 323, 333, 334, 348, 349, 352, 358, 371, 394],
+  ...[],
   // 400~500
-  ...[400, 406, 430, 480, 482],
+  ...[],
   // 500~600
-  ...[512, 520, 590],
+  ...[],
   // 600~700
-  ...[602, 614, 640, 642, 666, 758],
+  ...[],
   // 800~
-  ...[810, 838],
+  ...[],
 ];
 
 const convertSpacing = spacing =>
@@ -191,7 +191,6 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
-    require('@tailwindcss/line-clamp'),
     plugin(function ({ addBase, addComponents, addUtilities, theme }) {
       addBase({});
       addComponents({
