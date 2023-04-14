@@ -17,8 +17,8 @@ export const CardNFT = ({ image, nft, nftValue, sbt = false, ...rest }: Props) =
     <Wrapper {...rest}>
       <Image src={image} />
       <TokenContent>
-        <TokenName>{nft.name}</TokenName>
-        <TokenId>#{nft.id}</TokenId>
+        <TokenName>{nft.name || 'unknown'}</TokenName>
+        <TokenId>#{nft.id || ''}</TokenId>
         {!sbt && nftValue && (
           <TokenPriceContent>{`${nftValue.value} ${nftValue.name}`}</TokenPriceContent>
         )}
@@ -43,14 +43,14 @@ const Image = styled.div<ImageProps>(({ src }) => [
     `,
 ]);
 const TokenContent = tw.div`
-  flex flex-col gap-4
+  flex flex-col gap-4 
 `;
-const TokenName = tw.span`
-  font-r-12 text-white
+const TokenName = tw.div`
+  font-r-12 text-white min-h-20 
 `;
-const TokenId = tw.span`
-  font-sb-16 text-white
+const TokenId = tw.div`
+  font-sb-16 text-white h-24 truncate
 `;
-const TokenPriceContent = tw.span`
-  text-grayscale-3 font-r-12
+const TokenPriceContent = tw.div`
+  text-grayscale-3 font-r-12 truncate
 `;

@@ -6,7 +6,7 @@ interface Props {
   data?: AccountInGameInfo[];
 }
 export const PortfolioInGameInfos = ({ data }: Props) => {
-  const isEmpty = data?.length === 0;
+  const isEmpty = !data || data?.length === 0;
 
   return (
     <Wrapper>

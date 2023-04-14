@@ -11,7 +11,7 @@ interface Props {
   data?: AccountStakingAsset[];
 }
 export const PortfolioStakingAssets = ({ data }: Props) => {
-  const isEmpty = data?.length === 0;
+  const isEmpty = !data || data?.length === 0;
   const totalValue = useMemo(() => data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0, [data]);
 
   return (

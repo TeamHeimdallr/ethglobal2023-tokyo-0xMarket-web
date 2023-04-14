@@ -67,8 +67,7 @@ const DetailPage = () => {
 
   const tokens = tokenData?.data.data.erc20.data;
   const nfts = tokenData?.data.data.erc721.data;
-  const sbts = tokenData?.data.data.erc721.data;
-  console.log(tokens, nfts, sbts);
+  const sbts = tokenData?.data.data.poap.data;
 
   return (
     <Wrapper>
@@ -84,9 +83,9 @@ const DetailPage = () => {
             <Divider />
             <PortfolioTokens data={tokens} />
             <Divider />
-            <PortfolioSbts data={sbts?.data} />
+            <PortfolioSbts data={sbts} />
             <Divider />
-            <PortfolioNfts data={nfts?.data} />
+            <PortfolioNfts data={nfts} />
             <Divider />
             <PortfolioLockupTokens data={lockupTokens?.data} />
             <Divider />

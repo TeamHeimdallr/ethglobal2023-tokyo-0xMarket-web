@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const PortfolioTokens = ({ data }: Props) => {
-  const isEmpty = data?.length === 0;
+  const isEmpty = !data || data?.length === 0;
   const totalValue = useMemo(
     () =>
       data?.reduce((res, d) => {

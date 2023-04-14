@@ -5,16 +5,18 @@ import { CardNFT } from '~/components/cards-nft';
 
 import { parseNumberCommaSeperator } from '~/utils/number';
 
-import { AccountNftSbt } from '~/types';
+import { AccountNft } from '~/types';
 
 interface Props {
-  data?: AccountNftSbt[];
+  data?: AccountNft[];
 }
 export const PortfolioNfts = ({ data }: Props) => {
-  const isEmpty = data?.length === 0;
+  const isEmpty = !data || data?.length === 0;
+
   const totalValue = useMemo(
-    () => data?.reduce((res, d) => (res += d.tokenValue ?? 0), 0) ?? 0,
-    [data]
+    // () => data?.reduce((res, d) => (res += d.tokenValue ?? 0), 0) ?? 0,
+    () => 0,
+    []
   );
 
   return (
@@ -29,9 +31,27 @@ export const PortfolioNfts = ({ data }: Props) => {
       </TitleWrapper>
       {!isEmpty && (
         <CardWrapper>
-          {data?.map(nft => (
-            <CardNFT key={nft.id} image={nft.image} nft={nft.token} nftValue={nft.nftValue} />
-          ))}
+          {data?.map(nft => {
+            const image = nft.tokenNfts.contentValue?.image?.small || '';
+            const tokenName = (nft.tokenNfts.metaData.name ?? '').replace(/\s?#.*/g, '');
+            const tokenId = nft.tokenNfts.tokenId.replace('#', '');
+            const tokenValue = '0';
+
+            return (
+              <CardNFT
+                key={nft.id}
+                image={image}
+                nft={{
+                  name: tokenName,
+                  id: tokenId,
+                }}
+                nftValue={{
+                  name: 'ETH',
+                  value: tokenValue,
+                }}
+              />
+            );
+          })}
         </CardWrapper>
       )}
     </Wrapper>
