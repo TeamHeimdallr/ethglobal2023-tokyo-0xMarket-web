@@ -8,7 +8,7 @@ import {
   AccountLockupToken,
   AccountNftSbt,
   AccountStakingAsset,
-  AccountToken,
+  AccountTokenAll,
   AccountTxHistory,
 } from '~/types';
 
@@ -16,7 +16,7 @@ interface AccountInGameInfosResponse {
   data: AccountInGameInfo[];
 }
 interface AccountTokensResponse {
-  data: AccountToken[];
+  data: AccountTokenAll;
 }
 interface AccountNftsResponse {
   data: AccountNftSbt[];

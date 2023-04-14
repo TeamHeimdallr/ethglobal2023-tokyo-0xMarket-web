@@ -8,7 +8,7 @@ import { parseNumberCommaSeperator } from '~/utils/number';
 import { Token } from '~/types';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  image: string;
+  image?: string;
   token: Token;
   tokenValue: number;
 }
@@ -47,11 +47,11 @@ const Image = styled.div<ImageProps>(({ src }) => [
 ]);
 
 const TokenContent = tw.div`
-  flex flex-col
+  truncate
 `;
 
 const TokenAmount = tw.div`
-  font-sb-14 text-white
+  font-sb-14 text-white truncate
 `;
 const TokenValue = tw.div`
   font-r-12 text-grayscale-3

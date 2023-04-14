@@ -3,9 +3,12 @@ import tw from 'twin.macro';
 
 import { CardToken } from '~/components/cards-token';
 
-import { parseNumberCommaSeperator } from '~/utils/number';
+import { parseNumberCommaSeperator, parseNumberToString } from '~/utils/number';
 
 import { AccountToken } from '~/types';
+
+import { tokenImages } from '~/__mocks__/data/token-images';
+import { price } from '~/__mocks__/data/token-price';
 
 interface Props {
   data?: AccountToken[];
@@ -13,7 +16,16 @@ interface Props {
 
 export const PortfolioTokens = ({ data }: Props) => {
   const isEmpty = data?.length === 0;
-  const totalValue = useMemo(() => data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0, [data]);
+  const totalValue = useMemo(
+    () =>
+      data?.reduce((res, d) => {
+        const tokenPrice =
+          Number(price.find(p => p.symbol === d.token.symbol)?.lastPriceUSD || 0) || 0;
+
+        return (res += tokenPrice);
+      }, 0) ?? 0,
+    [data]
+  );
 
   return (
     <Wrapper>
@@ -27,9 +39,24 @@ export const PortfolioTokens = ({ data }: Props) => {
       </TitleWrapper>
       {!isEmpty && (
         <CardWrapper>
-          {data?.map(token => (
-            <CardToken key={token.id} {...token} />
-          ))}
+          {data?.map(token => {
+            const tokenSymbol = token.token.symbol;
+            const tokenAmount = parseNumberToString(token.formattedAmount);
+            const tokenPrice =
+              Number(price.find(p => p.symbol === tokenSymbol)?.lastPriceUSD || 0) || 0;
+            const tokenImage = tokenImages[tokenSymbol];
+
+            const tokenValue = token.formattedAmount * tokenPrice;
+
+            return (
+              <CardToken
+                key={token.id}
+                image={tokenImage}
+                token={{ name: tokenSymbol, value: tokenAmount }}
+                tokenValue={tokenValue}
+              />
+            );
+          })}
         </CardWrapper>
       )}
     </Wrapper>

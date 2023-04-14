@@ -26,7 +26,7 @@ export interface NFT {
   id: string;
 }
 export interface Token {
-  name: CURRENCY;
+  name: string;
   value: string;
 }
 
@@ -70,6 +70,20 @@ export interface AccountInGameInfo {
 
   title: string;
 }
+
+export interface AccountTokenAll {
+  data: {
+    erc20: {
+      data: AccountToken[];
+    };
+    erc721: {
+      data: AccountNft[];
+    };
+    poap: {
+      data: AccountSbt[];
+    };
+  };
+}
 export interface AccountNftSbt {
   id: string;
 
@@ -80,12 +94,72 @@ export interface AccountNftSbt {
   tokenValue?: number;
 }
 export interface AccountToken {
+  amount: string;
+  formattedAmount: number;
+
+  chainId: string;
   id: string;
 
-  image: string;
-  token: Token;
-  tokenValue: number;
+  tokenAddress: string;
+  tokenId: string;
+  tokenType: string;
+  token: {
+    name: string;
+    symbol: string;
+  };
+
+  image?: string;
 }
+
+export interface AccountNft {
+  amount: string;
+  chainId: string;
+
+  id: string;
+  tokenAddress: string;
+  tokenId: string;
+  tokenType: 'ERC721';
+
+  token: {
+    name: string;
+    symbol: string;
+  };
+
+  tokenNfts: {
+    tokenId: string;
+    metaData: {
+      name: string | null;
+    };
+    contentValue: {
+      image: {
+        medium: string;
+        extraSmall: string;
+        large: string;
+        original: string;
+        small: string;
+      } | null;
+    };
+  };
+}
+
+export interface AccountSbt {
+  amount: string;
+  tokenAddress: string;
+  tokenId: string;
+  tokenType: 'ERC721';
+
+  token: {
+    name: string;
+    symbol: string;
+  };
+  tokenNfts: {
+    metaData: {
+      name: string | null;
+    };
+    tokenURI: string | null;
+  };
+}
+
 export interface AccountLockupToken {
   id: string;
 

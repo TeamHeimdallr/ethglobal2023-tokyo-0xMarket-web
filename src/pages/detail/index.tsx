@@ -33,21 +33,22 @@ const DetailPage = () => {
     staleTime: Infinity,
     enabled: !!id,
   });
-  const { data: tokens } = useAccountTokensQuery(id ?? '', {
+  const { data: tokenData } = useAccountTokensQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!id,
   });
-  const { data: nfts } = useAccountNftsQuery(id ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!id,
-  });
-  const { data: sbts } = useAccountSbtsQuery(id ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!id,
-  });
+
+  // const { data: nfts } = useAccountNftsQuery(id ?? '', {
+  //   cacheTime: Infinity,
+  //   staleTime: Infinity,
+  //   enabled: !!id,
+  // });
+  // const { data: sbts } = useAccountSbtsQuery(id ?? '', {
+  //   cacheTime: Infinity,
+  //   staleTime: Infinity,
+  //   enabled: !!id,
+  // });
   const { data: lockupTokens } = useAccountLockupTokensQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -64,6 +65,11 @@ const DetailPage = () => {
     enabled: !!id,
   });
 
+  const tokens = tokenData?.data.data.erc20.data;
+  const nfts = tokenData?.data.data.erc721.data;
+  const sbts = tokenData?.data.data.erc721.data;
+  console.log(tokens, nfts, sbts);
+
   return (
     <Wrapper>
       <GnbMain />
@@ -76,7 +82,7 @@ const DetailPage = () => {
             <PortfolioTitle>Portfolio</PortfolioTitle>
             <PortfolioInGameInfos data={inGameInfo?.data} />
             <Divider />
-            <PortfolioTokens data={tokens?.data} />
+            <PortfolioTokens data={tokens} />
             <Divider />
             <PortfolioSbts data={sbts?.data} />
             <Divider />

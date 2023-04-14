@@ -19,3 +19,13 @@ export const parseNumberCommaSeperator = ({
 
   return parsedNumber;
 };
+
+export const parseNumberToString = (num: number | string, decimalPoint = 4) => {
+  const commaSeperatorRegexp = /\B(?=(\d{3})+(?!\d))/g;
+  const parsedNumber = `${Number(Number(num).toFixed(decimalPoint)) || 0}`.replace(
+    commaSeperatorRegexp,
+    ','
+  );
+
+  return parsedNumber;
+};

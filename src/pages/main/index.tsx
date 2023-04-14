@@ -101,61 +101,6 @@ const MainPage = () => {
     }
   `;
 
-  const lido = gql`
-    query histories($address: Identity!, $staking: Identity!) {
-      add: TokenTransfers(
-        input: {
-          filter: { from: { _eq: $address }, to: { _eq: $staking } }
-          blockchain: ethereum
-          limit: 30
-        }
-      ) {
-        TokenTransfer {
-          amount
-          formattedAmount
-          blockTimestamp
-          token {
-            symbol
-            name
-            decimals
-          }
-          from {
-            addresses
-          }
-          to {
-            addresses
-          }
-          type
-        }
-      }
-      remove: TokenTransfers(
-        input: {
-          filter: { from: { _eq: $staking }, to: { _eq: $to } }
-          blockchain: ethereum
-          limit: 30
-        }
-      ) {
-        TokenTransfer {
-          amount
-          formattedAmount
-          blockTimestamp
-          token {
-            symbol
-            name
-            decimals
-          }
-          from {
-            addresses
-          }
-          to {
-            addresses
-          }
-          type
-        }
-      }
-    }
-  `;
-
   const transfers = gql`
     query transfers($address: Identity!) {
       transfers: TokenTransfers(
@@ -191,16 +136,6 @@ const MainPage = () => {
       }),
     { enabled: false }
   );
-
-  // const { data: lidoStaking } = useQuery(
-  //   ['gql', 'staking', 'lido'],
-  //   async () =>
-  //     request('https://api.airstack.xyz/gql/4tITyVlBrB', lido, {
-  //       address: '0xe3C1B623c2F51b243E174D4498b07B3C97fda871',
-  //       staking: '0xDC24316b9AE028F1497c275EB9192a3Ea0f67022', // LIDO,
-  //     }),
-  //   { enabled: false }
-  // );
 
   const { data: totalTransfer } = useQuery(
     ['gql', 'transfer'],
