@@ -167,6 +167,7 @@ module.exports = {
       boxShadow: theme => ({
         ...defaultTheme.boxShadow,
         card: '0px 4px 20px rgba(41, 63, 255, 0.1)',
+        'button-hover': '0px 2px 12px rgba(102, 128, 230, 0.5)'
       }),
     },
   },
