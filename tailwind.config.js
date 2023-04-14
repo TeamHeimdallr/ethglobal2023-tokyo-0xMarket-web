@@ -49,13 +49,11 @@ module.exports = {
       colors: {
         ...defaultTheme.colors,
 
-        blue: '#6680E6',
-        red: '#FA7A84',
-        yellow: '#FFB178',
-        green: '#51BCB9',
+        blue: '#293FFF',
+        red: '#FF6262',
+        yellow: '#FFC875',
 
-        'light-sage': '#B3F19C',
-        'light-violet': '#D8B5FA',
+        'light-blue': '#7E8BFF',
 
         black: '#191F28',
 
@@ -63,17 +61,14 @@ module.exports = {
         'grayscale-6': '#333D4B',
         'grayscale-5': '#515A68',
         'grayscale-4': '#6D7684',
-        'grayscale-3': '#ADB4BE',
-        'grayscale-2': '#EAECEF',
-        'grayscale-1': '#F9FAFB',
-
-        'bar-blue': '#6680e6',
-        'bar-red': '#fa7a84',
+        'grayscale-3': '#ADB3BE',
+        'grayscale-2': '#E5E7EC',
+        'grayscale-1': '#F3F4F5',
 
         white: '#FFFFFF',
       },
       fontFamily: {
-        sans: ['Sora', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         9: '9px',
@@ -142,9 +137,6 @@ module.exports = {
       borderWidth: theme => ({
         ...defaultTheme.borderWidth,
         ...convertSpacing([...Array(21).keys()]),
-      }),
-      keyframes: theme => ({
-        ...defaultTheme.keyframes,
       }),
       animation: theme => ({
         ...defaultTheme.animation,
@@ -245,27 +237,20 @@ module.exports = {
           transitionDuration: '150ms',
         },
 
-        '.font-l-11': { fontSize: '11px', lineHeight: '18px', fontWeight: 300 },
-        '.font-l-12': { fontSize: '12px', lineHeight: '20px', fontWeight: 300 },
-        '.font-l-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 300 },
-        '.font-l-16': { fontSize: '16px', lineHeight: '26px', fontWeight: 300 },
-        '.font-l-18': { fontSize: '18px', lineHeight: '28px', fontWeight: 300 },
-
         '.font-r-11': { fontSize: '11px', lineHeight: '18px', fontWeight: 400 },
         '.font-r-12': { fontSize: '12px', lineHeight: '20px', fontWeight: 400 },
         '.font-r-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 400 },
-        '.font-r-16': { fontSize: '16px', lineHeight: '26px', fontWeight: 400 },
-        '.font-r-18': { fontSize: '18px', lineHeight: '28px', fontWeight: 400 },
-        '.font-r-20': { fontSize: '20px', lineHeight: '30px', fontWeight: 400 },
-        '.font-r-24': { fontSize: '24px', lineHeight: '32px', fontWeight: 400 },
+        '.font-r-16': { fontSize: '16px', lineHeight: '24px', fontWeight: 400 },
+        '.font-r-18': { fontSize: '18px', lineHeight: '26px', fontWeight: 400 },
 
         '.font-sb-12': { fontSize: '12px', lineHeight: '20px', fontWeight: 600 },
         '.font-sb-14': { fontSize: '14px', lineHeight: '22px', fontWeight: 600 },
-        '.font-sb-16': { fontSize: '16px', lineHeight: '26px', fontWeight: 600 },
-        '.font-sb-18': { fontSize: '18px', lineHeight: '28px', fontWeight: 600 },
-        '.font-sb-20': { fontSize: '20px', lineHeight: '30px', fontWeight: 600 },
+        '.font-sb-16': { fontSize: '16px', lineHeight: '24px', fontWeight: 600 },
+        '.font-sb-18': { fontSize: '18px', lineHeight: '26px', fontWeight: 600 },
+        '.font-sb-20': { fontSize: '20px', lineHeight: '28px', fontWeight: 600 },
         '.font-sb-24': { fontSize: '24px', lineHeight: '32px', fontWeight: 600 },
         '.font-sb-28': { fontSize: '28px', lineHeight: '38px', fontWeight: 600 },
+        '.font-sb-32': { fontSize: '32px', lineHeight: '38px', fontWeight: 600 },
       });
       addUtilities({});
     }),

@@ -1,10 +1,11 @@
 import tinyColor from 'tinycolor2';
 
 export const COLOR = {
-  BLUE: () => tinyColor('#6680E6'),
-  RED: () => tinyColor('#FA7A84'),
-  YELLOW: () => tinyColor('#FFB178'),
-  GREEN: () => tinyColor('#51BCB9'),
+  BLUE: () => tinyColor('#293FFF'),
+  RED: () => tinyColor('#FF6262'),
+  YELLOW: () => tinyColor('#FFC875'),
+
+  LIGHT_BLUE: () => tinyColor('#7E8BFF'),
 
   BLACK: () => tinyColor('#191F28'),
 
@@ -12,9 +13,9 @@ export const COLOR = {
   GRAYSCALE_6: () => tinyColor('#333D4B'),
   GRAYSCALE_5: () => tinyColor('#515A68'),
   GRAYSCALE_4: () => tinyColor('#6D7684'),
-  GRAYSCALE_3: () => tinyColor('#ADB4BE'),
-  GRAYSCALE_2: () => tinyColor('#EAECEF'),
-  GRAYSCALE_1: () => tinyColor('#F9FAFB'),
+  GRAYSCALE_3: () => tinyColor('#ADB3BE'),
+  GRAYSCALE_2: () => tinyColor('#E5E7EC'),
+  GRAYSCALE_1: () => tinyColor('#F3F4F5'),
 
   WHITE: () => tinyColor('#FFFFFF'),
 };
