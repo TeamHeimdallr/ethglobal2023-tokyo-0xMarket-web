@@ -5,7 +5,9 @@ import {
   useAccountInGameInfosQuery,
   useAccountLockupTokensQuery,
   useAccountTokensQuery,
-  useAccountTxHistoriesQuery,
+  useFirstTxQuery,
+  useNftTxQuery,
+  useTokenTxQuery,
 } from '~/api/account-portfolios';
 
 import { Footer } from '~/components/footer';
@@ -45,7 +47,18 @@ const DetailPage = () => {
     enabled: !!id,
   });
 
-  const { data: txHistories } = useAccountTxHistoriesQuery(id ?? '', {
+  const { data: firstTx } = useFirstTxQuery(id ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!id,
+  });
+  const { data: tokenTxs } = useTokenTxQuery(id ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!id,
+  });
+
+  const { data: nftTxs } = useNftTxQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!id,
@@ -57,6 +70,10 @@ const DetailPage = () => {
 
   const lido = tokens?.find(t => t.token.symbol === 'stETH');
   const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];
+
+  console.log(firstTx);
+  console.log(tokenTxs);
+  console.log(nftTxs);
 
   return (
     <Wrapper>
@@ -80,7 +97,7 @@ const DetailPage = () => {
             <Divider />
             <PortfolioStakingAssets data={stakingAssets} />
             <Divider />
-            <PortfolioTxHistories data={txHistories?.data} />
+            {/* <PortfolioTxHistories data={txHistories?.data} /> */}
           </PortfolioInnerWrapper>
         </PortfolioWrapper>
       </ContentWrapper>

@@ -3,9 +3,7 @@ import tw from 'twin.macro';
 import {
   useAccountInGameInfosQuery,
   useAccountLockupTokensQuery,
-  useAccountStakingAssetsQuery,
   useAccountTokensQuery,
-  useAccountTxHistoriesQuery,
 } from '~/api/account-portfolios';
 import { useContractDeposit } from '~/api/contract/change-owner';
 import { useContractList } from '~/api/contract/list';
@@ -46,12 +44,6 @@ export const ListingStep2 = () => {
   });
 
   const { data: lockupTokens } = useAccountLockupTokensQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
-
-  const { data: txHistories } = useAccountTxHistoriesQuery(address ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!address,
@@ -122,7 +114,7 @@ export const ListingStep2 = () => {
             <Divider />
             <PortfolioStakingAssets data={stakingAssets} />
             <Divider />
-            <PortfolioTxHistories data={txHistories?.data} />
+            {/* <PortfolioTxHistories data={txHistories?.data} /> */}
           </PortfolioInnerWrapper>
         </PortfolioWrapper>
       </ContentWrapper>

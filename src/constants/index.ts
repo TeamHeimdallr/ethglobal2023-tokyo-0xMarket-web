@@ -28,6 +28,9 @@ export const OOV3_CONTRACT_ADDRESS = IS_MAINNET
   : '0x9923D42eF695B5dd9911D05Ac944d4cAca3c4EAB';
 
 export const TRADE_TOKEN_ADDRESS = IS_MAINNET ? '0x' : '0xfeb936d27aadde0b33a11bcd2842c7507e2277e3';
+export const API_URL_ETHERSCAN = IS_MAINNET ? '' : 'https://api-goerli.etherscan.io/api';
+export const ETHERSCAN_API_KEY = 'HPWTPRKCEMT3JFRCYYPETD3694ISJRYW6F';
+export const AIRSTACK_API_URL = 'https://api.airstack.xyz/gql/4tITyVlBrB';
 
 export const API_URL = IS_LOCAL
   ? 'http://localhost:8080'

@@ -3,17 +3,14 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
-import {
-  useAccountLockupTokensQuery,
-  useAccountStakingAssetsQuery,
-  useAccountTokensQuery,
-} from '~/api/account-portfolios';
+import { useAccountLockupTokensQuery, useAccountTokensQuery } from '~/api/account-portfolios';
 
 import { Category } from '~/components/category';
 import { Checkbox } from '~/components/checkbox';
 import { IconLocked } from '~/components/icons';
 
 import { parseNumberCommaSeperator } from '~/utils/number';
+import { parseLidoStakingAsset } from '~/utils/token';
 import { useListingDataState } from '~/states/listing-data';
 
 import { CATEGORIES } from '~/types';
@@ -36,14 +33,12 @@ export const ListedAccountAbstract = () => {
     staleTime: Infinity,
     enabled: !!address,
   });
-  const { data: stakingAssets } = useAccountStakingAssetsQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
 
   const tokens = tokenData?.data.data.erc20.data;
   const nfts = tokenData?.data.data.erc721.data;
+
+  const lido = tokens?.find(t => t.token.symbol === 'stETH');
+  const stakingAssets = useMemo(() => (lido ? [parseLidoStakingAsset(lido)] : []), [lido]);
 
   const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
   const totalValue = useMemo(() => {
@@ -56,11 +51,10 @@ export const ListedAccountAbstract = () => {
       }, 0) ?? 0;
     const nftValue = 0; // TODO
     const lockTokenValue = lockupTokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
-    const stakingAssetValue =
-      stakingAssets?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
+    const stakingAssetValue = stakingAssets?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
 
     return tokensValue + nftValue + lockTokenValue + stakingAssetValue;
-  }, [lockupTokens?.data, stakingAssets?.data, tokens]);
+  }, [lockupTokens?.data, stakingAssets, tokens]);
 
   return (
     <Wrapper>
