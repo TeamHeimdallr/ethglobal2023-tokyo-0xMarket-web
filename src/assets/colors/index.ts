@@ -18,4 +18,10 @@ export const COLOR = {
   GRAYSCALE_1: () => tinyColor('#F3F4F5'),
 
   WHITE: () => tinyColor('#FFFFFF'),
+
+  GAME: () => tinyColor('#7636FF'),
+  WHITELIST: () => tinyColor('#000000'),
+  SBT: () => tinyColor('#FF94CE'),
+  TOKEN: () => tinyColor('#FFA869'),
+  GENERAL: () => tinyColor('#44B89C'),
 };

@@ -922,3 +922,24 @@ export const IconCalendar = ({ color, ...rest }: IconProps) => {
     </svg>
   );
 };
+export const IconVerification = ({ color, ...rest }: IconProps) => {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+      {...rest}
+    >
+      <rect width="18" height="18" rx="9" fill={color ?? '#293FFF'} />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M13.496 6.25386C13.7238 6.48167 13.7238 6.85101 13.496 7.07882L8.24598 12.3288C8.01817 12.5566 7.64882 12.5566 7.42102 12.3288L4.50435 9.41215C4.27654 9.18435 4.27654 8.815 4.50435 8.5872C4.73216 8.35939 5.1015 8.35939 5.32931 8.5872L7.8335 11.0914L12.671 6.25386C12.8988 6.02606 13.2682 6.02606 13.496 6.25386Z"
+        fill="white"
+      />
+    </svg>
+  );
+};
