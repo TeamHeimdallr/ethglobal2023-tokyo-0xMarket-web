@@ -53,6 +53,7 @@ export const _Icons = (args: any) => {
         <IconSvg.IconUp {...args} />
         <IconSvg.IconUpFill {...args} />
         <IconSvg.IconWallet {...args} />
+        <IconSvg.IconVerification {...args} />
       </InnerWrapper>
     </Wrapper>
   );
