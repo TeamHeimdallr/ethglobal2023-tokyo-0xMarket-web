@@ -17,7 +17,7 @@ export const _DropdownProfile = () => {
   const { disconnect } = useDisconnect();
   const parsedAddress = String(address);
   const balances = [
-    { currency: CURRENCY.ETH, balance: 1234567 },
+    { currency: CURRENCY.ETH, balance: 1234567.89 },
     { currency: CURRENCY.USD, balance: 123456 },
   ];
 
