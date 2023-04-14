@@ -5,6 +5,7 @@ import {
   useAccountInGameInfosQuery,
   useAccountLockupTokensQuery,
   useAccountTokensQuery,
+  useAllTxQuery,
   useFirstTxQuery,
   useNftTxQuery,
   useTokenTxQuery,
@@ -23,6 +24,7 @@ import {
 } from '~/components/portfolios';
 
 import { parseLidoStakingAsset } from '~/utils/token';
+import { parseTxHistory } from '~/utils/transactions';
 
 import { AccountInfo } from './components/account-info';
 
@@ -47,18 +49,22 @@ const DetailPage = () => {
     enabled: !!id,
   });
 
-  const { data: firstTx } = useFirstTxQuery(id ?? '', {
+  const { data: firstTxData } = useFirstTxQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!id,
   });
-  const { data: tokenTxs } = useTokenTxQuery(id ?? '', {
+  const { data: allTxData } = useAllTxQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!id,
   });
-
-  const { data: nftTxs } = useNftTxQuery(id ?? '', {
+  const { data: tokenTxData } = useTokenTxQuery(id ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!id,
+  });
+  const { data: nftTxData } = useNftTxQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!id,
@@ -68,12 +74,14 @@ const DetailPage = () => {
   const nfts = tokenData?.data.data.erc721.data;
   const sbts = tokenData?.data.data.poap.data;
 
+  const firstTx = firstTxData?.data.result?.[0];
+  const allTx = allTxData?.data.result;
+  const tokenTx = tokenTxData?.data.result;
+  const nftTx = nftTxData?.data.result;
+
   const lido = tokens?.find(t => t.token.symbol === 'stETH');
   const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];
-
-  console.log(firstTx);
-  console.log(tokenTxs);
-  console.log(nftTxs);
+  const histories = parseTxHistory({ firstTx, allTx, tokenTx, nftTx });
 
   return (
     <Wrapper>
@@ -97,7 +105,7 @@ const DetailPage = () => {
             <Divider />
             <PortfolioStakingAssets data={stakingAssets} />
             <Divider />
-            {/* <PortfolioTxHistories data={txHistories?.data} /> */}
+            <PortfolioTxHistories data={histories} />
           </PortfolioInnerWrapper>
         </PortfolioWrapper>
       </ContentWrapper>

@@ -68,9 +68,11 @@ export const useAccountTokensQuery = (
   );
 
 interface EtherscanTxResponse {
-  status: string;
-  message: string;
-  result: EtherscanTx[];
+  data: {
+    status: string;
+    message: string;
+    result: EtherscanTx[];
+  };
 }
 export const useFirstTxQuery = (
   account?: string,
@@ -81,16 +83,33 @@ export const useFirstTxQuery = (
     async () =>
       (
         await axios.get<EtherscanTxResponse>(
-          `${API_URL_ETHERSCAN}?module=account&action=txlist&address=${account}&startblock=0&page=1&offset=1&sort=asc&apikey=${ETHERSCAN_API_KEY}`
+          `${API_URL_ETHERSCAN}?module=account&action=txlist&address=${account}&startblock=0&offset=1&sort=asc&apikey=${ETHERSCAN_API_KEY}`
+        )
+      ).data,
+    options
+  );
+
+export const useAllTxQuery = (
+  account?: string,
+  options?: UseQueryOptions<EtherscanTxResponse, AxiosError<EtherscanTxResponse, null>>
+) =>
+  useQuery<EtherscanTxResponse, AxiosError<EtherscanTxResponse, null>>(
+    ['query', 'all-tx', account],
+    async () =>
+      (
+        await axios.get<EtherscanTxResponse>(
+          `${API_URL_ETHERSCAN}?module=account&action=txlist&address=${account}&startblock=0&offset=10000&sort=asc&apikey=${ETHERSCAN_API_KEY}`
         )
       ).data,
     options
   );
 
 interface EtherscanTokenTxResponse {
-  status: string;
-  message: string;
-  result: EtherscanTokenTx[];
+  data: {
+    status: string;
+    message: string;
+    result: EtherscanTokenTx[];
+  };
 }
 export const useTokenTxQuery = (
   account?: string,
@@ -101,16 +120,18 @@ export const useTokenTxQuery = (
     async () =>
       (
         await axios.get<EtherscanTokenTxResponse>(
-          `${API_URL_ETHERSCAN}?module=account&action=tokentx&address=${account}&page=1&offset=100&startblock=0&endblock=99999999&sort=asc&apikey=${ETHERSCAN_API_KEY}`
+          `${API_URL_ETHERSCAN}?module=account&action=tokentx&address=${account}&offset=10000&startblock=0&endblock=99999999&sort=asc&apikey=${ETHERSCAN_API_KEY}`
         )
       ).data,
     options
   );
 
 interface EtherscanNftTxResponse {
-  status: string;
-  message: string;
-  result: EtherscanNftTx[];
+  data: {
+    status: string;
+    message: string;
+    result: EtherscanNftTx[];
+  };
 }
 export const useNftTxQuery = (
   account?: string,
@@ -121,7 +142,7 @@ export const useNftTxQuery = (
     async () =>
       (
         await axios.get<EtherscanNftTxResponse>(
-          `${API_URL_ETHERSCAN}?module=account&action=tokennfttx&address=${account}&page=1&offset=100&startblock=0&endblock=99999999&sort=asc&apikey=${ETHERSCAN_API_KEY}`
+          `${API_URL_ETHERSCAN}?module=account&action=tokennfttx&address=${account}&offset=10000&startblock=0&endblock=99999999&sort=asc&apikey=${ETHERSCAN_API_KEY}`
         )
       ).data,
     options

@@ -29,9 +29,10 @@ export const PortfolioStakingAssets = ({ data }: Props) => {
       </TitleWrapper>
       {!isEmpty && (
         <CardWrapper>
-          {data?.map(token => (
-            <CardStaking key={token.id} {...token} />
-          ))}
+          {data?.map(token => {
+            if (!token.id) return;
+            return <CardStaking key={token.id} {...token} />;
+          })}
         </CardWrapper>
       )}
     </Wrapper>

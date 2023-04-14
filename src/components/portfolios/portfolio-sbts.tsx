@@ -19,9 +19,10 @@ export const PortfolioSbts = ({ data }: Props) => {
         {isEmpty && <TotalValueEmpty>No assets</TotalValueEmpty>}
       </TitleWrapper>
       <CardWrapper>
-        {data?.map(sbt => (
-          <CardSbt key={sbt.tokenAddress + sbt.tokenId} sbt={sbt} />
-        ))}
+        {data?.map(sbt => {
+          if (!sbt.tokenId) return;
+          return <CardSbt key={sbt.tokenAddress + sbt.tokenId} sbt={sbt} />;
+        })}
       </CardWrapper>
     </Wrapper>
   );

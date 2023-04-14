@@ -18,9 +18,10 @@ export const PortfolioTxHistories = ({ data }: Props) => {
       </TitleWrapper>
       {!isEmpty && (
         <CardWrapper>
-          {data?.map(history => (
-            <CardTxHistory key={history.id} {...history} />
-          ))}
+          {data?.map(history => {
+            if (!history.id) return;
+            return <CardTxHistory key={history.id} {...history} />;
+          })}
         </CardWrapper>
       )}
     </Wrapper>

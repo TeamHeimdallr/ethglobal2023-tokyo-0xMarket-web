@@ -32,6 +32,8 @@ export const PortfolioNfts = ({ data }: Props) => {
       {!isEmpty && (
         <CardWrapper>
           {data?.map(nft => {
+            if (!nft.id) return;
+
             const image = nft.tokenNfts.contentValue?.image?.small || '';
             const tokenName = (nft.tokenNfts.metaData.name ?? '').replace(/\s?#.*/g, '');
             const tokenId = nft.tokenNfts.tokenId.replace('#', '');

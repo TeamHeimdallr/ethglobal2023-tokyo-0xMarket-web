@@ -251,3 +251,11 @@ export interface EtherscanNftTx {
   input: string;
   confirmations: string;
 }
+
+export interface AccountTxHistory {
+  id: string;
+
+  image: string;
+  title: string;
+  description: string;
+}

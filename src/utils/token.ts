@@ -20,3 +20,9 @@ export const parseLidoStakingAsset = (lido: AccountToken | undefined): AccountSt
     stakedAt: 'Lido',
   };
 };
+
+export const parseToken = (token: string, decimals = '18'): number => {
+  const divisor = BigInt(10) ** BigInt(decimals);
+  const result = BigInt(token) / divisor;
+  return parseFloat(result.toString());
+};

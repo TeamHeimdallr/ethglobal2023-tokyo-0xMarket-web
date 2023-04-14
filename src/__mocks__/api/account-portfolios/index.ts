@@ -1,6 +1,7 @@
 import { graphql, rest } from 'msw';
 
 import {
+  accountAllTx,
   accountFirstTx as accountFirstTx1,
   accountInGameInfos as accountInGameInfos1,
   accountLockupTokens as accountLockupTokens1,
@@ -35,13 +36,14 @@ export const apiAccountPortfolios = [
   rest.get(`${API_URL_ETHERSCAN}?module=account&action=txlist`, (req, res, ctx) => {
     const action = req.url.searchParams.get('action');
     const account = req.url.searchParams.get('account');
+    const offset = req.url.searchParams.get('offset');
 
     let resData = {};
     if (action === 'txlist') {
       const data = {
         status: '1',
         message: 'OK',
-        result: [accountFirstTx1],
+        result: offset === '1' ? [accountFirstTx1] : accountAllTx,
       };
       resData = account === '1' ? data : data;
     }
@@ -49,7 +51,7 @@ export const apiAccountPortfolios = [
       const data = {
         status: '1',
         message: 'OK',
-        result: [accountTokenTx1],
+        result: accountTokenTx1,
       };
       resData = account === '1' ? data : data;
     }
@@ -57,7 +59,7 @@ export const apiAccountPortfolios = [
       const data = {
         status: '1',
         message: 'OK',
-        result: [accountNftTx1],
+        result: accountNftTx1,
       };
       resData = account === '1' ? data : data;
     }

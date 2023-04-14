@@ -27,9 +27,10 @@ export const PortfolioLockupTokens = ({ data }: Props) => {
       </TitleWrapper>
       {!isEmpty && (
         <CardWrapper>
-          {data?.map(token => (
-            <CardLockup key={token.id} {...token} />
-          ))}
+          {data?.map(token => {
+            if (!token.id) return;
+            return <CardLockup key={token.id} {...token} />;
+          })}
         </CardWrapper>
       )}
     </Wrapper>

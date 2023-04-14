@@ -40,6 +40,8 @@ export const PortfolioTokens = ({ data }: Props) => {
       {!isEmpty && (
         <CardWrapper>
           {data?.map(token => {
+            if (!token.id) return;
+
             const tokenSymbol = token.token.symbol;
             const tokenAmount = parseNumberToString(token.formattedAmount);
             const tokenPrice =
