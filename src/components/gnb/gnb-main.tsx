@@ -43,32 +43,40 @@ export const GnbMain = () => {
       <LogoWrapper>
         <Logo color="#fff" />
       </LogoWrapper>
-      {isConnected ? (
-        <ConnectWalletWrapper>
-          <Notification />
-          <DropdownProfile
-            address={address ?? '0x'}
-            balances={balances}
-            disconnect={() => disconnect()}
-          />
-          <ButtonMediumPrimary text="List my account" onClick={() => navigate('/listing')} />
-        </ConnectWalletWrapper>
-      ) : (
-        <ButtonMediumPrimary text="Connect wallet" onClick={() => connect()} />
-      )}
+      <RightWrapper>
+        {isConnected ? (
+          <ConnectWalletWrapper>
+            <Notification />
+            <DropdownProfile
+              address={address ?? '0x'}
+              balances={balances}
+              disconnect={() => disconnect()}
+            />
+            <ButtonMediumPrimary text="List my account" onClick={() => navigate('/listing')} />
+          </ConnectWalletWrapper>
+        ) : (
+          <ButtonMediumPrimary text="Connect wallet" onClick={() => connect()} />
+        )}
+      </RightWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div(() => [
   tw`
-    fixed left-0 top-0 w-full h-80 flex items-center justify-between px-24 py-20 relative z-1000
+    fixed left-0 top-0 w-full h-80 flex items-center justify-between px-24 py-20 z-1000
+    flex-shrink-0
   `,
   css`
     background: rgba(25, 31, 40, 0.01);
     backdrop-filter: blur(4px);
   `,
 ]);
+
+const RightWrapper = tw.div`
+  sm:hidden
+  md:block
+`;
 
 const LogoWrapper = tw.div`
   flex-center

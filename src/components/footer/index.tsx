@@ -26,7 +26,7 @@ export const Footer = ({ date }: Props) => {
 };
 
 const Wrapper = tw.div`
-  flex-center flex-col gap-8 w-full h-124 bg-grayscale-7
+  flex-center flex-col gap-8 w-full h-124 bg-grayscale-7 flex-shrink-0
 `;
 
 const LogoWrapper = tw.div`

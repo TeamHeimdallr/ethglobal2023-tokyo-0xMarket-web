@@ -56,7 +56,8 @@ export const GnbListing = ({ handleListing }: Props) => {
 
 const Wrapper = styled.div(() => [
   tw`
-    fixed left-0 top-0 w-full h-80 flex items-center justify-between px-24 py-20 relative z-1000
+    fixed left-0 top-0 w-full h-80 flex items-center justify-between px-24 py-20 z-1000
+    flex-shrink-0
   `,
   css`
     background: rgba(25, 31, 40, 0.01);
@@ -69,4 +70,6 @@ const LogoWrapper = tw.div`
 `;
 const ButtonWrapper = tw.div`
   flex gap-8
+  sm:hidden
+  md:block
 `;
