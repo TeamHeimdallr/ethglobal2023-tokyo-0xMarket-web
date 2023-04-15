@@ -3,10 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { InjectedConnector } from '@wagmi/core';
+import { ethers } from 'ethers';
 import tw from 'twin.macro';
 import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
-import { useAccount, useConnect } from 'wagmi';
+import { useAccount, useBalance, useConnect } from 'wagmi';
 
+import { useAccountTokensQuery } from '~/api/account-portfolios';
 import { useAllowance, useTokenApprove } from '~/api/contract/approve';
 import { useContractBuy } from '~/api/contract/buy';
 
@@ -17,7 +19,8 @@ import { parseNumberCommaSeperator } from '~/utils/number';
 
 import { Account, CATEGORIES } from '~/types';
 
-import { CategoriesMap, DEFAULT_DECIMAL, LISTED_LOCAL_KEY } from '~/constants';
+import { price } from '~/__mocks__/data/token-price';
+import { CategoriesMap, DEFAULT_CHAIN_ID, DEFAULT_DECIMAL, LISTED_LOCAL_KEY } from '~/constants';
 
 import { BackButton } from './back-button';
 
@@ -36,6 +39,37 @@ export const AccountInfo = () => {
   const [_, setStorage] = useLocalStorage<Account[]>(LISTED_LOCAL_KEY, listedAccount ?? []);
 
   const categoryData = CategoriesMap[account?.category ?? CATEGORIES.GENERAL];
+
+  const { data: ethBalance } = useBalance({
+    chainId: DEFAULT_CHAIN_ID,
+    address: address as `0x{string}`,
+    enabled: !!address && ethers.utils.isAddress(address),
+  });
+  const { data: tokenData } = useAccountTokensQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address && ethers.utils.isAddress(address),
+  });
+
+  const tokens = tokenData?.data?.data?.erc20?.data;
+
+  const ethTokenValue = ethBalance
+    ? Number(price.find(p => p.symbol === ethBalance?.symbol)?.lastPriceUSD || 0) || 0
+    : 0;
+  const ethTotalValue = Number(ethBalance?.formatted ?? 0) * ethTokenValue;
+
+  const totalValue = () => {
+    const tokenValues =
+      tokens?.reduce((res, d) => {
+        const tokenPrice =
+          Number(price.find(p => p.symbol === d.token.symbol)?.lastPriceUSD || 0) *
+            d.formattedAmount || 0;
+
+        return (res += tokenPrice);
+      }, 0) ?? 0;
+
+    return tokenValues + ethTotalValue;
+  };
 
   const {
     allowanceAmount,
@@ -122,7 +156,7 @@ export const AccountInfo = () => {
             <TokenValueLabel>Token value</TokenValueLabel>
             <TokenValue>
               {parseNumberCommaSeperator({
-                number: account?.tokenValue ?? 0,
+                number: totalValue() || account?.tokenValue || 0,
                 prefix: '$',
               })}
             </TokenValue>
