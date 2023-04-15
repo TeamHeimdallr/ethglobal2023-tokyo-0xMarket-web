@@ -8,7 +8,7 @@ export const accountDetail: Account = {
   address: '0x48DBa2D1b6C89Bf8234C2B63554369aDC7Ae3250',
   receivingAddress: '0x9DCD43faB2CF8104cb2ff53CF4C051842C125EE0',
 
-  title: '[50,000 $TOKYO] 6 Month vesting left wallet for $TOKYO token. Monthly drop',
+  title: '6 Month vesting left wallet for $TOKYO token. Monthly drop',
   description:
     'This account is a account to receive $TOKYO token vesting from the angel investment a year ago.\n' +
     'We have received 100,000 $TOKYO until now and waiting for the next drop in April 28th, 2023.\n' +
