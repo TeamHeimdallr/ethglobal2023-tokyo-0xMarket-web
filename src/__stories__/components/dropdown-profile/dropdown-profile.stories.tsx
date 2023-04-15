@@ -16,7 +16,7 @@ export const _DropdownProfile = () => {
   const { address } = useAccount();
 
   const { disconnect } = useDisconnect();
-  const balances = [{ currency: CURRENCY.ETH, balance: 1234567.89 }];
+  const balances = [{ currency: CURRENCY.ETH, balance: '1234567.89' }];
 
   return (
     <DropdownProfile

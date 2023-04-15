@@ -18,7 +18,7 @@ export enum CATEGORIES {
 
 export interface Balance {
   currency: CURRENCY;
-  balance: number;
+  balance: string;
 }
 
 export interface NFT {
