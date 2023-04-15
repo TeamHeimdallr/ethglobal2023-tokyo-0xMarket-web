@@ -21,17 +21,3 @@ export const useAccountDiscoversQuery = (options?: AccountDiscoversQueryOptions)
     getAccountDiscoversAxios,
     options
   );
-
-// interface AccountResponse {
-//   data: Account;
-// }
-// type AccountQueryOptions = UseQueryOptions<AccountResponse, AxiosError<AccountResponse, null>>;
-// const getAccountAxios = async (id: string) =>
-//   (await api.get<AccountResponse>(`/account/${id}`)).data;
-
-// export const useAccountQuery = (id: string, options?: AccountQueryOptions) =>
-//   useQuery<AccountResponse, AxiosError<AccountResponse, null>>(
-//     ['accounts', 'get-account'],
-//     () => getAccountAxios(id),
-//     options
-//   );
