@@ -51,7 +51,7 @@ export const GnbListing = ({ handleListing }: Props) => {
 
   return (
     <Wrapper>
-      <LogoWrapper>
+      <LogoWrapper onClick={() => navigate('/')}>
         <Logo color="#fff" />
       </LogoWrapper>
       <ButtonWrapper>
@@ -78,7 +78,7 @@ const Wrapper = styled.div(() => [
 ]);
 
 const LogoWrapper = tw.div`
-  flex-center
+  flex-center clickable
 `;
 
 const ButtonWrapper = tw.div`

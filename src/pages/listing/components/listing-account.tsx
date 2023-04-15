@@ -6,7 +6,7 @@ import { TextFieldWallet } from '~/components/textfield/textfield-wallet';
 import { useListingDataState } from '~/states/listing-data';
 
 export const ListingAccount = () => {
-  const { setData } = useListingDataState();
+  const { data, setData } = useListingDataState();
 
   const handleAccountChange = useCallback(
     (value?: string) => setData({ address: value }),
@@ -20,6 +20,7 @@ export const ListingAccount = () => {
       </TitleWrapper>
       <TextFieldWallet
         placeholder="Enter your account address here"
+        value={data.address ?? ''}
         onChange={handleAccountChange}
       />
     </Wrapper>

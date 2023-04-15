@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useCallback, useEffect, useRef, useState } from 'react';
 import tw from 'twin.macro';
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
@@ -29,6 +29,19 @@ export const TextFieldWallet = ({ onChange, ...rest }: Props) => {
     },
     [onChange, resize]
   );
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    const value = valueRef.current;
+    const hiddenValue = hiddenValueRef.current;
+    if (!wrapper || !hiddenValue || !value) return;
+
+    const hiddenValueWidth = hiddenValue.scrollWidth;
+    if (hiddenValueWidth > 0) {
+      wrapper.style.width = `${hiddenValueWidth + 80}px`;
+      value.style.width = `${hiddenValueWidth}px`;
+    }
+  }, []);
 
   return (
     <Wrapper ref={wrapperRef}>

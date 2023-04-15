@@ -12,6 +12,7 @@ import {
 
 import { Category } from '~/components/category';
 import { Checkbox } from '~/components/checkbox';
+import { IconLocked } from '~/components/icons';
 
 import { parseNumberCommaSeperator } from '~/utils/number';
 import { useListingDataState } from '~/states/listing-data';
@@ -63,7 +64,14 @@ export const ListedAccountAbstract = () => {
         <AddressContentWrapper>
           <AddressWrapper>
             <Category category={category} />
-            {address}
+            {data.hidden ? (
+              <HiddenAddress>
+                <IconLocked width={20} height={20} color="#6D7684" />
+                Your address is hidden
+              </HiddenAddress>
+            ) : (
+              <>{address}</>
+            )}
           </AddressWrapper>
           <HideAddressWrapper onClick={() => setData({ hidden: !data.hidden })}>
             <Checkbox selected={data.hidden} />
@@ -111,7 +119,11 @@ const AddressContentWrapper = tw.div`
 `;
 
 const AddressWrapper = tw.div`
-  flex flex-col gap-8 font-r-16 text-grayscale-2
+  flex flex-col gap-8 font-r-16 text-grayscale-2 items-start
+`;
+
+const HiddenAddress = tw.div`
+  flex gap-6 font-sb-16 text-grayscale-2 items-center
 `;
 
 const HideAddressWrapper = tw.div`

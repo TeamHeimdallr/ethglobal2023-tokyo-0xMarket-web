@@ -40,7 +40,7 @@ export const GnbMain = () => {
 
   return (
     <Wrapper>
-      <LogoWrapper>
+      <LogoWrapper onClick={() => navigate('/')}>
         <Logo color="#fff" />
       </LogoWrapper>
       <RightWrapper>
@@ -79,7 +79,7 @@ const RightWrapper = tw.div`
 `;
 
 const LogoWrapper = tw.div`
-  flex-center
+  flex-center clickable
 `;
 const ConnectWalletWrapper = tw.div`
   flex gap-16
