@@ -27,7 +27,6 @@ export const parseTxHistory = ({ firstTx, allTx, tokenTx, nftTx }: ParseTxHistor
 };
 
 export const parseFirstTxHistory = (tx?: EtherscanTx): AccountTxHistory => {
-  console.log(tx);
   if (!tx) return {} as AccountTxHistory;
   const timestamp = Number(tx.timeStamp) * 1000;
 
