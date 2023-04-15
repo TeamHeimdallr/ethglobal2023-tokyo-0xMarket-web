@@ -17,7 +17,7 @@ export const accountDetail: Account = {
   category: CATEGORIES.GAME,
 
   price: 2500,
-  tokenValue: 1495869,
+  tokenValue: 10372,
 
   verified: [
     {
