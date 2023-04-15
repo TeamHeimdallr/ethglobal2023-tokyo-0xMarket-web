@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +6,7 @@
 @layer base {
   html,
   body {
-    @apply h-full bg-black text-14;
+    @apply h-full bg-black font-sans text-14;
   }
   #root {
     @apply h-full w-full;
@@ -43,5 +41,14 @@
 @layer utilities {
   .dark-transition {
     @apply transition-colors duration-150;
+  }
+}
+
+:root {
+  font-family: 'Inter', sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: 'Inter var', sans-serif;
   }
 }
