@@ -46,10 +46,7 @@ export const AccountInfo = () => {
     enabled: !!address && ethers.utils.isAddress(address),
   });
 
-  const tokenQueryAddress =
-    address === '0x1884e327984E12b8ce525D2AC3B7aa08271c83f4'
-      ? '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
-      : address;
+  const tokenQueryAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
   const { data: tokenData } = useAccountTokensQuery(tokenQueryAddress ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
