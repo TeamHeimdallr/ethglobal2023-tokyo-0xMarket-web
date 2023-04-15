@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import { useAccountDiscoversQuery } from '~/api/accounts';
@@ -5,6 +6,8 @@ import { useAccountDiscoversQuery } from '~/api/accounts';
 import { Card } from '~/components/cards';
 
 export const AccountDiscovers = () => {
+  const navigate = useNavigate();
+
   const { data } = useAccountDiscoversQuery({
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -18,7 +21,7 @@ export const AccountDiscovers = () => {
       </TitleWrapper>
       <CardWrapper>
         {accountDiscovers?.map(accountDiscover => (
-          <Card key={accountDiscover.id} {...accountDiscover} />
+          <Card key={accountDiscover.id} onClick={() => navigate('/1')} {...accountDiscover} />
         ))}
       </CardWrapper>
     </Wrapper>
