@@ -73,7 +73,7 @@ export const accountTokens: AccountTokenAll = {
           tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
           tokenId: '✨Angel✨',
           tokenType: 'ERC721',
-          tokenPrice: 300,
+          tokenPrice: 0.05,
           token: {
             name: 'Axie Infinity',
             symbol: 'KODA',
@@ -101,7 +101,7 @@ export const accountTokens: AccountTokenAll = {
           tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
           tokenId: 'Devil Jack',
           tokenType: 'ERC721',
-          tokenPrice: 200,
+          tokenPrice: 0.06,
           token: {
             name: 'Axie Infinity',
             symbol: 'KODA',
@@ -129,7 +129,7 @@ export const accountTokens: AccountTokenAll = {
           tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
           tokenId: 'Handsome Bob',
           tokenType: 'ERC721',
-          tokenPrice: 200,
+          tokenPrice: 0.07,
           token: {
             name: 'Axie Infinity',
             symbol: 'KODA',
