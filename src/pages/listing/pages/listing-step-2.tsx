@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ethers } from 'ethers';
 import tw from 'twin.macro';
 import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
@@ -12,6 +13,7 @@ import {
   useNftTxQuery,
   useTokenTxQuery,
 } from '~/api/account-portfolios';
+import { useContractAssert } from '~/api/contract/assertDataFor';
 import { useContractDeposit } from '~/api/contract/change-owner';
 import { useContractList } from '~/api/contract/list';
 
@@ -182,20 +184,35 @@ export const ListingStep2 = () => {
   };
 
   const handleListing = async () => {
-    await listAsync?.();
+    const tx = await listAsync?.();
     handleSaveInfo();
+    await tx?.wait();
   };
 
   const handleDepositing = async () => {
     await depositAsync?.();
   };
 
+  const { writeAsync: assertAsync, isLoading: isAssertLoading } = useContractAssert({
+    statement: umaData ? Object.keys(umaData).map(key => umaData[key])[0] ?? '' : '', // only for first statement
+    asserter: address ?? '',
+  });
+
+  useEffect(() => {
+    if (isListSuccess && !isAssertLoading) {
+      const assertApi = async () => {
+        await assertAsync?.();
+      };
+      assertApi();
+    }
+  }, [assertAsync, isAssertLoading, isListSuccess]);
+
   return (
     <Wrapper>
       <GnbListing
         handleListing={handleListing}
         handleDepositing={handleDepositing}
-        isLoading={isListLoading || isDepositLoading}
+        isLoading={isListLoading || isDepositLoading || isAssertLoading}
         isListSuccess={isListSuccess}
         isDepositSuccess={isDepositSuccess}
       />
@@ -247,7 +264,7 @@ const InputWrapper = tw.div`
 `;
 
 const UmaWrapper = tw.div`
-  w-886 flex flex-col flex-1 flex-shrink-0 
+  w-886 flex flex-col flex-1 flex-shrink-0
 `;
 
 const Divider = tw.div`

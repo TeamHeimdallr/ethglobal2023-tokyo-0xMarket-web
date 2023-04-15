@@ -1,3 +1,4 @@
+import { ethers } from 'ethers';
 import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 
 import { STATEMENT_VERIFIER_ABI } from '~/abi/statement-verifier';
@@ -13,7 +14,7 @@ export const useContractAssert = ({ statement, asserter }: AssertParam) => {
     abi: STATEMENT_VERIFIER_ABI,
     functionName: 'assertDataFor',
     args: [
-      statement,
+      ethers.utils.toUtf8Bytes(statement),
       asserter,
       //   {
       //     gasLimit: 1300000, // TODO
