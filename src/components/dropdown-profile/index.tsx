@@ -56,7 +56,7 @@ export const DropdownProfile = ({ address, balances, disconnect, ...rest }: Prop
         <ContentWrapper>
           {balances?.map(val => (
             <BalanceWrapper key={val.currency}>
-              <Amount>{val.balance}</Amount>
+              <Amount>{Number(Number(val.balance).toFixed(4))}</Amount>
               <Symbol>{val.currency as CURRENCY}</Symbol>
             </BalanceWrapper>
           ))}
