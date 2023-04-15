@@ -184,9 +184,8 @@ export const ListingStep2 = () => {
   };
 
   const handleListing = async () => {
-    const tx = await listAsync?.();
+    await listAsync?.();
     handleSaveInfo();
-    await tx?.wait();
   };
 
   const handleDepositing = async () => {

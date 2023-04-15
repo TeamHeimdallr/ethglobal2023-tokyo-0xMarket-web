@@ -15,8 +15,6 @@ import { useListingProgressState } from '~/states/listing-progress';
 
 import { Account } from '~/types';
 
-import { MARKET_CONTRACT_ADDRESS } from '~/constants';
-
 interface Props {
   handleListing?: (data: Partial<Account>) => Promise<void>;
   handleDepositing?: () => Promise<void>;
@@ -36,20 +34,20 @@ export const GnbListing = ({
   const { progress, setProgress, resetProgress } = useListingProgressState();
   const { data } = useListingDataState();
 
-  const { refetch, owner } = useContractOwnerQuery({
+  const { refetch } = useContractOwnerQuery({
     address: (data?.address as `0x${string}`) ?? '',
   });
 
   const nextButtonText = useMemo(() => {
     if (progress === 0) return 'Continue';
-    if (progress === 2 || owner === MARKET_CONTRACT_ADDRESS) return 'List now';
     if (progress === 1) return 'Deposit';
+    if (progress === 2) return 'List now';
     return 'Continue';
-  }, [owner, progress]);
+  }, [progress]);
 
   const nextButtonDisabled = useMemo(() => {
     if (progress === 0) return !data.address || !data.category;
-    if (progress === 1 || progress === 2 || owner === MARKET_CONTRACT_ADDRESS)
+    if (progress === 1 || progress === 2)
       return (
         !data.address ||
         !data.category ||
@@ -58,13 +56,13 @@ export const GnbListing = ({
         !data.description ||
         !data.price
       );
-  }, [data, progress, owner]);
+  }, [data, progress]);
 
   const handleNextButtonClick = useCallback(async () => {
     if (progress === 0) setProgress(1);
-    if (progress === 2 || owner === MARKET_CONTRACT_ADDRESS) await handleListing?.(data);
-    else if (progress === 1) await handleDepositing?.();
-  }, [progress, setProgress, owner, handleListing, data, handleDepositing]);
+    if (progress === 1) await handleDepositing?.();
+    if (progress === 2) await handleListing?.(data);
+  }, [progress, setProgress, handleListing, data, handleDepositing]);
 
   useEffect(() => {
     if (isListSuccess) {

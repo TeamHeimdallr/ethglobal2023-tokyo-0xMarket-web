@@ -17,7 +17,7 @@ export const IS_MAINNET = IS_PROD;
 
 export const MARKET_CONTRACT_ADDRESS = IS_MAINNET
   ? '0x'
-  : '0xce54082acf6ae7B81C84096bd7a0f0728f934Ad8';
+  : '0x35a1f98B814f01EBccc80dcF78a26D4753207313';
 
 export const STATEMENT_VERIFIER_CONTRACT_ADDRESS = IS_MAINNET
   ? '0x'
@@ -27,7 +27,7 @@ export const OOV3_CONTRACT_ADDRESS = IS_MAINNET
   ? '0x'
   : '0x9923D42eF695B5dd9911D05Ac944d4cAca3c4EAB';
 
-export const TRADE_TOKEN_ADDRESS = IS_MAINNET ? '0x' : '0xfeb936d27aadde0b33a11bcd2842c7507e2277e3';
+export const TRADE_TOKEN_ADDRESS = IS_MAINNET ? '0x' : '0x68035dd1dfabf2c682f6e1f3eb56db0b26c2e4d5';
 export const API_URL_ETHERSCAN = IS_MAINNET ? '' : 'https://api-goerli.etherscan.io/api';
 export const ETHERSCAN_API_KEY = 'HPWTPRKCEMT3JFRCYYPETD3694ISJRYW6F';
 export const AIRSTACK_API_URL = 'https://api.airstack.xyz/gql/4tITyVlBrB';
