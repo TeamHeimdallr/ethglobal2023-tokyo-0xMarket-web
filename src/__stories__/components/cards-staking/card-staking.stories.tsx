@@ -17,19 +17,19 @@ export const _CardStaking = () => {
       <CardStaking
         image={IconEth}
         token={{ name: CURRENCY.ETH, value: '100,000' }}
-        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+        tokenValue={1864.93}
         stakedAt="Lido"
       />
       <CardStaking
         image={IconEth}
         token={{ name: CURRENCY.ETH, value: '100,000' }}
-        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+        tokenValue={1864.93}
         stakedAt="Coinbase Wrapped Staked ETH"
       />
       <CardStaking
         image={IconEth}
         token={{ name: CURRENCY.ETH, value: '100,000' }}
-        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+        tokenValue={1864.93}
         stakedAt="Rocket Pool"
       />
     </Wrapper>

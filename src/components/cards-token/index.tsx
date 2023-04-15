@@ -8,7 +8,7 @@ import { Token } from '~/types';
 interface Props extends HTMLAttributes<HTMLDivElement> {
   image: string;
   token: Token;
-  tokenValue: Token;
+  tokenValue: number;
 }
 
 export const CardToken = ({ image, token, tokenValue, ...rest }: Props) => {
@@ -17,7 +17,7 @@ export const CardToken = ({ image, token, tokenValue, ...rest }: Props) => {
       <Image src={image} />
       <TokenContent>
         <TokenAmount>{`${token.value} ${token.name}`}</TokenAmount>
-        <TokenValue>{`${tokenValue.name}${tokenValue.value}`}</TokenValue>
+        <TokenValue>{`$${tokenValue}`}</TokenValue>
       </TokenContent>
     </Wrapper>
   );

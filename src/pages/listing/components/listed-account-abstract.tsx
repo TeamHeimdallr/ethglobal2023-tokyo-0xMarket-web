@@ -3,6 +3,13 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
+import {
+  useAccountLockupTokensQuery,
+  useAccountNftsQuery,
+  useAccountStakingAssetsQuery,
+  useAccountTokensQuery,
+} from '~/api/account-portfolios';
+
 import { Category } from '~/components/category';
 import { Checkbox } from '~/components/checkbox';
 
@@ -17,10 +24,37 @@ export const ListedAccountAbstract = () => {
   const { data, setData } = useListingDataState();
   const { address, category } = data;
 
+  const { data: tokens } = useAccountTokensQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: nfts } = useAccountNftsQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: lockupTokens } = useAccountLockupTokensQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: stakingAssets } = useAccountStakingAssetsQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+
   const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
   const tokenValue = useMemo(() => {
-    return 0;
-  }, []);
+    const tokenValue = tokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
+    const nftValue = nfts?.data?.reduce((res, d) => (res += d.tokenValue || 0), 0) ?? 0;
+    const lockTokenValue = lockupTokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
+    const stakingAssetValue =
+      stakingAssets?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
+
+    return tokenValue + nftValue + lockTokenValue + stakingAssetValue;
+  }, [lockupTokens?.data, nfts?.data, stakingAssets?.data, tokens?.data]);
 
   return (
     <Wrapper>

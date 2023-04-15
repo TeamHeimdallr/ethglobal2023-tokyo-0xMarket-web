@@ -9,18 +9,18 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   image: string;
   nft: NFT;
   sbt?: boolean;
-  tokenValue?: Token;
+  nftValue?: Token;
 }
 
-export const CardNFT = ({ image, nft, tokenValue, sbt = false, ...rest }: Props) => {
+export const CardNFT = ({ image, nft, nftValue, sbt = false, ...rest }: Props) => {
   return (
     <Wrapper {...rest}>
       <Image src={image} />
       <TokenContent>
         <TokenName>{nft.name}</TokenName>
         <TokenId>#{nft.id}</TokenId>
-        {!sbt && tokenValue && (
-          <TokenPriceContent>{`${tokenValue.value} ${tokenValue.name}`}</TokenPriceContent>
+        {!sbt && nftValue && (
+          <TokenPriceContent>{`${nftValue.value} ${nftValue.name}`}</TokenPriceContent>
         )}
       </TokenContent>
     </Wrapper>

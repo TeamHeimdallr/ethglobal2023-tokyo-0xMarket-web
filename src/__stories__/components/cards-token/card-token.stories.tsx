@@ -18,17 +18,17 @@ export const _CardToken = () => {
       <CardToken
         image={IconEth}
         token={{ name: CURRENCY.ETH, value: '0.00006' }}
-        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+        tokenValue={1864.93}
       />
       <CardToken
         image={IconMatic}
         token={{ name: CURRENCY.ETH, value: '99.99' }}
-        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+        tokenValue={1864.93}
       />
       <CardToken
         image={IconEth}
         token={{ name: CURRENCY.ETH, value: '0.00006' }}
-        tokenValue={{ name: CURRENCY.USD, value: '1,864.93' }}
+        tokenValue={1864.93}
       />
     </Wrapper>
   );

@@ -5,7 +5,10 @@ import { useAccountDiscoversQuery } from '~/api/accounts';
 import { Card } from '~/components/cards';
 
 export const AccountDiscovers = () => {
-  const { data } = useAccountDiscoversQuery();
+  const { data } = useAccountDiscoversQuery({
+    cacheTime: Infinity,
+    staleTime: Infinity,
+  });
   const accountDiscovers = data?.data;
 
   return (

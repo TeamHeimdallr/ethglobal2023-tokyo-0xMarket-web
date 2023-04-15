@@ -31,7 +31,6 @@ export interface Token {
 }
 
 export enum CURRENCY {
-  USD = '$',
   ETH = 'ETH',
   MATIC = 'MATIC',
 }
@@ -67,35 +66,49 @@ export type AccountDiscover = Pick<
 export type ListingAccount = Partial<Omit<Account, 'id'>>;
 
 export interface AccountInGameInfo {
+  id: string;
+
   title: string;
 }
 export interface AccountNftSbt {
+  id: string;
+
   image: string;
   token: NFT;
-  tokenValue?: Token;
+
+  nftValue?: Token;
+  tokenValue?: number;
 }
 export interface AccountToken {
+  id: string;
+
   image: string;
   token: Token;
-  tokenValue: Token;
+  tokenValue: number;
 }
 export interface AccountLockupToken {
+  id: string;
+
   image: string;
   type: LOCKUP_TYPE;
 
   token: Token;
-  tokenValue: Token;
+  tokenValue: number;
 
   totalToken?: Token;
   date: Date;
 }
 export interface AccountStakingAsset {
+  id: string;
+
   image: string;
   token: Token;
-  tokenValue: Token;
+  tokenValue: number;
   stakedAt: string;
 }
 export interface AccountTxHistory {
+  id: string;
+
   image: string;
   title: string;
   description: string;

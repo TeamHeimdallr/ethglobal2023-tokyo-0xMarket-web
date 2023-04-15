@@ -8,7 +8,7 @@ import { Token } from '~/types';
 interface Props extends HTMLAttributes<HTMLDivElement> {
   image: string;
   token: Token;
-  tokenValue: Token;
+  tokenValue: number;
   stakedAt: string;
 }
 
@@ -20,7 +20,7 @@ export const CardStaking = ({ image, token, tokenValue, stakedAt, ...rest }: Pro
           <Image src={image} />
           <TokenContent>
             <TokenAmount>{`${token.value} ${token.name}`}</TokenAmount>
-            <TokenValue>{`${tokenValue.name}${tokenValue.value}`}</TokenValue>
+            <TokenValue>{`$${tokenValue}`}</TokenValue>
           </TokenContent>
         </TokenOuterWrapper>
       </UpperWrapper>

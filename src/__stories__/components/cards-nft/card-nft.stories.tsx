@@ -17,22 +17,22 @@ export const _CardNFT = () => {
         <CardNFT
           image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
           nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
-          tokenValue={{ name: CURRENCY.ETH, value: '230.99' }}
+          nftValue={{ name: CURRENCY.ETH, value: '230.99' }}
         />
         <CardNFT
           image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
           nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
-          tokenValue={{ name: CURRENCY.ETH, value: '230.99' }}
+          nftValue={{ name: CURRENCY.ETH, value: '230.99' }}
         />
         <CardNFT
           image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
           nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
-          tokenValue={{ name: CURRENCY.ETH, value: '230.99' }}
+          nftValue={{ name: CURRENCY.ETH, value: '230.99' }}
         />
         <CardNFT
           image="https://static.cryptobriefing.com/wp-content/uploads/2022/01/31075231/bored-ape-record-nft-cover-1024x538.png"
           nft={{ name: 'Bored Ape Yacht Club', id: '1456' }}
-          tokenValue={{ name: CURRENCY.ETH, value: '230.99' }}
+          nftValue={{ name: CURRENCY.ETH, value: '230.99' }}
         />
       </CardContainer>
       <Divider />

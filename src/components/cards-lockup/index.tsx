@@ -13,7 +13,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   type: LOCKUP_TYPE;
 
   token: Token;
-  tokenValue: Token;
+  tokenValue: number;
 
   totalToken?: Token;
   date: Date;
@@ -39,7 +39,7 @@ export const CardLockup = ({
           <Image src={image} />
           <TokenContent>
             <TokenAmount>{`${token.value} ${token.name}`}</TokenAmount>
-            <TokenValue>{`${tokenValue.name}${tokenValue.value}`}</TokenValue>
+            <TokenValue>{`$${tokenValue}`}</TokenValue>
           </TokenContent>
         </TokenOuterWrapper>
       </UpperWrapper>
