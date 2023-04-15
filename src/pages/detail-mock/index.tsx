@@ -16,6 +16,7 @@ import {
 import { Account } from '~/types';
 
 import {
+  accountEthBalance as accountEthBalance1,
   accountInGameInfos as accountInGameInfos1,
   accountLockupTokens as accountLockupTokens1,
   accountStakingAssets as accountStakingAssets1,
@@ -23,6 +24,7 @@ import {
   accountTxHistories as accountTxHistories1,
 } from '~/__mocks__/data/account-portfolios-1';
 import {
+  accountEthBalance as accountEthBalance2,
   accountInGameInfos as accountInGameInfos2,
   accountLockupTokens as accountLockupTokens2,
   accountStakingAssets as accountStakingAssets2,
@@ -41,6 +43,7 @@ const DetailPageMock = ({ id }: Props) => {
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   const account = (listedAccount?.find(account => account.id === id) as Account) || undefined;
 
+  const ethTokenData = id === MOCK_USER.USER_1 ? accountEthBalance1 : accountEthBalance2;
   const tokenData = id === MOCK_USER.USER_1 ? accountTokens1 : accountTokens2;
   const lockupTokens = id === MOCK_USER.USER_1 ? accountLockupTokens1 : accountLockupTokens2;
   const inGameInfo = id === MOCK_USER.USER_1 ? accountInGameInfos1 : accountInGameInfos2;
@@ -67,7 +70,7 @@ const DetailPageMock = ({ id }: Props) => {
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
-            <PortfolioTokens data={tokens} />
+            <PortfolioTokens ethData={ethTokenData} data={tokens} />
             <Divider />
             <PortfolioSbts data={sbts} />
             <Divider />

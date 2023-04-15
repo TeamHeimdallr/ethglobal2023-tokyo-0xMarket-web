@@ -50,6 +50,7 @@ export const accountEthBalance: AccountEthBalance = {
   symbol: 'ETH',
   value: '123450000000000000000',
 };
+
 export const accountTokens: AccountTokenAll = {
   data: {
     erc20: {

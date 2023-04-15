@@ -1,33 +1,39 @@
-import { useMemo } from 'react';
 import tw from 'twin.macro';
 
 import iconToken from '~/assets/icons/icon-coin.png';
+import iconEth from '~/assets/icons/icon-eth.png';
 import { CardToken } from '~/components/cards-token';
 
 import { parseNumberCommaSeperator, parseNumberToString } from '~/utils/number';
 
-import { AccountToken } from '~/types';
+import { AccountEthBalance, AccountToken } from '~/types';
 
 import { tokenImages } from '~/__mocks__/data/token-images';
 import { price } from '~/__mocks__/data/token-price';
 
 interface Props {
+  ethData?: AccountEthBalance;
   data?: AccountToken[];
 }
 
-export const PortfolioTokens = ({ data }: Props) => {
-  const isEmpty = !data || data?.length === 0;
-  const totalValue = useMemo(
-    () =>
+export const PortfolioTokens = ({ ethData, data }: Props) => {
+  const isEmpty = (!ethData && !data) || (!ethData && data?.length === 0);
+  const ethTokenValue = ethData
+    ? Number(price.find(p => p.symbol === ethData?.symbol)?.lastPriceUSD || 0) || 0
+    : 0;
+  const ethTotalValue = Number(ethData?.formatted ?? 0) * ethTokenValue;
+  const totalValue = () => {
+    const tokenValues =
       data?.reduce((res, d) => {
         const tokenPrice =
           Number(price.find(p => p.symbol === d.token.symbol)?.lastPriceUSD || 0) *
             d.formattedAmount || 0;
 
         return (res += tokenPrice);
-      }, 0) ?? 0,
-    [data]
-  );
+      }, 0) ?? 0;
+
+    return tokenValues + ethTotalValue;
+  };
 
   return (
     <Wrapper>
@@ -36,11 +42,20 @@ export const PortfolioTokens = ({ data }: Props) => {
         {isEmpty ? (
           <TotalValueEmpty>No assets</TotalValueEmpty>
         ) : (
-          <TotalValue>{parseNumberCommaSeperator({ number: totalValue, prefix: '$' })}</TotalValue>
+          <TotalValue>
+            {parseNumberCommaSeperator({ number: totalValue(), prefix: '$' })}
+          </TotalValue>
         )}
       </TitleWrapper>
       {!isEmpty && (
         <CardWrapper>
+          {ethData && (
+            <CardToken
+              image={iconEth}
+              token={{ name: ethData.symbol, value: ethData.formatted }}
+              tokenValue={Number(ethData.formatted) * ethTokenValue}
+            />
+          )}
           {data?.map(token => {
             if (!token.id) return;
 

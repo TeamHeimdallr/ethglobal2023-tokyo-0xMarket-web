@@ -1,5 +1,7 @@
+import { ethers } from 'ethers';
 import tw from 'twin.macro';
 import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
+import { useBalance } from 'wagmi';
 
 import {
   useAccountInGameInfosQuery,
@@ -30,9 +32,15 @@ import { parseTxHistory } from '~/utils/transactions';
 import { useListingDataState } from '~/states/listing-data';
 import { useListingUmaState } from '~/states/listing-uma';
 
-import { Account, AccountUmaVerified, CATEGORIES, UMA_VERIFY_STATUS } from '~/types';
+import {
+  Account,
+  AccountEthBalance,
+  AccountUmaVerified,
+  CATEGORIES,
+  UMA_VERIFY_STATUS,
+} from '~/types';
 
-import { LISTED_LOCAL_KEY } from '~/constants';
+import { DEFAULT_CHAIN_ID, LISTED_LOCAL_KEY } from '~/constants';
 
 import { BackButton } from '../components/back-button';
 import { ListingInputs } from '../components/lising-inputs';
@@ -44,6 +52,12 @@ export const ListingStep2 = () => {
   const { data: umaData } = useListingUmaState();
 
   const { address } = data;
+  const { data: ethBalance } = useBalance({
+    chainId: DEFAULT_CHAIN_ID,
+    address: address as `0x{string}`,
+    enabled: !!address && ethers.utils.isAddress(address),
+  });
+
   const currentListedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, saveStorage] = useLocalStorage<Account[]>(LISTED_LOCAL_KEY, currentListedAccount || []);
@@ -177,7 +191,7 @@ export const ListingStep2 = () => {
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
-            <PortfolioTokens data={tokens} />
+            <PortfolioTokens ethData={ethBalance as AccountEthBalance | undefined} data={tokens} />
             <Divider />
             <PortfolioSbts data={sbts} />
             <Divider />

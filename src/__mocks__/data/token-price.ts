@@ -1,5 +1,10 @@
 export const price = [
   {
+    name: 'Ethereum',
+    symbol: 'ETH',
+    lastPriceUSD: '2122.71',
+  },
+  {
     name: 'TrueUSD',
     symbol: 'TUSD',
     lastPriceUSD: '1',

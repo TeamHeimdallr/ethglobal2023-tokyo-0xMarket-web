@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
+import { ethers } from 'ethers';
 import tw from 'twin.macro';
 import { useReadLocalStorage } from 'usehooks-ts';
+import { useBalance } from 'wagmi';
 
 import {
   useAccountInGameInfosQuery,
@@ -27,9 +29,9 @@ import {
 import { parseLidoStakingAsset } from '~/utils/token';
 import { parseTxHistory } from '~/utils/transactions';
 
-import { Account } from '~/types';
+import { Account, AccountEthBalance } from '~/types';
 
-import { LISTED_LOCAL_KEY } from '~/constants';
+import { DEFAULT_CHAIN_ID, LISTED_LOCAL_KEY } from '~/constants';
 
 import { AccountInfo } from './components/account-info';
 import { UmaVerified } from './components/uma-verified';
@@ -40,6 +42,12 @@ const DetailPage = () => {
 
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   const account = (listedAccount?.find(account => account.id === id) as Account) || undefined;
+
+  const { data: ethBalance } = useBalance({
+    chainId: DEFAULT_CHAIN_ID,
+    address: account.address as `0x{string}`,
+    enabled: !!account.address && ethers.utils.isAddress(account.address),
+  });
 
   const { data: tokenData } = useAccountTokensQuery(id ?? '', {
     cacheTime: Infinity,
@@ -107,7 +115,7 @@ const DetailPage = () => {
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
-            <PortfolioTokens data={tokens} />
+            <PortfolioTokens ethData={ethBalance as AccountEthBalance | undefined} data={tokens} />
             <Divider />
             <PortfolioSbts data={sbts} />
             <Divider />
