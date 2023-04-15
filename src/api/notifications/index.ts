@@ -3,17 +3,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 
 import { api } from '~/api/axios';
 
-interface Notification {
-  id: string;
-
-  account: string;
-  message: string;
-
-  timestamp: number;
-  isNew: boolean;
-
-  image?: string;
-}
+import { Notification } from '~/types';
 
 interface NotificationsResponse {
   data: Notification[];

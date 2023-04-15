@@ -43,6 +43,8 @@ export enum LOCKUP_TYPE {
 }
 
 export interface Account {
+  id: string;
+
   address: string;
   receivingAddress: string;
 
@@ -59,7 +61,7 @@ export interface Account {
 
 export type AccountDiscover = Pick<
   Account,
-  'title' | 'category' | 'price' | 'tokenValue' | 'verified'
+  'id' | 'title' | 'category' | 'price' | 'tokenValue' | 'verified'
 >;
 
 export interface AccountInGameInfo {
@@ -95,4 +97,16 @@ export interface AccountTxHistory {
   image: string;
   title: string;
   description: string;
+}
+
+export interface Notification {
+  id: string;
+
+  account: string;
+  message: string;
+
+  timestamp: number;
+  isNew: boolean;
+
+  image?: string;
 }

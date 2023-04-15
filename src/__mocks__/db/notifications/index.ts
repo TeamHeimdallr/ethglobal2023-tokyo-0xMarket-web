@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { factory, nullable, primaryKey } from '@mswjs/data';
-import { sub } from 'date-fns';
+
+import { notifications } from '~/__mocks__/data/notifications';
 
 export const notificationDB = factory({
   notifications: {
@@ -14,16 +15,6 @@ export const notificationDB = factory({
   },
 });
 
-notificationDB.notifications.create({
-  account: '0x9DCD43faB2CF8104cb2ff53CF4C051842C125EE0',
-  message: 'Your account has been sold.',
-  timestamp: Date.now(),
-  isNew: true,
-});
-
-notificationDB.notifications.create({
-  account: '0x9DCD43faB2CF8104cb2ff53CF4C051842C125EE0',
-  message: 'Your account has been sold.',
-  timestamp: sub(new Date(), { hours: 3 }).getTime(),
-  isNew: false,
+notifications.forEach(notification => {
+  notificationDB.notifications.create(notification);
 });
