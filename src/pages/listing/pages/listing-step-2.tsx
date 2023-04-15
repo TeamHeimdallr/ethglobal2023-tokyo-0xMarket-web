@@ -216,14 +216,15 @@ export const ListingStep2 = () => {
   });
 
   useEffect(() => {
-    if (!isListSuccess || isAssertLoading) return;
+    if (!isListSuccess || isAssertLoading || isAssertSuccess) return;
 
     const assertApi = async () => {
       await assertAsync?.();
     };
 
     assertApi();
-  }, [assertAsync, isAssertLoading, isListSuccess]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAssertLoading, isAssertSuccess, isListSuccess]);
 
   useEffect(() => {
     if (isAssertSuccess || (isListSuccess && !statement)) {
