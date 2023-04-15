@@ -22,6 +22,7 @@ export const CardToken = ({ image, token, tokenValue, ...rest }: Props) => {
         <TokenValue>{`${parseNumberCommaSeperator({
           number: tokenValue,
           prefix: '$',
+          decimalPoint: 2,
         })}`}</TokenValue>
       </TokenContent>
     </Wrapper>

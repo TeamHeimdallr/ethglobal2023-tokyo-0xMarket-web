@@ -25,6 +25,7 @@ export const CardStaking = ({ image, token, tokenValue, stakedAt, ...rest }: Pro
             <TokenValue>{`${parseNumberCommaSeperator({
               number: tokenValue,
               prefix: '$',
+              decimalPoint: 2,
             })}`}</TokenValue>
           </TokenContent>
         </TokenOuterWrapper>

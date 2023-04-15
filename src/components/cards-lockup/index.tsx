@@ -44,6 +44,7 @@ export const CardLockup = ({
             <TokenValue>{`${parseNumberCommaSeperator({
               number: tokenValue,
               prefix: '$',
+              decimalPoint: 2,
             })}`}</TokenValue>
           </TokenContent>
         </TokenOuterWrapper>
