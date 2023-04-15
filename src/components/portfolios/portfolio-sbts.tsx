@@ -33,13 +33,15 @@ interface SbtProps {
   sbt: AccountSbt;
 }
 const CardSbt = ({ sbt }: SbtProps) => {
+  const currentImage = sbt.tokenNfts?.tokenImage;
+
   const { data } = useQuery(
     ['query', 'sbt', 'sbt-image', sbt.tokenId, sbt.tokenAddress],
     async () => (await axios.get(sbt.tokenNfts.tokenURI ?? '')).data,
-    { enabled: !!sbt.tokenNfts.tokenURI, cacheTime: Infinity, staleTime: Infinity }
+    { enabled: !currentImage && !!sbt.tokenNfts.tokenURI, cacheTime: Infinity, staleTime: Infinity }
   );
 
-  const image = data?.image_url;
+  const image = currentImage ?? data?.image_url;
 
   const tokenName = sbt.tokenNfts.metaData.name ?? iconEmpty;
   const tokenId = sbt.tokenId;

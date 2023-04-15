@@ -123,7 +123,7 @@ const InfoCardWrapper = tw.div`
 `;
 
 const GameInfoCard = tw.div`
-  flex gap-12 items-center bg-grayscale-7 min-w-158 px-16 py-8 rounded-8
+  flex gap-12 items-center bg-grayscale-7 min-w-158 px-16 py-8 rounded-8 justify-between
 `;
 
 const GameInfoLabelWrapper = tw.div`
@@ -136,7 +136,7 @@ const GameInfoValue = tw.div`
   font-r-12 text-grayscale-2
 `;
 const GameInfoIcon = tw.div`
-  w-40 h-40 bg-center bg-no-repeat bg-cover
+  w-48 h-40 bg-center bg-no-repeat bg-cover
 `;
 
 const GameItemWrapper = tw.div`

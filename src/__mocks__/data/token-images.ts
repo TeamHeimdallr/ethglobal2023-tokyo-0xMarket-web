@@ -297,4 +297,5 @@ export const tokenImages: Record<string, string> = {
   OPTIMUS: 'https://etherscan.io/token/images/optimus_32.png?v=30',
   MAP: 'https://etherscan.io/token/images/mapprotocol_32.png',
   PRIME: 'https://etherscan.io/token/images/primefoundation_32.png',
+  AXS: 'https://etherscan.io/token/images/axieinfinityshard_32.png',
 };

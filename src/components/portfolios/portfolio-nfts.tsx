@@ -13,7 +13,8 @@ interface Props {
 export const PortfolioNfts = ({ data }: Props) => {
   const isEmpty = !data || data?.length === 0;
 
-  const totalValue = 0;
+  const nftsValue = data?.reduce((res, d) => (res += d.tokenPrice ?? 0), 0) ?? 0;
+  const totalValue = (2122.71 * nftsValue).toFixed(2);
 
   return (
     <Wrapper>
@@ -22,7 +23,9 @@ export const PortfolioNfts = ({ data }: Props) => {
         {isEmpty ? (
           <TotalValueEmpty>No assets</TotalValueEmpty>
         ) : (
-          <TotalValue>{parseNumberCommaSeperator({ number: totalValue, prefix: '$' })}</TotalValue>
+          <TotalValue>
+            {parseNumberCommaSeperator({ number: Number(totalValue), prefix: '$' })}
+          </TotalValue>
         )}
       </TitleWrapper>
       {!isEmpty && (
@@ -33,7 +36,7 @@ export const PortfolioNfts = ({ data }: Props) => {
             const image = nft.tokenNfts.contentValue?.image?.small || iconEmpty;
             const tokenName = (nft.tokenNfts.metaData.name ?? '').replace(/\s?#.*/g, '');
             const tokenId = nft.tokenNfts.tokenId.replace('#', '');
-            const tokenValue = '0';
+            const tokenValue = nft?.tokenPrice ?? 0;
 
             return (
               <CardNFT
@@ -45,7 +48,7 @@ export const PortfolioNfts = ({ data }: Props) => {
                 }}
                 nftValue={{
                   name: 'ETH',
-                  value: tokenValue,
+                  value: tokenValue.toString(),
                 }}
               />
             );

@@ -1,30 +1,17 @@
-import IconArbitrum from '~/assets/icons/icon-arbitrum.png';
 import IconAxie from '~/assets/icons/icon-axie.png';
 import IconTier from '~/assets/icons/icon-axie-tier.png';
-import IconBelongingWeek from '~/assets/icons/icon-belonging-week-memorabilia.png';
-import IconCataCommon from '~/assets/icons/icon-cata-common.png';
-import IconCataEpic from '~/assets/icons/icon-cata-epic.png';
-import IconCataLegendary from '~/assets/icons/icon-cata-legendary.png';
-import IconCataRare from '~/assets/icons/icon-cata-rare.png';
 import IconCharm from '~/assets/icons/icon-charm.png';
 import IconDex from '~/assets/icons/icon-dex.png';
 import IconEth from '~/assets/icons/icon-eth.png';
-import IconGemDefense from '~/assets/icons/icon-gem-defense.png';
-import IconGemLuck from '~/assets/icons/icon-gem-luck.png';
-import IconGemMagic from '~/assets/icons/icon-gem-magic.png';
-import IconGemPower from '~/assets/icons/icon-gem-power.png';
-import IconGemSpeed from '~/assets/icons/icon-gem-speed.png';
-import IconGucciVault from '~/assets/icons/icon-gucci-vault.png';
-import IconKverse from '~/assets/icons/icon-kverse.png';
-import IconMatic from '~/assets/icons/icon-matic.png';
 import IconMaxs from '~/assets/icons/icon-maxs.png';
 import IconMoonshard from '~/assets/icons/icon-moonshard.png';
 import IconNft from '~/assets/icons/icon-nft.png';
 import IconRune from '~/assets/icons/icon-rune.png';
-import IconSandbox from '~/assets/icons/icon-sanbox.png';
 import IconSlp from '~/assets/icons/icon-slp.png';
-import IconSportsland from '~/assets/icons/icon-sportsland-event.png';
-import IconZksync from '~/assets/icons/icon-zksync.png';
+import IconEthTokyo from '~/assets/icons/logo-ethtokyo.png';
+import ImageAxieNft1 from '~/assets/images/image-axie-nft-1.png';
+import ImageAxieNft2 from '~/assets/images/image-axie-nft-2.png';
+import ImageAxieNft3 from '~/assets/images/image-axie-nft-3.png';
 
 import { randomDate } from '~/utils/date';
 
@@ -36,19 +23,13 @@ import {
   EtherscanTokenTx,
   EtherscanTx,
 } from '~/types';
-import {
-  AccountInGameInfo,
-  AccountLockupToken,
-  AccountStakingAsset,
-  CURRENCY,
-  LOCKUP_TYPE,
-} from '~/types';
+import { AccountInGameInfo, AccountLockupToken, AccountStakingAsset } from '~/types';
 
 export const accountEthBalance: AccountEthBalance = {
   decimals: '18',
-  formatted: '123.45',
+  formatted: '2.124',
   symbol: 'ETH',
-  value: '123450000000000000000',
+  value: '2124000000000000000',
 };
 
 export const accountTokens: AccountTokenAll = {
@@ -57,41 +38,28 @@ export const accountTokens: AccountTokenAll = {
       data: [
         {
           amount: '16799306000000000000',
-          formattedAmount: 16.799306,
+          formattedAmount: 133.9,
           chainId: '1',
           id: '10xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc20xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f',
           tokenAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
           tokenId: '',
           tokenType: 'ERC20',
           token: {
-            name: 'Wrapped Ether',
-            symbol: 'WETH',
+            name: 'Uniswap',
+            symbol: 'UNI',
           },
         },
         {
           amount: '647763741527175900000',
-          formattedAmount: 647.7637415271759,
+          formattedAmount: 513,
           chainId: '1',
           id: '10x5283d291dbcf85356a21ba090e6db59121208b440xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f',
           tokenAddress: '0x5283d291dbcf85356a21ba090e6db59121208b44',
           tokenId: '',
           tokenType: 'ERC20',
           token: {
-            name: 'Blur',
-            symbol: 'BLUR',
-          },
-        },
-        {
-          amount: '7000',
-          formattedAmount: 7000,
-          chainId: '1',
-          id: '10xc1c8c49b0405f6cffba5351179befb2d8a2c776c0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f',
-          tokenAddress: '0xc1c8c49b0405f6cffba5351179befb2d8a2c776c',
-          tokenId: '',
-          tokenType: 'ERC20',
-          token: {
-            name: 'staked eth',
-            symbol: 'stETH',
+            name: 'Axie Infinity',
+            symbol: 'AXS',
           },
         },
       ],
@@ -103,10 +71,11 @@ export const accountTokens: AccountTokenAll = {
           chainId: '1',
           id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f65408',
           tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
-          tokenId: '65408',
+          tokenId: '✨Angel✨',
           tokenType: 'ERC721',
+          tokenPrice: 300,
           token: {
-            name: 'KnownOriginDigitalAsset',
+            name: 'Axie Infinity',
             symbol: 'KODA',
           },
           tokenNfts: {
@@ -116,16 +85,11 @@ export const accountTokens: AccountTokenAll = {
             },
             contentValue: {
               image: {
-                medium:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/65408/medium.gif',
-                extraSmall:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/65408/extra_small.gif',
-                large:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/65408/large.gif',
-                original:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/65408/original_image.gif',
-                small:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/65408/small.gif',
+                medium: ImageAxieNft1,
+                extraSmall: ImageAxieNft1,
+                large: ImageAxieNft1,
+                original: ImageAxieNft1,
+                small: ImageAxieNft1,
               },
             },
           },
@@ -135,10 +99,11 @@ export const accountTokens: AccountTokenAll = {
           chainId: '1',
           id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f109256',
           tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
-          tokenId: '109256',
+          tokenId: 'Devil Jack',
           tokenType: 'ERC721',
+          tokenPrice: 200,
           token: {
-            name: 'KnownOriginDigitalAsset',
+            name: 'Axie Infinity',
             symbol: 'KODA',
           },
           tokenNfts: {
@@ -148,16 +113,11 @@ export const accountTokens: AccountTokenAll = {
             },
             contentValue: {
               image: {
-                medium:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/109256/medium.gif',
-                extraSmall:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/109256/extra_small.gif',
-                large:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/109256/large.gif',
-                original:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/109256/original_image.gif',
-                small:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/109256/small.gif',
+                medium: ImageAxieNft2,
+                extraSmall: ImageAxieNft2,
+                large: ImageAxieNft2,
+                original: ImageAxieNft2,
+                small: ImageAxieNft2,
               },
             },
           },
@@ -167,10 +127,11 @@ export const accountTokens: AccountTokenAll = {
           chainId: '1',
           id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f27905',
           tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
-          tokenId: '27905',
+          tokenId: 'Handsome Bob',
           tokenType: 'ERC721',
+          tokenPrice: 200,
           token: {
-            name: 'KnownOriginDigitalAsset',
+            name: 'Axie Infinity',
             symbol: 'KODA',
           },
           tokenNfts: {
@@ -180,48 +141,11 @@ export const accountTokens: AccountTokenAll = {
             },
             contentValue: {
               image: {
-                medium:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/27905/medium.gif',
-                extraSmall:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/27905/extra_small.gif',
-                large:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/27905/large.gif',
-                original:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/27905/original_image.gif',
-                small:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/27905/small.gif',
-              },
-            },
-          },
-        },
-        {
-          amount: '1',
-          chainId: '1',
-          id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f104440',
-          tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
-          tokenId: '104440',
-          tokenType: 'ERC721',
-          token: {
-            name: 'KnownOriginDigitalAsset',
-            symbol: 'KODA',
-          },
-          tokenNfts: {
-            tokenId: '104440',
-            metaData: {
-              name: 'Gobshites',
-            },
-            contentValue: {
-              image: {
-                medium:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/104440/medium.gif',
-                extraSmall:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/104440/extra_small.gif',
-                large:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/104440/large.gif',
-                original:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/104440/original_image.gif',
-                small:
-                  'https://assets.airstack.xyz/image/nft/1/0xfbeef911dc5821886e1dda71586d90ed28174b7d/104440/small.gif',
+                medium: ImageAxieNft3,
+                extraSmall: ImageAxieNft3,
+                large: ImageAxieNft3,
+                original: ImageAxieNft3,
+                small: ImageAxieNft3,
               },
             },
           },
@@ -233,49 +157,18 @@ export const accountTokens: AccountTokenAll = {
         {
           amount: '1',
           tokenAddress: '0x22c1f6050e56d2876009903609a2cc3fef83b415',
-          tokenId: '308718',
+          tokenId: '623',
           tokenType: 'ERC721',
           token: {
             name: 'POAP',
-            symbol: 'The Proof of Attendance Protocol',
+            symbol: 'EthTokyo Participation',
           },
           tokenNfts: {
             metaData: {
-              name: 'Zenft Garden Society: Genesis',
+              name: 'EthTokyo Participation',
             },
             tokenURI: 'https://api.poap.tech/metadata/2514/308718',
-          },
-        },
-        {
-          amount: '1',
-          tokenAddress: '0x22c1f6050e56d2876009903609a2cc3fef83b415',
-          tokenId: '3345887',
-          tokenType: 'ERC721',
-          token: {
-            name: 'POAP',
-            symbol: 'The Proof of Attendance Protocol',
-          },
-          tokenNfts: {
-            metaData: {
-              name: 'KnownOrigin X-MESS party! 29th Dec. 2021',
-            },
-            tokenURI: 'https://api.poap.tech/metadata/20034/3345887',
-          },
-        },
-        {
-          amount: '1',
-          tokenAddress: '0x22c1f6050e56d2876009903609a2cc3fef83b415',
-          tokenId: '551825',
-          tokenType: 'ERC721',
-          token: {
-            name: 'POAP',
-            symbol: 'The Proof of Attendance Protocol',
-          },
-          tokenNfts: {
-            metaData: {
-              name: 'XCOPY GALLERY - LAUNCH PARTY',
-            },
-            tokenURI: 'https://api.poap.tech/metadata/3928/551825',
+            tokenImage: IconEthTokyo,
           },
         },
       ],
@@ -285,7 +178,7 @@ export const accountTokens: AccountTokenAll = {
 
 export const accountFirstTx: EtherscanTx = {
   blockNumber: '5782338',
-  timeStamp: '1635909569',
+  timeStamp: '1585106520',
   hash: '0xea20d60639bdda99e07812a77f3b4193226e9e214cfa543bdd9e9c1df7bbd99a',
   nonce: '29',
   blockHash: '0x298a09a904e53ef1f1ecf0ffd36a56bdc01cc080b068fa95555ff6315e938475',
@@ -382,17 +275,17 @@ export const accountNftTx: EtherscanNftTx[] = [...Array(10).keys()]
 export const accountInGameInfos: AccountInGameInfo[] = [
   {
     id: '1',
-    user: '@kenzo456',
+    user: '@cbczm223',
     game: {
       name: 'Axie infinity',
       logo: IconAxie,
     },
     infos: [
-      { label: 'Tier', value: 'Challenger 0', logo: IconTier },
-      { label: 'Rating', value: '2042' },
-      { label: 'Rank', value: '#45' },
-      { label: 'WinRate', value: '84%' },
-      { label: 'Crafting Level', value: '89' },
+      { label: 'Tier', value: 'Tiger ll', logo: IconTier },
+      { label: 'Rating', value: '1470' },
+      { label: 'Rank', value: '#1193' },
+      { label: 'WinRate', value: '53%' },
+      { label: 'Crafting Level', value: '52' },
     ],
     items: [
       {
@@ -416,173 +309,29 @@ export const accountInGameInfos: AccountInGameInfo[] = [
       },
     ],
   },
-  {
-    id: '2',
-    user: '@kenzo456',
-    game: {
-      name: 'The Sandbox',
-      logo: IconSandbox,
-    },
-    items: [
-      {
-        label: 'Badges',
-        type: 'col',
-        items: [
-          {
-            value: 'Memorabilia',
-            logo: { src: IconSportsland, width: 48, height: 48 },
-          },
-          {
-            value: 'Kverse Mini Event',
-            logo: { src: IconKverse, width: 48, height: 48 },
-          },
-          {
-            value: 'Belonging Week Momorabilia',
-            logo: { src: IconBelongingWeek, width: 48, height: 48 },
-          },
-          {
-            value: 'Gucci Vault Event',
-            logo: { src: IconGucciVault, width: 48, height: 48 },
-          },
-          {
-            value: 'Sportsland Event',
-            logo: { src: IconSportsland, width: 48, height: 48 },
-          },
-        ],
-      },
-      {
-        label: 'My Gems',
-        items: [
-          {
-            value: 'Power 5',
-            logo: { src: IconGemPower, width: 24, height: 24 },
-          },
-          {
-            value: 'Defense 10',
-            logo: { src: IconGemDefense, width: 24, height: 24 },
-          },
-          { value: 'Speed 7', logo: { src: IconGemSpeed, width: 24, height: 24 } },
-          {
-            value: 'Magic 1',
-            logo: { src: IconGemMagic, width: 24, height: 24 },
-          },
-          { value: 'Luck', logo: { src: IconGemLuck, width: 24, height: 24 } },
-        ],
-      },
-      {
-        label: 'My Catalysts',
-        items: [
-          {
-            value: 'Legendary 0',
-            logo: { src: IconCataLegendary, width: 24, height: 24 },
-          },
-          {
-            value: 'Epic 7',
-            logo: { src: IconCataEpic, width: 24, height: 24 },
-          },
-          { value: 'Rare 16', logo: { src: IconCataRare, width: 24, height: 24 } },
-          {
-            value: 'Common 55',
-            logo: { src: IconCataCommon, width: 24, height: 24 },
-          },
-        ],
-      },
-    ],
-  },
 ];
 
-export const accountLockupTokens: AccountLockupToken[] = [
-  {
-    id: '1',
-    image: IconEth,
-    type: LOCKUP_TYPE.VESTING,
-    token: { name: CURRENCY.ETH, value: '100,000' },
-    tokenValue: 1864.93,
-    date: new Date(),
-  },
-  {
-    id: '2',
-    image: IconMatic,
-    type: LOCKUP_TYPE.UNLOCKED,
-    token: { name: CURRENCY.MATIC, value: '99.99' },
-    tokenValue: 100,
-    date: new Date(),
-  },
-  {
-    id: '3',
-    image: IconEth,
-    type: LOCKUP_TYPE.AIRDROP,
-    token: { name: CURRENCY.ETH, value: '100,000' },
-    tokenValue: 1864.93,
-    date: new Date(),
-  },
-];
+export const accountLockupTokens: AccountLockupToken[] = [];
 
-export const accountStakingAssets: AccountStakingAsset[] = [
-  {
-    id: '1',
-    image: IconEth,
-    token: { name: CURRENCY.ETH, value: '100,000' },
-    tokenValue: 1864.93,
-    stakedAt: 'Lido',
-  },
-  {
-    id: '2',
-    image: IconMatic,
-    token: { name: CURRENCY.MATIC, value: '99.99' },
-    tokenValue: 100,
-    stakedAt: 'Coinbase Wrapped Staked ETH',
-  },
-  {
-    id: '3',
-    image: IconEth,
-    token: { name: CURRENCY.ETH, value: '100,000' },
-    tokenValue: 1864.93,
-    stakedAt: 'Rocket Pool',
-  },
-];
+export const accountStakingAssets: AccountStakingAsset[] = [];
 
 export const accountTxHistories: AccountTxHistory[] = [
   {
     id: '1',
     image: IconEth,
-    title: 'May 17, 2018',
+    title: 'March 25, 2020',
     description: 'First Tx on Ethereum',
   },
   {
     id: '2',
-    image: IconArbitrum,
-    title: 'Over 1k',
-    description: 'No. of Tx on Abitrum',
+    image: IconNft,
+    title: 'Over 5k',
+    description: 'No. of tx on Ethereum Network',
   },
   {
     id: '3',
-    image: IconZksync,
-    title: 'Over 1k',
-    description: 'No. of Tx on zkSync',
-  },
-  {
-    id: '4',
-    image: IconZksync,
-    title: 'Over 100',
-    description: 'Tx Vol. on zkSync',
-  },
-  {
-    id: '5',
-    image: IconNft,
-    title: 'Over $1m',
-    description: 'Tx Vol. on NFT Marketplace',
-  },
-  {
-    id: '6',
     image: IconDex,
-    title: 'Over $1m',
+    title: 'Over $10k',
     description: 'Tx Vol. on DEX',
-  },
-  {
-    id: '7',
-    image: IconDex,
-    title: 'Over $1k',
-    description: 'Provided Liquidity on DEX',
   },
 ];

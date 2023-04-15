@@ -153,6 +153,7 @@ export interface AccountNft {
   id: string;
   tokenAddress: string;
   tokenId: string;
+  tokenPrice?: number;
   tokenType: 'ERC721';
 
   token: {
@@ -192,6 +193,7 @@ export interface AccountSbt {
       name: string | null;
     };
     tokenURI: string | null;
+    tokenImage?: string;
   };
 }
 

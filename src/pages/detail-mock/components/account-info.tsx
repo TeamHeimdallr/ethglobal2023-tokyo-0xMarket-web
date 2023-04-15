@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { InjectedConnector } from '@wagmi/core';
@@ -24,14 +24,13 @@ import { BackButton } from './back-button';
 
 export const AccountInfo = () => {
   const navigate = useNavigate();
-  const params = useParams();
-  const { id } = params;
+  const location = useLocation();
   const { isConnected, address } = useAccount();
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
 
-  const account = id === MOCK_USER.USER_1 ? accountDetail1 : accountDetail2;
+  const account = location.pathname.includes(MOCK_USER.USER_1) ? accountDetail1 : accountDetail2;
   const categoryData = CategoriesMap[account?.category ?? CATEGORIES.GENERAL];
 
   const {
@@ -197,7 +196,7 @@ const BottomWrapper = tw.div`
 `;
 
 const Description = tw.div`
-  font-r-14 text-grayscale-2
+  font-r-14 text-grayscale-2 whitespace-pre-wrap
 `;
 
 const BottomRightWrapper = tw.div`

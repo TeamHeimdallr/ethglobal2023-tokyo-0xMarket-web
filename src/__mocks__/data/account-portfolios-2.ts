@@ -1,7 +1,4 @@
 import IconEth from '~/assets/icons/icon-eth.png';
-import IconStargate from '~/assets/icons/icon-stargate.png';
-import IconZksync from '~/assets/icons/icon-zksync.png';
-import IconZro from '~/assets/icons/icon-zro.png';
 
 import { randomDate } from '~/utils/date';
 
@@ -13,63 +10,24 @@ import {
   EtherscanTokenTx,
   EtherscanTx,
 } from '~/types';
-import {
-  AccountInGameInfo,
-  AccountLockupToken,
-  AccountStakingAsset,
-  CURRENCY,
-  LOCKUP_TYPE,
-} from '~/types';
-
-import { price } from './token-price';
+import { AccountInGameInfo, AccountLockupToken, AccountStakingAsset } from '~/types';
 
 export const accountEthBalance: AccountEthBalance = {
   decimals: '18',
-  formatted: '103.51',
+  formatted: '0.241',
   symbol: 'ETH',
   value: '103510000000000000000',
 };
 export const accountTokens: AccountTokenAll = {
   data: {
     erc20: {
-      data: [
-        {
-          amount: '1046925200000000000000000',
-          formattedAmount: 104692.52,
-          chainId: '1',
-          id: '10xaf5191b0de278c7286d6c7cc6ab6bb8a73ba2cd60xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f',
-          tokenAddress: '0xaf5191b0de278c7286d6c7cc6ab6bb8a73ba2cd6',
-          tokenId: '',
-          tokenType: 'ERC20',
-          token: {
-            name: 'StargateToken',
-            symbol: 'STG',
-          },
-        },
-      ],
+      data: [],
     },
     erc721: {
       data: [],
     },
     poap: {
-      data: [
-        {
-          amount: '1',
-          tokenAddress: '0x22c1f6050e56d2876009903609a2cc3fef83b415',
-          tokenId: '1670599',
-          tokenType: 'ERC721',
-          token: {
-            name: 'POAP',
-            symbol: 'The Proof of Attendance Protocol',
-          },
-          tokenNfts: {
-            metaData: {
-              name: 'zkSync Quiz 1',
-            },
-            tokenURI: 'https://api.poap.tech/metadata/8738/1670599',
-          },
-        },
-      ],
+      data: [],
     },
   },
 };
@@ -170,182 +128,23 @@ export const accountNftTx: EtherscanNftTx[] = [...Array(10).keys()]
   })
   .sort((a, b) => Number(a.timeStamp) - Number(b.timeStamp));
 
-export const accountInGameInfos: AccountInGameInfo[] = [
-  // {
-  //   id: '1',
-  //   user: '@kenzo456',
-  //   game: {
-  //     name: 'Axie infinity',
-  //     logo: IconAxie,
-  //   },
-  //   infos: [
-  //     { label: 'Tier', value: 'Challenger 0', logo: IconTier },
-  //     { label: 'Rating', value: '2042' },
-  //     { label: 'Rank', value: '#45' },
-  //     { label: 'WinRate', value: '84%' },
-  //     { label: 'Crafting Level', value: '89' },
-  //   ],
-  //   items: [
-  //     {
-  //       label: 'In-game Assets',
-  //       items: [
-  //         { value: '169,359 mAXS', logo: { src: IconMaxs, width: 24, height: 24 } },
-  //         { value: '8,274 SLP', logo: { src: IconSlp, width: 24, height: 24 } },
-  //         {
-  //           value: '610 Moonshards',
-  //           logo: { src: IconMoonshard, width: 24, height: 24 },
-  //         },
-  //         {
-  //           value: 'Runes (Season 3)',
-  //           logo: { src: IconRune, width: 24, height: 24 },
-  //         },
-  //         {
-  //           value: 'Charms (Season 3)',
-  //           logo: { src: IconCharm, width: 24, height: 24 },
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: '2',
-  //   user: '@kenzo456',
-  //   game: {
-  //     name: 'The Sandbox',
-  //     logo: IconSandbox,
-  //   },
-  //   items: [
-  //     {
-  //       label: 'Badges',
-  //       type: 'col',
-  //       items: [
-  //         {
-  //           value: 'Memorabilia',
-  //           logo: { src: IconSportsland, width: 48, height: 48 },
-  //         },
-  //         {
-  //           value: 'Kverse Mini Event',
-  //           logo: { src: IconKverse, width: 48, height: 48 },
-  //         },
-  //         {
-  //           value: 'Belonging Week Momorabilia',
-  //           logo: { src: IconBelongingWeek, width: 48, height: 48 },
-  //         },
-  //         {
-  //           value: 'Gucci Vault Event',
-  //           logo: { src: IconGucciVault, width: 48, height: 48 },
-  //         },
-  //         {
-  //           value: 'Sportsland Event',
-  //           logo: { src: IconSportsland, width: 48, height: 48 },
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       label: 'My Gems',
-  //       items: [
-  //         {
-  //           value: 'Power 5',
-  //           logo: { src: IconGemPower, width: 24, height: 24 },
-  //         },
-  //         {
-  //           value: 'Defense 10',
-  //           logo: { src: IconGemDefense, width: 24, height: 24 },
-  //         },
-  //         { value: 'Speed 7', logo: { src: IconGemSpeed, width: 24, height: 24 } },
-  //         {
-  //           value: 'Magic 1',
-  //           logo: { src: IconGemMagic, width: 24, height: 24 },
-  //         },
-  //         { value: 'Luck', logo: { src: IconGemLuck, width: 24, height: 24 } },
-  //       ],
-  //     },
-  //     {
-  //       label: 'My Catalysts',
-  //       items: [
-  //         {
-  //           value: 'Legendary 0',
-  //           logo: { src: IconCataLegendary, width: 24, height: 24 },
-  //         },
-  //         {
-  //           value: 'Epic 7',
-  //           logo: { src: IconCataEpic, width: 24, height: 24 },
-  //         },
-  //         { value: 'Rare 16', logo: { src: IconCataRare, width: 24, height: 24 } },
-  //         {
-  //           value: 'Common 55',
-  //           logo: { src: IconCataCommon, width: 24, height: 24 },
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
-];
+export const accountInGameInfos: AccountInGameInfo[] = [];
 
-export const accountLockupTokens: AccountLockupToken[] = [
-  {
-    id: '1',
-    image: IconZro,
-    type: LOCKUP_TYPE.AIRDROP,
-    token: { name: CURRENCY.ZRO, value: '1,250' },
-    tokenValue: 0,
-    date: new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
-  },
-];
+export const accountLockupTokens: AccountLockupToken[] = [];
 
-export const accountStakingAssets: AccountStakingAsset[] = [
-  {
-    id: '1',
-    image: IconEth,
-    token: { name: CURRENCY.stETH, value: '200' },
-    tokenValue: 200 * Number(price.find(p => p.symbol === 'ETH')?.lastPriceUSD),
-    stakedAt: 'Lido',
-  },
-  // {
-  //   id: '2',
-  //   image: IconMatic,
-  //   token: { name: CURRENCY.MATIC, value: '99.99' },
-  //   tokenValue: 100,
-  //   stakedAt: 'Coinbase Wrapped Staked ETH',
-  // },
-  // {
-  //   id: '3',
-  //   image: IconEth,
-  //   token: { name: CURRENCY.ETH, value: '100,000' },
-  //   tokenValue: 1864.93,
-  //   stakedAt: 'Rocket Pool',
-  // },
-];
+export const accountStakingAssets: AccountStakingAsset[] = [];
 
 export const accountTxHistories: AccountTxHistory[] = [
   {
-    id: '1',
+    id: 'p2-1',
     image: IconEth,
-    title: 'May 27, 2018',
+    title: 'March 25, 2022',
     description: 'First Tx on Ethereum',
   },
   {
-    id: '2',
-    image: IconZksync,
+    id: 'p2-2',
+    image: IconEth,
     title: 'Over 1k',
-    description: 'No. of Tx on zkSync',
-  },
-  {
-    id: '3',
-    image: IconZksync,
-    title: 'Over $10k',
-    description: 'Tx Vol. on zkSync',
-  },
-  {
-    id: '4',
-    image: IconZksync,
-    title: 'Over $10k',
-    description: 'Bridged to zkSync',
-  },
-  {
-    id: '5',
-    image: IconStargate,
-    title: 'Over $10k',
-    description: 'Tx Vol. on Stargate Bridge',
+    description: 'No. of tx on Ethereum Network',
   },
 ];

@@ -67,7 +67,7 @@ export const price = [
   {
     name: 'Uniswap',
     symbol: 'UNI',
-    lastPriceUSD: '6.025895801285752589033226426783686',
+    lastPriceUSD: '6.30',
   },
   {
     name: 'StakeWise Reward ETH2',
@@ -678,5 +678,10 @@ export const price = [
     name: 'StargateToken',
     symbol: 'STG',
     lastPriceUSD: '0.88',
+  },
+  {
+    name: 'Axie Infinity',
+    symbol: 'AXS',
+    lastPriceUSD: '9.04',
   },
 ];
