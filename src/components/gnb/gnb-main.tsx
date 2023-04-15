@@ -16,6 +16,8 @@ import { ButtonMediumPrimary } from '../buttons';
 import { DropdownProfile } from '../dropdown-profile';
 import { Notification } from '../notification';
 
+import { GnbNetworkSelector } from './gnb-network-selector';
+
 export const GnbMain = () => {
   const navigate = useNavigate();
 
@@ -47,6 +49,7 @@ export const GnbMain = () => {
         {isConnected ? (
           <ConnectWalletWrapper>
             <Notification />
+            <GnbNetworkSelector />
             <DropdownProfile
               address={address ?? '0x'}
               balances={balances}
