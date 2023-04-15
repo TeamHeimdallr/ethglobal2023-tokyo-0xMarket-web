@@ -7,6 +7,8 @@ import { parseNumberCommaSeperator } from '~/utils/number';
 
 import { CATEGORIES } from '~/types';
 
+import { CategoriesMap } from '~/constants';
+
 import { Category } from '../category';
 import { IconVerification } from '../icons';
 
@@ -15,11 +17,12 @@ interface Props extends HTMLMotionProps<'div'> {
   category?: CATEGORIES;
   price?: number;
   tokenValue?: number;
-  image?: string;
   verified?: boolean;
 }
 
-export const Card = ({ category, title, price, tokenValue, image, verified, ...rest }: Props) => {
+export const Card = ({ category, title, price, tokenValue, verified, ...rest }: Props) => {
+  const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
+
   return (
     <Wrapper
       whileHover={{
@@ -29,7 +32,7 @@ export const Card = ({ category, title, price, tokenValue, image, verified, ...r
       {...rest}
     >
       <TopWrapper>
-        <Image src={image} />
+        <Image src={categoryData.image} />
         <ContentWrapper>
           <CategoryTitleWrapper>
             <Category category={category} />
@@ -79,6 +82,7 @@ const Image = styled.div<ImageProps>(({ src }) => [
   `,
   src &&
     css`
+      background-color: #fff;
       background-image: url(${src});
     `,
 ]);

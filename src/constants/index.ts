@@ -1,4 +1,9 @@
 import { COLOR } from '~/assets/colors';
+import categoryGameImage from '~/assets/images/image-game.png';
+import categoryGeneralImage from '~/assets/images/image-general.png';
+import categorySbtImage from '~/assets/images/image-sbt.png';
+import categoryTokenImage from '~/assets/images/image-token.png';
+import categoryWhitelistImage from '~/assets/images/image-whitelist.png';
 
 import { CATEGORIES, CategoryMap } from '~/types';
 
@@ -26,35 +31,35 @@ export const CategoriesMap: CategoryMap = {
     text: 'Game',
     color: COLOR.GAME().toHexString(),
     textColor: '#FFF',
-    image: '',
+    image: categoryGameImage,
   },
   [CATEGORIES.WHITELIST]: {
     key: CATEGORIES.WHITELIST,
     text: 'Whitelist',
     color: COLOR.WHITELIST().toHexString(),
     textColor: '#000',
-    image: '',
+    image: categoryWhitelistImage,
   },
   [CATEGORIES.SBT]: {
     key: CATEGORIES.SBT,
     text: 'SBT',
     color: COLOR.SBT().toHexString(),
     textColor: '#FFF',
-    image: '',
+    image: categorySbtImage,
   },
   [CATEGORIES.TOKEN]: {
     key: CATEGORIES.TOKEN,
     text: 'Token',
     color: COLOR.TOKEN().toHexString(),
     textColor: '#FFF',
-    image: '',
+    image: categoryTokenImage,
   },
   [CATEGORIES.GENERAL]: {
     key: CATEGORIES.GENERAL,
     text: 'General',
     color: COLOR.GENERAL().toHexString(),
     textColor: '#FFF',
-    image: '',
+    image: categoryGeneralImage,
   },
 };
 
