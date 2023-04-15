@@ -14,6 +14,7 @@ interface Props {
   // TODO return listed data
   handleListing?: () => Promise<void>;
 }
+
 export const GnbListing = ({ handleListing }: Props) => {
   const navigate = useNavigate();
   const { progress, setProgress, resetProgress } = useListingProgressState();
@@ -27,14 +28,23 @@ export const GnbListing = ({ handleListing }: Props) => {
 
   const nextButtonDisabled = useMemo(() => {
     if (progress === 0) return !data.address || !data.category;
-    if (progress === 1) return true; // TODO;
+    if (progress === 1)
+      return (
+        !data.address ||
+        !data.category ||
+        !data.receivingAddress ||
+        !data.title ||
+        !data.description ||
+        !data.price
+      );
   }, [data, progress]);
 
   const handleNextButtonClick = useCallback(async () => {
     if (progress === 0) setProgress(1);
     if (progress === 1) {
       await handleListing?.();
-      navigate('/list/1'); // TODO: listed id
+
+      navigate('/1'); // TODO
       resetProgress();
     }
   }, [handleListing, navigate, progress, resetProgress, setProgress]);

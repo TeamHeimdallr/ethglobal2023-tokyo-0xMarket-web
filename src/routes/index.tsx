@@ -14,7 +14,7 @@ const EntryRoute = () => {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/listing" element={<ListingPage />} />
-          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/:id" element={<DetailPage />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
