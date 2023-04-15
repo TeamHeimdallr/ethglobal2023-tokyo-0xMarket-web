@@ -3,7 +3,7 @@ import loadable from '@loadable/component';
 import tw from 'twin.macro';
 
 const MainPage = loadable(() => import('~/pages/main'));
-const ListPage = loadable(() => import('~/pages/list'));
+const ListingPage = loadable(() => import('~/pages/listing'));
 const DetailPage = loadable(() => import('~/pages/detail'));
 
 const RouteWrapper = tw.main`relative w-full h-full`;
@@ -13,7 +13,7 @@ const EntryRoute = () => {
       <RouteWrapper>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/list" element={<ListPage />} />
+          <Route path="/listing" element={<ListingPage />} />
           <Route path="/detail/:id" element={<DetailPage />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
