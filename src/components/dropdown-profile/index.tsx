@@ -1,4 +1,4 @@
-import { HTMLAttributes, useRef, useState } from 'react';
+import { HTMLAttributes, MouseEvent, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import copy from 'copy-to-clipboard';
@@ -7,11 +7,11 @@ import { useOnClickOutside } from 'usehooks-ts';
 
 import { COLOR } from '~/assets/colors';
 
-import { parseNumberCommaSeperator } from '~/utils/number';
 import { shortenAddress } from '~/utils/string';
 
 import { Balance, CURRENCY } from '~/types';
 
+import { ButtonIconSmall } from '../buttons';
 import { IconCopy, IconLogout } from '../icons';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -21,35 +21,42 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const DropdownProfile = ({ address, balances, disconnect, ...rest }: Props) => {
-  const [opened, open] = useState(false);
+  const [isOpen, open] = useState(false);
+  const [addressText, setAddressText] = useState<string>(shortenAddress(address, 4));
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = () => {
     open(false);
   };
 
+  const copyAddress = (e: MouseEvent) => {
+    e.stopPropagation();
+    const copied = copy(address);
+
+    if (copied) {
+      setAddressText('Copied!');
+      setTimeout(() => setAddressText(shortenAddress(address, 4)), 1000);
+    }
+  };
+
   useOnClickOutside(wrapperRef, handleClickOutside);
 
   return (
-    <Wrapper ref={wrapperRef} opened={opened} {...rest}>
+    <Wrapper ref={wrapperRef} isOpen={isOpen} {...rest}>
       <AddressWrapper onClick={() => open(prev => !prev)}>
-        <AddressText>{shortenAddress(address, 4)}</AddressText>
+        <AddressText>{addressText}</AddressText>
         <CopyIconWrapper>
-          <IconCopy
-            onClick={() => copy(address)}
-            color={COLOR.GRAYSCALE_4().toHexString()}
-            width={20}
-            height={20}
+          <ButtonIconSmall
+            icon={<IconCopy color={COLOR.GRAYSCALE_4().toHexString()} width={20} height={20} />}
+            onClick={copyAddress}
           />
         </CopyIconWrapper>
       </AddressWrapper>
-      {opened && (
+      {isOpen && (
         <ContentWrapper>
           {balances?.map(val => (
             <BalanceWrapper key={val.currency}>
-              <Amount>
-                {parseNumberCommaSeperator({ number: Number(val.balance), decimalPoint: 2 })}
-              </Amount>
+              <Amount>{val.balance}</Amount>
               <Symbol>{val.currency as CURRENCY}</Symbol>
             </BalanceWrapper>
           ))}
@@ -64,33 +71,36 @@ export const DropdownProfile = ({ address, balances, disconnect, ...rest }: Prop
   );
 };
 
-interface WrapperProps extends HTMLAttributes<HTMLDivElement> {
-  opened?: boolean;
+interface OpenProps {
+  isOpen?: boolean;
 }
 
-const Wrapper = styled.div(({ opened }: WrapperProps) => [
-  opened ? tw`bg-grayscale-6` : tw`bg-grayscale-6/50`,
+const Wrapper = styled.div(({ isOpen }: OpenProps) => [
   tw`
-    flex flex-col items-start absolute rounded-8 w-163 hover:bg-grayscale-6 text-white
-  `,
-]);
-const ContentWrapper = tw.div`
-  flex flex-col flex-center p-8 gap-4 bg-grayscale-6 rounded-8 w-full 
-`;
+    flex flex-col items-start rounded-8 text-white w-163 relative clickable
+    py-6 pr-16 pl-24
 
+    bg-grayscale-6/50 hover:bg-grayscale-6
+  `,
+  isOpen && tw`bg-grayscale-6 rounded-bl-0 rounded-br-0`,
+]);
 const AddressWrapper = tw.div`
-  flex flex-center w-full py-4 pl-24 pr-16 gap-4 clickable
+  w-full flex items-center gap-4
 `;
 const CopyIconWrapper = styled.div(() => [
-  tw`w-28 h-28 flex flex-center`,
   css`
     &:hover svg path {
-      fill: ${COLOR.GRAYSCALE_1().toHexString()};
+      fill: #f3f4f5;
     }
   `,
 ]);
-const AddressText = tw.span`
-  font-r-12
+const AddressText = tw.div`
+  font-r-12 text-center flex flex-1
+`;
+
+const ContentWrapper = tw.div`
+  absolute flex flex-col flex-center p-8 gap-4 bg-grayscale-6 rounded-bl-8 rounded-br-8 w-full
+  top-40 left-0 overflow-hidden
 `;
 
 const BalanceWrapper = styled.div(() => [

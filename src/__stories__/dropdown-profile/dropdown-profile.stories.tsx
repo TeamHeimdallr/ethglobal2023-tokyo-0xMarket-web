@@ -1,7 +1,8 @@
-import tw from 'twin.macro';
 import { useAccount, useDisconnect } from 'wagmi';
 
 import { DropdownProfile } from '~/components/dropdown-profile';
+
+import { shortenAddress } from '~/utils/string';
 
 import { CURRENCY } from '~/types';
 
@@ -15,19 +16,13 @@ export const _DropdownProfile = () => {
   const { address } = useAccount();
 
   const { disconnect } = useDisconnect();
-  const parsedAddress = String(address);
-  const balances = [
-    { currency: CURRENCY.ETH, balance: 1234567.89 },
-    { currency: CURRENCY.USD, balance: 123456 },
-  ];
+  const balances = [{ currency: CURRENCY.ETH, balance: 1234567.89 }];
 
   return (
-    <Wrapper>
-      <DropdownProfile balances={balances} disconnect={disconnect} address={parsedAddress} />
-    </Wrapper>
+    <DropdownProfile
+      balances={balances}
+      disconnect={disconnect}
+      address={address ? shortenAddress(address, 4) : 'unknown'}
+    />
   );
 };
-
-const Wrapper = tw.div`
-  bg-grayscale-7
-`;
