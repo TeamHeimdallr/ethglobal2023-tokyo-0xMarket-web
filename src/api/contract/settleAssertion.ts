@@ -15,9 +15,6 @@ export const useContractSettleAssertion = ({ assertionId }: SettleAssertionParam
 
     chainId: DEFAULT_CHAIN_ID,
     enabled: !!assertionId,
-    onError(error) {
-      console.log('Error', error);
-    },
   });
   const { data, writeAsync } = useContractWrite(config);
 

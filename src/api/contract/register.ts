@@ -18,17 +18,9 @@ export const useContractRegister = ({ address }: RegisterParam) => {
     address: MARKET_CONTRACT_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'register',
-    args: [
-      address,
-      {
-        gasLimit: 1300000, // TODO
-      },
-    ],
+    args: [address],
     chainId: DEFAULT_CHAIN_ID,
     enabled: !!address && ethers.utils.isAddress(address),
-    onError(error) {
-      console.log('Error', error);
-    },
   });
   const { data, writeAsync } = useContractWrite(config);
 

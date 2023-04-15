@@ -18,7 +18,6 @@ import { Account } from '~/types';
 import { MARKET_CONTRACT_ADDRESS } from '~/constants';
 
 interface Props {
-  // TODO return listed data
   handleListing?: (data: Partial<Account>) => Promise<void>;
   handleDepositing?: () => Promise<void>;
   isLoading?: boolean;

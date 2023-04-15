@@ -18,17 +18,9 @@ export const useContractDeposit = ({ address }: ListParam) => {
     address,
     abi: TRADABLE_ACCOUNT_ABI,
     functionName: 'changeOwner',
-    args: [
-      MARKET_CONTRACT_ADDRESS,
-      {
-        gasLimit: 1300000, // TODO
-      },
-    ],
+    args: [MARKET_CONTRACT_ADDRESS],
     chainId: DEFAULT_CHAIN_ID,
     enabled: !!address && ethers.utils.isAddress(address),
-    onError(error) {
-      console.log('Error', error);
-    },
   });
   const { data, writeAsync } = useContractWrite(config);
 

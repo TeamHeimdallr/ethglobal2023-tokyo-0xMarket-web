@@ -21,7 +21,6 @@ export const ListingUma = () => {
           <UpperInfo>
             Verify statements
             <UpperDescription>{`The verification fee costs ${UMA_PRICE} USDC per sentence.`}</UpperDescription>
-            {/* TODO: USDC 가격 */}
           </UpperInfo>
           <Toggle active={active} onClick={toggleActive} />
         </UpperInfoWrapper>

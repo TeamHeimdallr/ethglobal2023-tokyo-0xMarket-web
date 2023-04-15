@@ -49,7 +49,7 @@ export const ListedAccountAbstract = () => {
 
         return (res += tokenPrice);
       }, 0) ?? 0;
-    const nftValue = 0; // TODO
+    const nftValue = 0;
     const lockTokenValue = lockupTokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
     const stakingAssetValue = stakingAssets?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
 

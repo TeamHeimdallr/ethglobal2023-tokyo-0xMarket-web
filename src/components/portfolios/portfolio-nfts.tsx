@@ -14,11 +14,7 @@ interface Props {
 export const PortfolioNfts = ({ data }: Props) => {
   const isEmpty = !data || data?.length === 0;
 
-  const totalValue = useMemo(
-    // TODO
-    () => 0,
-    []
-  );
+  const totalValue = 0;
 
   return (
     <Wrapper>

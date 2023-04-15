@@ -13,19 +13,10 @@ export const useContractAssert = ({ statement, asserter }: AssertParam) => {
     address: STATEMENT_VERIFIER_CONTRACT_ADDRESS,
     abi: STATEMENT_VERIFIER_ABI,
     functionName: 'assertDataFor',
-    args: [
-      ethers.utils.toUtf8Bytes(statement),
-      asserter,
-      //   {
-      //     gasLimit: 1300000, // TODO
-      //   },
-    ],
+    args: [ethers.utils.toUtf8Bytes(statement), asserter],
 
     chainId: DEFAULT_CHAIN_ID,
     enabled: !!statement && !!asserter,
-    onError(error) {
-      console.log('Error', error);
-    },
   });
   const { data, writeAsync } = useContractWrite(config);
 

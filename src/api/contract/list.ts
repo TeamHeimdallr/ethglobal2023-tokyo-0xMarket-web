@@ -14,19 +14,9 @@ export const useContractList = ({ address, receiver, price }: ListParam) => {
     address: MARKET_CONTRACT_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'list',
-    args: [
-      address,
-      receiver,
-      BigInt(price * 10 ** DEFAULT_DECIMAL).toString(),
-      {
-        gasLimit: 1300000, // TODO
-      },
-    ],
+    args: [address, receiver, BigInt(price * 10 ** DEFAULT_DECIMAL).toString()],
     chainId: DEFAULT_CHAIN_ID,
     enabled: !!address && ethers.utils.isAddress(address) && !!receiver && !!price,
-    onError(error) {
-      console.log('Error', error);
-    },
   });
   const { data, writeAsync } = useContractWrite(config);
 
