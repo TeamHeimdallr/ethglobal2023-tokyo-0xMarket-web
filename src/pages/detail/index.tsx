@@ -35,6 +35,7 @@ import { DEFAULT_CHAIN_ID, LISTED_LOCAL_KEY } from '~/constants';
 
 import { AccountInfo } from './components/account-info';
 import { UmaVerified } from './components/uma-verified';
+import { UmaVerify } from './components/uma-verify';
 
 const DetailPage = () => {
   const params = useParams();
@@ -116,6 +117,9 @@ const DetailPage = () => {
             <UmaVerified verified={verified} />
           </UmaWrapper>
         )}
+        <UmaWrapper>
+          <UmaVerify accountId={account?.id} currentVerified={verified} />
+        </UmaWrapper>
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>

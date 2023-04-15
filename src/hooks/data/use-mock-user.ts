@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { sub } from 'date-fns';
-import { useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
 
 import { Account, CATEGORIES, UMA_VERIFY_STATUS } from '~/types';
 
@@ -9,6 +9,7 @@ import { accountDetail as accountDetail2 } from '~/__mocks__/data/account-detail
 import { LISTED_LOCAL_KEY } from '~/constants';
 
 export const useMockUser = () => {
+  const current = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setMockUser] = useLocalStorage<Account[]>(LISTED_LOCAL_KEY, []);
   const mockUser = useMemo(
@@ -49,10 +50,11 @@ export const useMockUser = () => {
         ],
       },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
   useEffect(() => {
-    setMockUser(mockUser);
-  }, [mockUser, setMockUser]);
+    if (!current) setMockUser(mockUser);
+  }, [current, mockUser, setMockUser]);
 };
