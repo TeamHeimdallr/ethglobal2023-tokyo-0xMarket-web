@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import tw from 'twin.macro';
 
 import iconEmpty from '~/assets/icons/icon-empty.png';
