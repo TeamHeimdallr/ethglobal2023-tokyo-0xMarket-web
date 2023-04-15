@@ -18,12 +18,17 @@ export const useContractAssert = ({ statement, asserter }: AssertParam) => {
     chainId: DEFAULT_CHAIN_ID,
     enabled: !!statement && !!asserter,
   });
-  const { data, writeAsync } = useContractWrite(config);
+  const { data, writeAsync, isLoading: isContractWriteLoading } = useContractWrite(config);
 
-  const { isLoading, isSuccess, isFetching } = useWaitForTransaction({
+  const { isLoading, isSuccess, isFetching, isRefetching } = useWaitForTransaction({
     hash: data?.hash,
     enabled: !!data?.hash,
   });
 
-  return { isLoading: isLoading || isFetching, isSuccess, data, writeAsync };
+  return {
+    isLoading: isLoading || isFetching || isContractWriteLoading || isRefetching,
+    isSuccess,
+    data,
+    writeAsync,
+  };
 };

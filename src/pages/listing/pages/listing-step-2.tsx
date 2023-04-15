@@ -216,12 +216,13 @@ export const ListingStep2 = () => {
   });
 
   useEffect(() => {
-    if (isListSuccess && !isAssertLoading) {
-      const assertApi = async () => {
-        await assertAsync?.();
-      };
-      assertApi();
-    }
+    if (!isListSuccess || isAssertLoading) return;
+
+    const assertApi = async () => {
+      await assertAsync?.();
+    };
+
+    assertApi();
   }, [assertAsync, isAssertLoading, isListSuccess]);
 
   useEffect(() => {

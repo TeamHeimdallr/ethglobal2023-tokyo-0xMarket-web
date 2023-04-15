@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import tw from 'twin.macro';
 import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
 import { useAccount } from 'wagmi';
@@ -27,35 +27,53 @@ export const UmaVerify = ({ accountId, currentVerified }: Props) => {
 
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setAccount] = useLocalStorage<Account[]>(LISTED_LOCAL_KEY, listedAccount ?? []);
+  const [_, setStorage] = useLocalStorage<Account[]>(LISTED_LOCAL_KEY, listedAccount ?? []);
 
   const account =
     (listedAccount?.find(account => account.id === accountId) as Account) || undefined;
 
-  const { writeAsync: assertAsync, isLoading: isAssertLoading } = useContractAssert({
+  const {
+    writeAsync: assertAsync,
+    isLoading: isAssertLoading,
+    isSuccess: isAssertSuccess,
+  } = useContractAssert({
     statement: data || '',
     asserter: address ?? '',
   });
 
   const handleAssert = async () => {
-    const verified = {
+    await assertAsync?.();
+  };
+
+  const verified = useMemo(
+    () => ({
       id: (currentVerified?.length ?? 1).toString(),
       status: UMA_VERIFY_STATUS.PENDING,
       text: data ?? '',
       date: new Date(),
-    };
-    const addedVerified = currentVerified ? [...currentVerified, verified] : [verified];
+    }),
+    [currentVerified?.length, data]
+  );
 
-    const addAccount = { ...account, verified: addedVerified };
-    const addedListedAccount = [
-      ...(listedAccount?.filter(account => account.id !== accountId) ?? []),
-      addAccount,
-    ];
+  const addedVerified = useMemo(
+    () => (currentVerified ? [...currentVerified, verified] : [verified]),
+    [currentVerified, verified]
+  );
+  const addAccount = useMemo(
+    () => ({ ...account, verified: addedVerified }),
+    [account, addedVerified]
+  );
+  const addedListedAccount = useMemo(
+    () => [...(listedAccount?.filter(account => account.id !== accountId) ?? []), addAccount],
+    [accountId, addAccount, listedAccount]
+  );
 
-    await assertAsync?.();
-    setAccount(addedListedAccount);
-    setData('');
-  };
+  useEffect(() => {
+    if (isAssertSuccess) {
+      setStorage(addedListedAccount);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAssertSuccess, setStorage]);
 
   return (
     <Wrapper>

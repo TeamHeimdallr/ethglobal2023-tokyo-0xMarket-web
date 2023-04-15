@@ -63,7 +63,7 @@ export const AccountInfo = () => {
     isSuccess,
   } = useContractBuy({
     address: account?.address ?? '0x',
-    approve: approveSuccess,
+    approve: allowance,
   });
 
   const isLoading = useMemo(
@@ -87,18 +87,21 @@ export const AccountInfo = () => {
       return;
     }
     await buyAsync?.();
-
-    const removed = listedAccount?.filter(a => a.address !== account.address) ?? [];
-    setStorage(removed);
-  }, [account.address, buyAsync, connect, isConnected, isLoading, listedAccount, setStorage]);
+  }, [buyAsync, connect, isConnected, isLoading]);
 
   useEffect(() => {
     allowanceRefetch();
   }, [approveSuccess, allowanceRefetch]);
 
   useEffect(() => {
-    if (isSuccess) navigate('/');
-  }, [isSuccess, navigate]);
+    if (isSuccess) {
+      const removed =
+        listedAccount?.filter(a => a.address.toLowerCase() !== account?.address?.toLowerCase()) ??
+        [];
+      setStorage(removed);
+      navigate('/');
+    }
+  }, [account?.address, isSuccess, listedAccount, navigate, setStorage]);
 
   return (
     <Wrapper>
