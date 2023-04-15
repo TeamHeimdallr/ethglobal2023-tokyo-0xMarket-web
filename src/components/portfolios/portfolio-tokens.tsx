@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from 'react';
 import tw from 'twin.macro';
 
 import iconToken from '~/assets/icons/icon-coin.png';
@@ -22,7 +23,7 @@ export const PortfolioTokens = ({ ethData, data }: Props) => {
     ? Number(price.find(p => p.symbol === ethData?.symbol)?.lastPriceUSD || 0) || 0
     : 0;
   const ethTotalValue = Number(ethData?.formatted ?? 0) * ethTokenValue;
-  const totalValue = () => {
+  const totalValue = useCallback(() => {
     const tokenValues =
       data?.reduce((res, d) => {
         const tokenPrice =
@@ -33,7 +34,7 @@ export const PortfolioTokens = ({ ethData, data }: Props) => {
       }, 0) ?? 0;
 
     return tokenValues + ethTotalValue;
-  };
+  }, [data, ethTotalValue]);
 
   return (
     <Wrapper>

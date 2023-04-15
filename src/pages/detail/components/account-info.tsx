@@ -24,14 +24,14 @@ import { BackButton } from './back-button';
 export const AccountInfo = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const { id } = params;
+  const { address } = params;
   const { isConnected } = useAccount();
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
 
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
-  const account = (listedAccount?.find(account => account.id === id) as Account) || undefined;
+  const account = (listedAccount?.find(account => account.id === address) as Account) || undefined;
 
   const categoryData = CategoriesMap[account?.category ?? CATEGORIES.GENERAL];
 
@@ -148,7 +148,7 @@ const Wrapper = tw.div`
 `;
 
 const AccountWrapper = tw.div`
-  flex flex-col gap-48
+  flex flex-col gap-48 w-full
 `;
 const Divider = tw.div`
   w-full h-1 bg-grayscale-5

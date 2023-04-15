@@ -147,7 +147,7 @@ const Wrapper = tw.div`
 `;
 
 const AccountWrapper = tw.div`
-  flex flex-col gap-48
+  flex flex-col gap-48 w-full
 `;
 const Divider = tw.div`
   w-full h-1 bg-grayscale-5

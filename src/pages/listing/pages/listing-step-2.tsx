@@ -40,6 +40,7 @@ import {
   UMA_VERIFY_STATUS,
 } from '~/types';
 
+import { price } from '~/__mocks__/data/token-price';
 import { DEFAULT_CHAIN_ID, LISTED_LOCAL_KEY } from '~/constants';
 
 import { BackButton } from '../components/back-button';
@@ -116,6 +117,23 @@ export const ListingStep2 = () => {
   const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];
   const histories = parseTxHistory({ firstTx, allTx, tokenTx, nftTx });
 
+  const ethTokenValue = ethBalance
+    ? Number(price.find(p => p.symbol === ethBalance?.symbol)?.lastPriceUSD || 0) || 0
+    : 0;
+  const ethTotalValue = Number(ethBalance?.formatted ?? 0) * ethTokenValue;
+  const totalValue = () => {
+    const tokenValues =
+      tokens?.reduce((res, d) => {
+        const tokenPrice =
+          Number(price.find(p => p.symbol === d.token.symbol)?.lastPriceUSD || 0) *
+            d.formattedAmount || 0;
+
+        return (res += tokenPrice);
+      }, 0) ?? 0;
+
+    return tokenValues + ethTotalValue;
+  };
+
   const {
     writeAsync: listAsync,
     isLoading: isListLoading,
@@ -155,7 +173,7 @@ export const ListingStep2 = () => {
       description: data.description || '',
       category: data.category || CATEGORIES.GENERAL,
       price: data.price || 0,
-      tokenValue: data.tokenValue || 0,
+      tokenValue: totalValue(),
       verified: typedUmaData,
       hidded: data.hidden || false,
     };
