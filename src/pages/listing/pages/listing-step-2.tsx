@@ -51,7 +51,10 @@ export const ListingStep2 = () => {
   const { data } = useListingDataState();
   const { data: umaData } = useListingUmaState();
 
-  const { address } = data;
+  const { address: addressData } = data;
+  const address = addressData ?? '';
+  const enabled = !!address && ethers.utils.isAddress(address);
+
   const { data: ethBalance } = useBalance({
     chainId: DEFAULT_CHAIN_ID,
     address: address as `0x{string}`,
@@ -62,42 +65,42 @@ export const ListingStep2 = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, saveStorage] = useLocalStorage<Account[]>(LISTED_LOCAL_KEY, currentListedAccount || []);
 
-  const { data: inGameInfo } = useAccountInGameInfosQuery(address ?? '', {
+  const { data: inGameInfo } = useAccountInGameInfosQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!address,
+    enabled,
   });
-  const { data: tokenData } = useAccountTokensQuery(address ?? '', {
+  const { data: tokenData } = useAccountTokensQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!address,
-  });
-
-  const { data: lockupTokens } = useAccountLockupTokensQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
+    enabled,
   });
 
-  const { data: firstTxData } = useFirstTxQuery(address ?? '', {
+  const { data: lockupTokens } = useAccountLockupTokensQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!address,
+    enabled,
   });
-  const { data: allTxData } = useAllTxQuery(address ?? '', {
+
+  const { data: firstTxData } = useFirstTxQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!address,
+    enabled,
   });
-  const { data: tokenTxData } = useTokenTxQuery(address ?? '', {
+  const { data: allTxData } = useAllTxQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!address,
+    enabled,
   });
-  const { data: nftTxData } = useNftTxQuery(address ?? '', {
+  const { data: tokenTxData } = useTokenTxQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!address,
+    enabled,
+  });
+  const { data: nftTxData } = useNftTxQuery(address, {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled,
   });
 
   const tokens = tokenData?.data.data.erc20.data;

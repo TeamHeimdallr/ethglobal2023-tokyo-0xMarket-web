@@ -38,10 +38,12 @@ import { UmaVerified } from './components/uma-verified';
 
 const DetailPage = () => {
   const params = useParams();
-  const { id } = params;
+  const { address: addressParams } = params;
 
+  const address = addressParams ?? '';
+  const enabled = !!address && ethers.utils.isAddress(address);
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
-  const account = (listedAccount?.find(account => account.id === id) as Account) || undefined;
+  const account = (listedAccount?.find(account => account.id === address) as Account) || undefined;
 
   const { data: ethBalance } = useBalance({
     chainId: DEFAULT_CHAIN_ID,
@@ -49,42 +51,42 @@ const DetailPage = () => {
     enabled: !!account.address && ethers.utils.isAddress(account.address),
   });
 
-  const { data: tokenData } = useAccountTokensQuery(id ?? '', {
+  const { data: tokenData } = useAccountTokensQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!id,
+    enabled,
   });
 
-  const { data: lockupTokens } = useAccountLockupTokensQuery(id ?? '', {
+  const { data: lockupTokens } = useAccountLockupTokensQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!id,
+    enabled,
   });
 
-  const { data: firstTxData } = useFirstTxQuery(id ?? '', {
+  const { data: firstTxData } = useFirstTxQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!id,
+    enabled,
   });
-  const { data: allTxData } = useAllTxQuery(id ?? '', {
+  const { data: allTxData } = useAllTxQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!id,
+    enabled,
   });
-  const { data: tokenTxData } = useTokenTxQuery(id ?? '', {
+  const { data: tokenTxData } = useTokenTxQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!id,
+    enabled,
   });
-  const { data: nftTxData } = useNftTxQuery(id ?? '', {
+  const { data: nftTxData } = useNftTxQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!id,
+    enabled,
   });
-  const { data: inGameInfo } = useAccountInGameInfosQuery(id ?? '', {
+  const { data: inGameInfo } = useAccountInGameInfosQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!id,
+    enabled,
   });
 
   const tokens = tokenData?.data.data.erc20.data;
@@ -109,9 +111,11 @@ const DetailPage = () => {
         <DetailWrapper>
           <AccountInfo />
         </DetailWrapper>
-        <UmaWrapper>
-          {verified && verified.length > 0 && <UmaVerified verified={verified} />}
-        </UmaWrapper>
+        {verified && verified.length > 0 && (
+          <UmaWrapper>
+            <UmaVerified verified={verified} />
+          </UmaWrapper>
+        )}
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>

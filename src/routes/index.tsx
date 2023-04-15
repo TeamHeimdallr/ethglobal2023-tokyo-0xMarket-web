@@ -24,7 +24,7 @@ const EntryRoute = () => {
           <Route path={`/${MOCK_USER.USER_1}`} element={<DetailPageMock id={MOCK_USER.USER_1} />} />
           <Route path={`/${MOCK_USER.USER_2}`} element={<DetailPageMock id={MOCK_USER.USER_2} />} />
 
-          <Route path="/:id" element={<DetailPage />} />
+          <Route path="/:address" element={<DetailPage />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
