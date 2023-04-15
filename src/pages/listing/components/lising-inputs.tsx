@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-import { IconDallar, IconWallet } from '~/components/icons';
+import { IconWallet } from '~/components/icons';
 import { TextField, TextFieldMultiline, TextFieldNumber } from '~/components/textfield';
 
 import { useListingDataState } from '~/states/listing-data';
@@ -16,7 +16,7 @@ export const ListingInputs = () => {
       />
       <InnerWrapper>
         <TextFieldNumber
-          prefixIcon={<IconDallar />}
+          suffix="USDC"
           placeholder="Price"
           onChange={value => setData({ price: value.floatValue })}
         />

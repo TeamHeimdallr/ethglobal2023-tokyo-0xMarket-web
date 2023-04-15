@@ -1,18 +1,17 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { InputHTMLAttributes } from 'react';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'> {
-  prefixIcon?: ReactNode;
+  suffix?: string;
   defaultValue?: number;
   onChange?: (value: NumberFormatValues) => void;
 }
-export const TextFieldNumber = ({ prefixIcon, defaultValue, placeholder, onChange }: Props) => {
+export const TextFieldNumber = ({ suffix, defaultValue, placeholder, onChange }: Props) => {
   return (
     <Wrapper>
-      {prefixIcon && <IconWrapper>{prefixIcon}</IconWrapper>}
       <NumericFormat
         defaultValue={defaultValue}
         placeholder={placeholder}
@@ -23,6 +22,7 @@ export const TextFieldNumber = ({ prefixIcon, defaultValue, placeholder, onChang
         allowLeadingZeros
         thousandSeparator=","
       />
+      {suffix && <Suffix>{suffix}</Suffix>}
     </Wrapper>
   );
 };
@@ -63,6 +63,7 @@ const Wrapper = styled.div(() => [
     }
   `,
 ]);
-const IconWrapper = tw.div`
-  flex-center flex-shrink-0
+
+const Suffix = tw.div`
+  font-sb-24 text-grayscale-4
 `;

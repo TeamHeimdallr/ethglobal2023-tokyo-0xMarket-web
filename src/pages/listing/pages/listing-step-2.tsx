@@ -31,7 +31,7 @@ import { useListingDataState } from '~/states/listing-data';
 import { BackButton } from '../components/back-button';
 import { ListingInputs } from '../components/lising-inputs';
 import { ListedAccountAbstract } from '../components/listed-account-abstract';
-import { ListingVerify } from '../components/listing-verify';
+import { ListingUma } from '../components/listing-uma';
 
 export const ListingStep2 = () => {
   const { data } = useListingDataState();
@@ -129,8 +129,10 @@ export const ListingStep2 = () => {
           <ListedAccountAbstract />
           <Divider />
           <ListingInputs />
-          <ListingVerify />
         </InputWrapper>
+        <UmaWrapper>
+          <ListingUma />
+        </UmaWrapper>
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
@@ -166,6 +168,10 @@ const ContentWrapper = tw.div`
 
 const InputWrapper = tw.div`
   w-886 flex flex-col flex-1 flex-shrink-0 gap-48
+`;
+
+const UmaWrapper = tw.div`
+  w-886 flex flex-col flex-1 flex-shrink-0 
 `;
 
 const Divider = tw.div`
