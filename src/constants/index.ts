@@ -17,7 +17,7 @@ export const IS_MAINNET = IS_PROD;
 
 export const MARKET_CONTRACT_ADDRESS = IS_MAINNET
   ? '0x'
-  : '0x3A6429114B60eCfc2B9abCe8b46E63d0f5d47e0C';
+  : '0x115c215066814b1D24e30518d20B5f0d73856147';
 
 export const STATEMENT_VERIFIER_CONTRACT_ADDRESS = IS_MAINNET
   ? '0x'
@@ -27,7 +27,7 @@ export const OOV3_CONTRACT_ADDRESS = IS_MAINNET
   ? '0x'
   : '0x9923D42eF695B5dd9911D05Ac944d4cAca3c4EAB';
 
-export const TRADE_TOKEN_ADDRESS = IS_MAINNET ? '0x' : '0x68035dd1dfabf2c682f6e1f3eb56db0b26c2e4d5';
+export const TRADE_TOKEN_ADDRESS = IS_MAINNET ? '0x' : '0xB4d456ae41894b0F03e31f4e3A344B5F9b058058';
 export const API_URL_ETHERSCAN = IS_MAINNET ? '' : 'https://api-goerli.etherscan.io/api';
 export const ETHERSCAN_API_KEY = 'HPWTPRKCEMT3JFRCYYPETD3694ISJRYW6F';
 export const AIRSTACK_API_URL = 'https://api.airstack.xyz/gql/4tITyVlBrB';
@@ -89,7 +89,7 @@ export const CHAIN_ID = {
   ARBITRUM: 42161,
   ZKSCROLL: 534353,
 };
-export const DEFAULT_CHAIN_ID = CHAIN_ID.GOERLI;
+export const DEFAULT_CHAIN_ID = CHAIN_ID.ZKSCROLL;
 
 export const DATE_FORMATTER = {
   MMM_d_yyyy: 'MMM d, yyyy',
