@@ -35,6 +35,7 @@ export const AIRSTACK_API_URL = 'https://api.airstack.xyz/gql/4tITyVlBrB';
 export const MOCK_USER = {
   USER_1: '0x48DBa2D1b6C89Bf8234C2B63554369aDC7Ae3258',
   USER_2: 'wz8zwPsNM6AbrtnE',
+  USER_3: '0x1884e327984E12b8ce525D2AC3B7aa08271c83f4',
 };
 
 export const API_URL = IS_LOCAL
