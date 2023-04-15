@@ -21,7 +21,11 @@ export const AccountDiscovers = () => {
       </TitleWrapper>
       <CardWrapper>
         {accountDiscovers?.map(accountDiscover => (
-          <Card key={accountDiscover.id} onClick={() => navigate('/1')} {...accountDiscover} />
+          <Card
+            key={accountDiscover.id}
+            onClick={() => navigate(`/${accountDiscover.id}`)}
+            {...accountDiscover}
+          />
         ))}
       </CardWrapper>
     </Wrapper>

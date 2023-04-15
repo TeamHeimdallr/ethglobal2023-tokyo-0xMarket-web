@@ -32,6 +32,11 @@ export const API_URL_ETHERSCAN = IS_MAINNET ? '' : 'https://api-goerli.etherscan
 export const ETHERSCAN_API_KEY = 'HPWTPRKCEMT3JFRCYYPETD3694ISJRYW6F';
 export const AIRSTACK_API_URL = 'https://api.airstack.xyz/gql/4tITyVlBrB';
 
+export const MOCK_USER = {
+  USER_1: '0x48DBa2D1b6C89Bf8234C2B63554369aDC7Ae3258',
+  USER_2: 'wz8zwPsNM6AbrtnE',
+};
+
 export const API_URL = IS_LOCAL
   ? 'http://localhost:8080'
   : IS_DEV

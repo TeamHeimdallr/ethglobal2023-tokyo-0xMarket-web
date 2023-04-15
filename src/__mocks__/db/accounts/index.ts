@@ -16,7 +16,6 @@ export const accountDB = factory({
     price: Number,
     tokenValue: Number,
 
-    verified: nullable(Boolean),
     hidded: nullable(Boolean),
   },
 
@@ -27,8 +26,6 @@ export const accountDB = factory({
 
     price: Number,
     tokenValue: Number,
-
-    verified: nullable(Boolean),
   },
 });
 

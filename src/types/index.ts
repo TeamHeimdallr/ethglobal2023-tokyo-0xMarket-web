@@ -41,6 +41,12 @@ export enum LOCKUP_TYPE {
   AIRDROP = 'AIRDROP',
 }
 
+export enum UMA_VERIFY_STATUS {
+  SUCCESS = 'SUCCESS',
+  PENDING = 'PENDING',
+  FAIL = 'FAIL',
+}
+
 export interface Account {
   id: string;
 
@@ -54,16 +60,20 @@ export interface Account {
   price: number;
   tokenValue: number;
 
-  verified?: boolean;
+  verified?: AccountUmaVerified[];
   hidden?: boolean;
 }
 
-export type AccountDiscover = Pick<
-  Account,
-  'id' | 'title' | 'category' | 'price' | 'tokenValue' | 'verified'
->;
+export type AccountDiscover = Pick<Account, 'id' | 'title' | 'category' | 'price' | 'tokenValue'>;
 
 export type ListingAccount = Partial<Omit<Account, 'id'>>;
+
+export interface AccountEthBalance {
+  decimals: string;
+  formatted: string;
+  symbol: string;
+  value: string;
+}
 
 interface GameItem {
   value: string;
@@ -73,6 +83,15 @@ interface GameItem {
     height?: number;
   };
 }
+
+export interface AccountUmaVerified {
+  id: string;
+  status: UMA_VERIFY_STATUS;
+  text: string;
+
+  date?: Date;
+}
+
 export interface AccountInGameInfo {
   id: string;
   user: string;

@@ -10,17 +10,15 @@ import { CATEGORIES } from '~/types';
 import { CategoriesMap } from '~/constants';
 
 import { Category } from '../category';
-import { IconVerification } from '../icons';
 
 interface Props extends HTMLMotionProps<'div'> {
   title: string;
   category?: CATEGORIES;
   price?: number;
   tokenValue?: number;
-  verified?: boolean;
 }
 
-export const Card = ({ category, title, price, tokenValue, verified, ...rest }: Props) => {
+export const Card = ({ category, title, price, tokenValue, ...rest }: Props) => {
   const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
 
   return (
@@ -48,12 +46,6 @@ export const Card = ({ category, title, price, tokenValue, verified, ...rest }: 
       </TopWrapper>
 
       <BottomWrapper>
-        {verified && (
-          <VerifiedWrapper>
-            <IconVerification />
-            <Verified>Verified</Verified>
-          </VerifiedWrapper>
-        )}
         <Price>{parseNumberCommaSeperator({ number: price ?? 0, suffix: ' USDC' })}</Price>
       </BottomWrapper>
     </Wrapper>
@@ -111,12 +103,6 @@ const TokenValue = tw.div`
 
 const BottomWrapper = tw.div`
   flex items-center justify-end gap-16
-`;
-const VerifiedWrapper = tw.div`
-  flex items-center gap-6
-`;
-const Verified = tw.div`
-  font-sb-12 text-white
 `;
 const Price = tw.div`
   font-sb-20 text-white w-222 overflow-hidden text-right

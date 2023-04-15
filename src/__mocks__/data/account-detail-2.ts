@@ -1,7 +1,9 @@
-import { Account, CATEGORIES } from '~/types';
+import { sub } from 'date-fns';
+
+import { Account, CATEGORIES, UMA_VERIFY_STATUS } from '~/types';
 
 export const accountDetail: Account = {
-  id: '1',
+  id: 'wz8zwPsNM6AbrtnE',
 
   address: '0x48DBa2D1b6C89Bf8234C2B63554369aDC7Ae3258',
   receivingAddress: '0x9DCD43faB2CF8104cb2ff53CF4C051842C125EE0',
@@ -14,6 +16,24 @@ export const accountDetail: Account = {
   price: 2345678,
   tokenValue: 123456,
 
-  verified: true,
+  verified: [
+    {
+      id: '1',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: UMA_VERIFY_STATUS.SUCCESS,
+      date: new Date(),
+    },
+    {
+      id: '2',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: UMA_VERIFY_STATUS.PENDING,
+    },
+    {
+      id: '3',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: UMA_VERIFY_STATUS.FAIL,
+      date: sub(new Date(), { hours: 7 }),
+    },
+  ],
   hidden: true,
 };

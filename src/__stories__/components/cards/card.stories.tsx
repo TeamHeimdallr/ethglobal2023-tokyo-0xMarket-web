@@ -17,7 +17,6 @@ export const _Card = () => (
       category={CATEGORIES.GAME}
       price={99999999999999}
       tokenValue={123456}
-      verified
     />
     <Card
       title="Early-access to BAYC Otherside"
@@ -30,7 +29,6 @@ export const _Card = () => (
       category={CATEGORIES.SBT}
       price={0}
       tokenValue={123456}
-      verified
     />
     <Card
       title="Vesting-in-process 50,000 UNI for 6 months"
@@ -49,7 +47,6 @@ export const _Card = () => (
       category={CATEGORIES.GAME}
       price={999999}
       tokenValue={123456}
-      verified
     />
   </Wrapper>
 );
