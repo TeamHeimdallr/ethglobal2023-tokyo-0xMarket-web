@@ -104,7 +104,7 @@ const DetailPage = () => {
   const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];
   const histories = parseTxHistory({ firstTx, allTx, tokenTx, nftTx });
 
-  const verified = account?.verified;
+  const verified = account?.verified?.filter(v => !!v.text);
 
   return (
     <Wrapper>

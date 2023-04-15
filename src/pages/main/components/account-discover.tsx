@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { ethers } from 'ethers';
 import tw from 'twin.macro';
 import { useReadLocalStorage } from 'usehooks-ts';
 
@@ -17,7 +18,9 @@ export const AccountDiscovers = () => {
   const currentAccounts = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
 
   const { accounts: accountAddresses } = useGetAccounts();
-  const accounts = currentAccounts?.filter(account => accountAddresses?.includes(account.address));
+  const accounts = currentAccounts?.filter(account =>
+    accountAddresses?.includes(ethers.utils.getAddress(account.address?.toLowerCase()))
+  );
 
   return (
     <Wrapper>
