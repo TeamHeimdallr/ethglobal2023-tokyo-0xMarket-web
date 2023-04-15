@@ -100,6 +100,19 @@ export const MARKETPLACE_ABI = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'getAccounts',
+    outputs: [
+      {
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
