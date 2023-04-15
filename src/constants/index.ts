@@ -67,6 +67,7 @@ export const CHAIN_ID = {
   GOERLI: 5,
   POLYGON: 137,
   ARBITRUM: 42161,
+  ZKSCROLL: 534353,
 };
 
 export const DATE_FORMATTER = {

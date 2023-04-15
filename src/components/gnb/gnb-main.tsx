@@ -21,20 +21,20 @@ export const GnbMain = () => {
 
   const { isConnected, address } = useAccount();
   const { connect } = useConnect({
-    chainId: CHAIN_ID.GOERLI,
+    chainId: CHAIN_ID.ZKSCROLL,
     connector: new MetaMaskConnector({ chains }),
   });
   const { disconnect } = useDisconnect();
 
-  const { data: goerliBalance } = useBalance({
-    chainId: CHAIN_ID.GOERLI,
+  const { data: zkscrollBalance } = useBalance({
+    chainId: CHAIN_ID.ZKSCROLL,
     address,
   });
 
   const balances: Balance[] = [
     {
       currency: CURRENCY.ETH,
-      balance: goerliBalance?.formatted ?? '0',
+      balance: zkscrollBalance?.formatted ?? '0',
     },
   ];
 
