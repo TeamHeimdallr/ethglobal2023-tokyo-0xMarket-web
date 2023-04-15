@@ -1,10 +1,14 @@
-import { useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { InjectedConnector } from '@wagmi/core';
 import tw from 'twin.macro';
+import { useAccount, useConnect } from 'wagmi';
 
 import { useAccountQuery } from '~/api/accounts';
+import { useAllowance, useTokenApprove } from '~/api/contract/approve';
+import { useContractBuy } from '~/api/contract/buy';
 
 import { ButtonLargePrimary } from '~/components/buttons';
 import { Category } from '~/components/category';
@@ -13,26 +17,86 @@ import { parseNumberCommaSeperator } from '~/utils/number';
 
 import { CATEGORIES } from '~/types';
 
-import { CategoriesMap } from '~/constants';
+import { CategoriesMap, DEFAULT_DECIMAL } from '~/constants';
 
 import { BackButton } from './back-button';
 
 export const AccountInfo = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
+  const { isConnected } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
 
   const { data } = useAccountQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
     enabled: !!id,
   });
+
   const account = data?.data;
   const categoryData = CategoriesMap[account?.category ?? CATEGORIES.GENERAL];
 
-  const handleBuy = useCallback(() => {
-    // TODO: buy logic
-    console.log('buy');
-  }, []);
+  const {
+    allowanceAmount,
+    refetch: allowanceRefetch,
+    isFetching: isAllowanceLoading,
+  } = useAllowance();
+
+  const {
+    writeAsync: approveAsync,
+    isLoading: isApproveLoading,
+    isSuccess: approveSuccess,
+  } = useTokenApprove();
+
+  const allowance = useMemo(
+    () =>
+      isConnected &&
+      allowanceAmount >= BigInt((account?.price ?? 0) * 10 ** DEFAULT_DECIMAL) &&
+      allowanceAmount > 0,
+    [isConnected, allowanceAmount, account]
+  );
+
+  const {
+    writeAsync: buyAsync,
+    isLoading: isBuyLoading,
+    isSuccess,
+  } = useContractBuy({
+    address: account?.address ?? '0x',
+  });
+
+  const isLoading = useMemo(
+    () => isApproveLoading || isBuyLoading || isAllowanceLoading,
+    [isAllowanceLoading, isBuyLoading, isApproveLoading]
+  );
+
+  const handleApprove = useCallback(async () => {
+    if (isLoading) return;
+    if (!isConnected) {
+      connect();
+      return;
+    }
+    await approveAsync?.();
+  }, [approveAsync, connect, isConnected, isLoading]);
+
+  const handleBuy = useCallback(async () => {
+    if (isLoading) return;
+    if (!isConnected) {
+      connect();
+      return;
+    }
+    await buyAsync?.();
+  }, [buyAsync, connect, isConnected, isLoading]);
+
+  useEffect(() => {
+    allowanceRefetch();
+  }, [approveSuccess, allowanceRefetch]);
+
+  useEffect(() => {
+    if (isSuccess) navigate('/');
+  }, [isSuccess, navigate]);
 
   return (
     <Wrapper>
@@ -68,10 +132,14 @@ export const AccountInfo = () => {
             <Price>
               {parseNumberCommaSeperator({
                 number: account?.price ?? 0,
-                suffix: 'USDC',
+                suffix: ' USDC',
               })}
             </Price>
-            <ButtonLargePrimary text="Buy now" onClick={handleBuy} />
+            {!allowance ? (
+              <ButtonLargePrimary loading={isLoading} text="Approve" onClick={handleApprove} />
+            ) : (
+              <ButtonLargePrimary loading={isLoading} text="Buy now" onClick={handleBuy} />
+            )}
           </BottomRightWrapper>
         </BottomWrapper>
       </AccountWrapper>

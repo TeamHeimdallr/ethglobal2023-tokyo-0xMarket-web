@@ -19,7 +19,7 @@ export const useContractBuy = ({ address }: BuyParam) => {
     ],
 
     chainId: DEFAULT_CHAIN_ID,
-    enabled: !!address,
+    enabled: !!address && address !== '0x',
     onError(error) {
       console.log('Error', error);
     },
