@@ -1,21 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
+import { useReadLocalStorage } from 'usehooks-ts';
 
-import { useAccountDiscoversQuery } from '~/api/accounts';
+import { useGetAccounts } from '~/api/contract/get-accounts';
 
 import { Card } from '~/components/cards';
 
+import { Account } from '~/types';
+
 import { accountDetail as accountDetail1 } from '~/__mocks__/data/account-detail-1';
 import { accountDetail as accountDetail2 } from '~/__mocks__/data/account-detail-2';
+import { LISTED_LOCAL_KEY } from '~/constants';
 
 export const AccountDiscovers = () => {
   const navigate = useNavigate();
+  const currentAccounts = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
 
-  const { data } = useAccountDiscoversQuery({
-    cacheTime: Infinity,
-    staleTime: Infinity,
-  });
-  const accountDiscovers = data?.data;
+  const { accounts: accountAddresses } = useGetAccounts();
+  const accounts = currentAccounts?.filter(account => accountAddresses?.includes(account.address));
 
   return (
     <Wrapper>
@@ -25,12 +27,8 @@ export const AccountDiscovers = () => {
       <CardWrapper>
         <Card onClick={() => navigate(`/${accountDetail1.id}`)} {...accountDetail1} />
         <Card onClick={() => navigate(`/${accountDetail2.id}`)} {...accountDetail2} />
-        {accountDiscovers?.map(accountDiscover => (
-          <Card
-            key={accountDiscover.id}
-            onClick={() => navigate(`/${accountDiscover.id}`)}
-            {...accountDiscover}
-          />
+        {accounts?.map(account => (
+          <Card key={account.id} onClick={() => navigate(`/${account.id}`)} {...account} />
         ))}
       </CardWrapper>
     </Wrapper>
