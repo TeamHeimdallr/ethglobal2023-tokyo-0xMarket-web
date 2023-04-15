@@ -24,12 +24,7 @@ interface Props {
   isDepositSuccess?: boolean;
 }
 
-export const GnbListing = ({
-  handleListing,
-  handleDepositing,
-  isLoading,
-  isDepositSuccess,
-}: Props) => {
+export const GnbListing = ({ handleListing, handleDepositing, isLoading }: Props) => {
   const navigate = useNavigate();
   const { progress, setProgress } = useListingProgressState();
   const { data } = useListingDataState();
@@ -60,25 +55,20 @@ export const GnbListing = ({
 
   const handleNextButtonClick = useCallback(async () => {
     if (progress === 0) setProgress(1);
-    if (progress === 1) await handleDepositing?.();
-    if (progress === 2) await handleListing?.(data);
-  }, [progress, setProgress, handleListing, data, handleDepositing]);
-
-  useEffect(() => {
-    if (isDepositSuccess) {
+    if (progress === 1) {
+      await handleDepositing?.();
       setProgress(2);
     }
-  }, [isDepositSuccess, setProgress]);
+    if (progress === 2) await handleListing?.(data);
+  }, [progress, setProgress, handleListing, data, handleDepositing]);
 
   useEffect(() => {
     if (!!data.address && ethers.utils.isAddress(data.address)) refetch();
   }, [data.address, refetch]);
 
   useEffect(() => {
-    if (owner === MARKET_CONTRACT_ADDRESS && progress !== 2) {
-      setProgress(2);
-    }
-  }, [owner, progress, setProgress]);
+    if (owner === MARKET_CONTRACT_ADDRESS && progress === 1) setProgress(2);
+  });
 
   return (
     <Wrapper>

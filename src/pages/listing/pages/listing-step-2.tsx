@@ -54,7 +54,7 @@ import { ListingUma } from '../components/listing-uma';
 
 export const ListingStep2 = () => {
   const navigate = useNavigate();
-  const { setProgress, resetProgress } = useListingProgressState();
+  const { resetProgress } = useListingProgressState();
 
   const { data } = useListingDataState();
   const { data: umaData } = useListingUmaState();
@@ -143,16 +143,6 @@ export const ListingStep2 = () => {
   };
 
   const {
-    writeAsync: listAsync,
-    isLoading: isListLoading,
-    isSuccess: isListSuccess,
-  } = useContractList({
-    address: address ?? '',
-    receiver: data?.receivingAddress ?? '',
-    price: data?.price ?? 0,
-  });
-
-  const {
     writeAsync: depositAsync,
     isLoading: isDepositLoading,
     isSuccess: isDepositSuccess,
@@ -160,17 +150,30 @@ export const ListingStep2 = () => {
     address: (address as `0x${string}`) ?? '0x',
   });
 
+  const {
+    writeAsync: listAsync,
+    isLoading: isListLoading,
+    isSuccess: isListSuccess,
+  } = useContractList({
+    address: address ?? '',
+    receiver: data?.receivingAddress ?? '',
+    price: data?.price ?? 0,
+    deposit: isDepositSuccess,
+  });
+
   const handleSaveInfo = () => {
     const typedUmaData: AccountUmaVerified[] = umaData
-      ? Object.keys(umaData).map(key => {
-          const value = umaData[key];
-          return {
-            id: key.toString(),
-            status: UMA_VERIFY_STATUS.PENDING,
-            text: value || '',
-            date: new Date(),
-          };
-        })
+      ? Object.keys(umaData)
+          .map(key => {
+            const value = umaData[key];
+            return {
+              id: key.toString(),
+              status: UMA_VERIFY_STATUS.PENDING,
+              text: value || '',
+              date: new Date(),
+            };
+          })
+          .filter(d => !!d.text)
       : [];
 
     const typedData = {
@@ -201,8 +204,6 @@ export const ListingStep2 = () => {
 
   const handleDepositing = async () => {
     await depositAsync?.();
-    navigate('/listing');
-    setProgress(2);
   };
 
   const {
@@ -225,10 +226,10 @@ export const ListingStep2 = () => {
 
   useEffect(() => {
     if (isAssertSuccess || (isListSuccess && !statement)) {
-      navigate(`/${data.id}`);
+      navigate(`/${data.address}`);
       resetProgress();
     }
-  }, [data.id, statement, isListSuccess, isAssertSuccess, navigate, resetProgress]);
+  }, [data.address, statement, isListSuccess, isAssertSuccess, navigate, resetProgress]);
 
   return (
     <Wrapper>

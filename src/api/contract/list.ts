@@ -8,8 +8,9 @@ interface ListParam {
   address: string;
   receiver: string;
   price: number;
+  deposit?: boolean;
 }
-export const useContractList = ({ address, receiver, price }: ListParam) => {
+export const useContractList = ({ address, receiver, price, deposit }: ListParam) => {
   const { config } = usePrepareContractWrite({
     address: MARKET_CONTRACT_ADDRESS,
     abi: MARKETPLACE_ABI,
@@ -20,7 +21,7 @@ export const useContractList = ({ address, receiver, price }: ListParam) => {
       ethers.utils.parseEther(price.toString()),
     ],
     chainId: DEFAULT_CHAIN_ID,
-    enabled: !!address && ethers.utils.isAddress(address) && !!receiver && !!price,
+    enabled: !!address && ethers.utils.isAddress(address) && !!receiver && !!price && deposit,
     onError(error) {
       console.log('error', error);
     },
