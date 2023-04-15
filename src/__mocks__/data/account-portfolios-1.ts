@@ -33,146 +33,144 @@ export const accountEthBalance: AccountEthBalance = {
 };
 
 export const accountTokens: AccountTokenAll = {
-  data: {
-    erc20: {
-      data: [
-        {
-          amount: '16799306000000000000',
-          formattedAmount: 133.9,
-          chainId: '1',
-          id: '10xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc20xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f',
-          tokenAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-          tokenId: '',
-          tokenType: 'ERC20',
-          token: {
-            name: 'Uniswap',
-            symbol: 'UNI',
-          },
+  erc20: {
+    data: [
+      {
+        amount: '16799306000000000000',
+        formattedAmount: 133.9,
+        chainId: '1',
+        id: '10xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc20xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f',
+        tokenAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+        tokenId: '',
+        tokenType: 'ERC20',
+        token: {
+          name: 'Uniswap',
+          symbol: 'UNI',
         },
-        {
-          amount: '647763741527175900000',
-          formattedAmount: 513,
-          chainId: '1',
-          id: '10x5283d291dbcf85356a21ba090e6db59121208b440xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f',
-          tokenAddress: '0x5283d291dbcf85356a21ba090e6db59121208b44',
-          tokenId: '',
-          tokenType: 'ERC20',
-          token: {
-            name: 'Axie Infinity',
-            symbol: 'AXS',
-          },
+      },
+      {
+        amount: '647763741527175900000',
+        formattedAmount: 513,
+        chainId: '1',
+        id: '10x5283d291dbcf85356a21ba090e6db59121208b440xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f',
+        tokenAddress: '0x5283d291dbcf85356a21ba090e6db59121208b44',
+        tokenId: '',
+        tokenType: 'ERC20',
+        token: {
+          name: 'Axie Infinity',
+          symbol: 'AXS',
         },
-      ],
-    },
-    erc721: {
-      data: [
-        {
-          amount: '1',
-          chainId: '1',
-          id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f65408',
-          tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
-          tokenId: '✨Angel✨',
-          tokenType: 'ERC721',
-          tokenPrice: 0.05,
-          token: {
-            name: 'Axie Infinity',
-            symbol: 'KODA',
+      },
+    ],
+  },
+  erc721: {
+    data: [
+      {
+        amount: '1',
+        chainId: '1',
+        id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f65408',
+        tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
+        tokenId: '✨Angel✨',
+        tokenType: 'ERC721',
+        tokenPrice: 0.05,
+        token: {
+          name: 'Axie Infinity',
+          symbol: 'KODA',
+        },
+        tokenNfts: {
+          tokenId: '65408',
+          metaData: {
+            name: 'Echoes of a Dead Earth (blue)',
           },
-          tokenNfts: {
-            tokenId: '65408',
-            metaData: {
-              name: 'Echoes of a Dead Earth (blue)',
-            },
-            contentValue: {
-              image: {
-                medium: ImageAxieNft1,
-                extraSmall: ImageAxieNft1,
-                large: ImageAxieNft1,
-                original: ImageAxieNft1,
-                small: ImageAxieNft1,
-              },
+          contentValue: {
+            image: {
+              medium: ImageAxieNft1,
+              extraSmall: ImageAxieNft1,
+              large: ImageAxieNft1,
+              original: ImageAxieNft1,
+              small: ImageAxieNft1,
             },
           },
         },
-        {
-          amount: '1',
-          chainId: '1',
-          id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f109256',
-          tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
-          tokenId: 'Devil Jack',
-          tokenType: 'ERC721',
-          tokenPrice: 0.06,
-          token: {
-            name: 'Axie Infinity',
-            symbol: 'KODA',
+      },
+      {
+        amount: '1',
+        chainId: '1',
+        id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f109256',
+        tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
+        tokenId: 'Devil Jack',
+        tokenType: 'ERC721',
+        tokenPrice: 0.06,
+        token: {
+          name: 'Axie Infinity',
+          symbol: 'KODA',
+        },
+        tokenNfts: {
+          tokenId: '109256',
+          metaData: {
+            name: 'RESIST',
           },
-          tokenNfts: {
-            tokenId: '109256',
-            metaData: {
-              name: 'RESIST',
-            },
-            contentValue: {
-              image: {
-                medium: ImageAxieNft2,
-                extraSmall: ImageAxieNft2,
-                large: ImageAxieNft2,
-                original: ImageAxieNft2,
-                small: ImageAxieNft2,
-              },
+          contentValue: {
+            image: {
+              medium: ImageAxieNft2,
+              extraSmall: ImageAxieNft2,
+              large: ImageAxieNft2,
+              original: ImageAxieNft2,
+              small: ImageAxieNft2,
             },
           },
         },
-        {
-          amount: '1',
-          chainId: '1',
-          id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f27905',
-          tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
-          tokenId: 'Handsome Bob',
-          tokenType: 'ERC721',
-          tokenPrice: 0.07,
-          token: {
-            name: 'Axie Infinity',
-            symbol: 'KODA',
+      },
+      {
+        amount: '1',
+        chainId: '1',
+        id: '10xfbeef911dc5821886e1dda71586d90ed28174b7d0xb4496906d6ea2685e7a46a14baefae9fe3bf0d2f27905',
+        tokenAddress: '0xfbeef911dc5821886e1dda71586d90ed28174b7d',
+        tokenId: 'Handsome Bob',
+        tokenType: 'ERC721',
+        tokenPrice: 0.07,
+        token: {
+          name: 'Axie Infinity',
+          symbol: 'KODA',
+        },
+        tokenNfts: {
+          tokenId: '27905',
+          metaData: {
+            name: 'Disintegration',
           },
-          tokenNfts: {
-            tokenId: '27905',
-            metaData: {
-              name: 'Disintegration',
-            },
-            contentValue: {
-              image: {
-                medium: ImageAxieNft3,
-                extraSmall: ImageAxieNft3,
-                large: ImageAxieNft3,
-                original: ImageAxieNft3,
-                small: ImageAxieNft3,
-              },
+          contentValue: {
+            image: {
+              medium: ImageAxieNft3,
+              extraSmall: ImageAxieNft3,
+              large: ImageAxieNft3,
+              original: ImageAxieNft3,
+              small: ImageAxieNft3,
             },
           },
         },
-      ],
-    },
-    poap: {
-      data: [
-        {
-          amount: '1',
-          tokenAddress: '0x22c1f6050e56d2876009903609a2cc3fef83b415',
-          tokenId: '623',
-          tokenType: 'ERC721',
-          token: {
-            name: 'POAP',
-            symbol: 'EthTokyo Participation',
-          },
-          tokenNfts: {
-            metaData: {
-              name: 'EthTokyo Participation',
-            },
-            tokenURI: 'https://api.poap.tech/metadata/2514/308718',
-            tokenImage: IconEthTokyo,
-          },
+      },
+    ],
+  },
+  poap: {
+    data: [
+      {
+        amount: '1',
+        tokenAddress: '0x22c1f6050e56d2876009903609a2cc3fef83b415',
+        tokenId: '623',
+        tokenType: 'ERC721',
+        token: {
+          name: 'POAP',
+          symbol: 'EthTokyo Participation',
         },
-      ],
-    },
+        tokenNfts: {
+          metaData: {
+            name: 'EthTokyo Participation',
+          },
+          tokenURI: 'https://api.poap.tech/metadata/2514/308718',
+          tokenImage: IconEthTokyo,
+        },
+      },
+    ],
   },
 };
 

@@ -115,16 +115,14 @@ export interface AccountInGameInfo {
 }
 
 export interface AccountTokenAll {
-  data: {
-    erc20: {
-      data: AccountToken[];
-    };
-    erc721: {
-      data: AccountNft[];
-    };
-    poap: {
-      data: AccountSbt[];
-    };
+  erc20: {
+    data: AccountToken[];
+  };
+  erc721: {
+    data: AccountNft[];
+  };
+  poap: {
+    data: AccountSbt[];
   };
 }
 

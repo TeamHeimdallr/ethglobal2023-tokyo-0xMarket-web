@@ -56,10 +56,11 @@ const DetailPage = () => {
     address === '0x1884e327984E12b8ce525D2AC3B7aa08271c83f4'
       ? '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
       : address;
+
   const { data: tokenData } = useAccountTokensQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress && ethers.utils.isAddress(tokenQueryAddress),
   });
 
   const { data: lockupTokens } = useAccountLockupTokensQuery(address, {
@@ -95,9 +96,9 @@ const DetailPage = () => {
     enabled: false,
   });
 
-  const tokens = tokenData?.data?.data?.erc20?.data;
-  const nfts = tokenData?.data?.data?.erc721?.data;
-  const sbts = tokenData?.data?.data?.poap?.data;
+  const tokens = tokenData?.erc20?.data;
+  const nfts = tokenData?.erc721?.data;
+  const sbts = tokenData?.poap?.data;
 
   const firstTx = firstTxData?.result?.[0];
   const allTx = allTxData?.result;
@@ -109,6 +110,8 @@ const DetailPage = () => {
   const histories = parseTxHistory({ firstTx, allTx, tokenTx, nftTx });
 
   const verified = account?.verified?.filter(v => !!v.text);
+
+  console.log(tokenData);
 
   return (
     <Wrapper>

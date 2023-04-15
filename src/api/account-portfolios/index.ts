@@ -20,9 +20,6 @@ import { tokenGraphql } from '../graphql/token';
 interface AccountInGameInfosResponse {
   data: AccountInGameInfo[];
 }
-interface AccountTokensResponse {
-  data: AccountTokenAll;
-}
 
 interface AccountLockupTokensResponse {
   data: AccountLockupToken[];
@@ -59,9 +56,9 @@ export const useAccountLockupTokensQuery = (
 
 export const useAccountTokensQuery = (
   account: string,
-  options?: UseQueryOptions<AccountTokensResponse>
+  options?: UseQueryOptions<AccountTokenAll>
 ) =>
-  useQuery<AccountTokensResponse>(
+  useQuery<AccountTokenAll>(
     ['account-portfolio', 'tokens', account],
     async () => request(AIRSTACK_API_URL, tokenGraphql, { address: account }),
     options

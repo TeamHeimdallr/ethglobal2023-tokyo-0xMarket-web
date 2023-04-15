@@ -19,16 +19,14 @@ export const accountEthBalance: AccountEthBalance = {
   value: '103510000000000000000',
 };
 export const accountTokens: AccountTokenAll = {
-  data: {
-    erc20: {
-      data: [],
-    },
-    erc721: {
-      data: [],
-    },
-    poap: {
-      data: [],
-    },
+  erc20: {
+    data: [],
+  },
+  erc721: {
+    data: [],
+  },
+  poap: {
+    data: [],
   },
 };
 

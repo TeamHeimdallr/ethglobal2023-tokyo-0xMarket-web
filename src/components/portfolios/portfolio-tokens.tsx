@@ -5,7 +5,7 @@ import iconToken from '~/assets/icons/icon-coin.png';
 import iconEth from '~/assets/icons/icon-eth.png';
 import { CardToken } from '~/components/cards-token';
 
-import { parseNumberCommaSeperator, parseNumberToString } from '~/utils/number';
+import { parseNumberCommaSeperator } from '~/utils/number';
 
 import { AccountEthBalance, AccountToken } from '~/types';
 
@@ -61,7 +61,7 @@ export const PortfolioTokens = ({ ethData, data }: Props) => {
             if (!token.id) return;
 
             const tokenSymbol = token.token.symbol;
-            const tokenAmount = parseNumberToString(token.formattedAmount);
+            const tokenAmount = token.formattedAmount.toFixed(4);
             const tokenPrice =
               Number(price.find(p => p.symbol === tokenSymbol)?.lastPriceUSD || 0) || 0;
             const tokenImage = tokenImages[tokenSymbol] || iconToken;

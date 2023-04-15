@@ -45,13 +45,18 @@ export const AccountInfo = () => {
     address: address as `0x{string}`,
     enabled: !!address && ethers.utils.isAddress(address),
   });
-  const { data: tokenData } = useAccountTokensQuery(address ?? '', {
+
+  const tokenQueryAddress =
+    address === '0x1884e327984E12b8ce525D2AC3B7aa08271c83f4'
+      ? '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+      : address;
+  const { data: tokenData } = useAccountTokensQuery(tokenQueryAddress ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!address && ethers.utils.isAddress(address),
+    enabled: !!tokenQueryAddress && ethers.utils.isAddress(tokenQueryAddress),
   });
 
-  const tokens = tokenData?.data?.data?.erc20?.data;
+  const tokens = tokenData?.erc20?.data;
 
   const ethTokenValue = ethBalance
     ? Number(price.find(p => p.symbol === ethBalance?.symbol)?.lastPriceUSD || 0) || 0

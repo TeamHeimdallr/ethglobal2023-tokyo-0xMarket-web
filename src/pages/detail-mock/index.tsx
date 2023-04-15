@@ -49,9 +49,9 @@ const DetailPageMock = ({ id }: Props) => {
   const lockupTokens = id === MOCK_USER.USER_1 ? accountLockupTokens1 : accountLockupTokens2;
   const inGameInfo = id === MOCK_USER.USER_1 ? accountInGameInfos1 : accountInGameInfos2;
 
-  const tokens = tokenData?.data?.erc20?.data;
-  const nfts = tokenData?.data?.erc721?.data;
-  const sbts = tokenData?.data?.poap?.data;
+  const tokens = tokenData?.erc20?.data;
+  const nfts = tokenData?.erc721?.data;
+  const sbts = tokenData?.poap?.data;
 
   const stakingAssets = id === MOCK_USER.USER_1 ? accountStakingAssets1 : accountStakingAssets2;
   const histories = id === MOCK_USER.USER_1 ? accountTxHistories1 : accountTxHistories2;
