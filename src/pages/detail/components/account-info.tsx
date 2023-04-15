@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { InjectedConnector } from '@wagmi/core';
 import tw from 'twin.macro';
-import { useReadLocalStorage } from 'usehooks-ts';
+import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
 import { useAccount, useConnect } from 'wagmi';
 
 import { useAllowance, useTokenApprove } from '~/api/contract/approve';
@@ -32,6 +32,8 @@ export const AccountInfo = () => {
 
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   const account = (listedAccount?.find(account => account.id === address) as Account) || undefined;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setStorage] = useLocalStorage<Account[]>(LISTED_LOCAL_KEY, listedAccount ?? []);
 
   const categoryData = CategoriesMap[account?.category ?? CATEGORIES.GENERAL];
 
@@ -61,6 +63,7 @@ export const AccountInfo = () => {
     isSuccess,
   } = useContractBuy({
     address: account?.address ?? '0x',
+    approve: approveSuccess,
   });
 
   const isLoading = useMemo(
@@ -84,7 +87,10 @@ export const AccountInfo = () => {
       return;
     }
     await buyAsync?.();
-  }, [buyAsync, connect, isConnected, isLoading]);
+
+    const removed = listedAccount?.filter(a => a.address !== account.address) ?? [];
+    setStorage(removed);
+  }, [account.address, buyAsync, connect, isConnected, isLoading, listedAccount, setStorage]);
 
   useEffect(() => {
     allowanceRefetch();

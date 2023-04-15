@@ -6,8 +6,9 @@ import { DEFAULT_CHAIN_ID, MARKET_CONTRACT_ADDRESS } from '~/constants';
 
 interface BuyParam {
   address: string;
+  approve?: boolean;
 }
-export const useContractBuy = ({ address }: BuyParam) => {
+export const useContractBuy = ({ address, approve }: BuyParam) => {
   const { config } = usePrepareContractWrite({
     address: MARKET_CONTRACT_ADDRESS,
     abi: MARKETPLACE_ABI,
@@ -15,7 +16,7 @@ export const useContractBuy = ({ address }: BuyParam) => {
     args: [address],
 
     chainId: DEFAULT_CHAIN_ID,
-    enabled: !!address && ethers.utils.isAddress(address),
+    enabled: !!address && ethers.utils.isAddress(address) && approve,
   });
   const { data, writeAsync } = useContractWrite(config);
 
