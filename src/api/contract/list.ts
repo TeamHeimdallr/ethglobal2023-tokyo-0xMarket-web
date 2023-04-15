@@ -1,7 +1,7 @@
 import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 
 import { MARKETPLACE_ABI } from '~/abi/marketplace';
-import { CHAIN_ID, DEFAULT_DECIMAL, MARKET_CONTRACT_ADDRESS } from '~/constants';
+import { DEFAULT_CHAIN_ID, DEFAULT_DECIMAL, MARKET_CONTRACT_ADDRESS } from '~/constants';
 
 interface ListParam {
   address: string;
@@ -21,7 +21,7 @@ export const useContractList = ({ address, receiver, price }: ListParam) => {
         gasLimit: 1300000, // TODO
       },
     ],
-    chainId: CHAIN_ID.ZKSCROLL,
+    chainId: DEFAULT_CHAIN_ID,
     enabled: !!address && !!receiver && !!price,
     onError(error) {
       console.log('Error', error);

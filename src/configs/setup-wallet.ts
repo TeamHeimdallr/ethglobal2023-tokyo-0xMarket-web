@@ -4,7 +4,7 @@ import { publicProvider } from 'wagmi/providers/public';
 
 import { zkscroll } from './chain';
 
-const chains = [zkscroll, goerli];
+const chains = [goerli, zkscroll];
 const { provider, webSocketProvider } = configureChains(chains, [publicProvider()]);
 
 const client = createClient({

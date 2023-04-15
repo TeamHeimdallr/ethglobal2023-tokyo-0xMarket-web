@@ -10,7 +10,7 @@ import { Logo } from '~/components/logo';
 import { Balance, CURRENCY } from '~/types';
 
 import { chains } from '~/configs/setup-wallet';
-import { CHAIN_ID } from '~/constants';
+import { DEFAULT_CHAIN_ID } from '~/constants';
 
 import { ButtonMediumPrimary } from '../buttons';
 import { DropdownProfile } from '../dropdown-profile';
@@ -21,20 +21,20 @@ export const GnbMain = () => {
 
   const { isConnected, address } = useAccount();
   const { connect } = useConnect({
-    chainId: CHAIN_ID.ZKSCROLL,
+    chainId: DEFAULT_CHAIN_ID,
     connector: new MetaMaskConnector({ chains }),
   });
   const { disconnect } = useDisconnect();
 
-  const { data: zkscrollBalance } = useBalance({
-    chainId: CHAIN_ID.ZKSCROLL,
+  const { data: ethBalance } = useBalance({
+    chainId: DEFAULT_CHAIN_ID,
     address,
   });
 
   const balances: Balance[] = [
     {
       currency: CURRENCY.ETH,
-      balance: zkscrollBalance?.formatted ?? '0',
+      balance: ethBalance?.formatted ?? '0',
     },
   ];
 

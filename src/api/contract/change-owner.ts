@@ -7,7 +7,7 @@ import {
 } from 'wagmi';
 
 import { TRADABLE_ACCOUNT_ABI } from '~/abi/tradable-account';
-import { CHAIN_ID, MARKET_CONTRACT_ADDRESS } from '~/constants';
+import { DEFAULT_CHAIN_ID, MARKET_CONTRACT_ADDRESS } from '~/constants';
 
 interface ListParam {
   address: `0x${string}`;
@@ -23,7 +23,7 @@ export const useContractDeposit = ({ address }: ListParam) => {
         gasLimit: 1300000, // TODO
       },
     ],
-    chainId: CHAIN_ID.ZKSCROLL,
+    chainId: DEFAULT_CHAIN_ID,
     enabled: !!address && address !== '0x',
     onError(error) {
       console.log('Error', error);

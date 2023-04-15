@@ -17,7 +17,11 @@ export const IS_MAINNET = IS_PROD;
 
 export const MARKET_CONTRACT_ADDRESS = IS_MAINNET
   ? '0x'
-  : '0xc11d1b8cD63DA35BE5461bF75c879A8410740E1C';
+  : '0xDB75955BBdB41686f4799408107d409BfCFa04Fd';
+
+export const UMA_CONTRACT_ADDRESS = IS_MAINNET
+  ? '0x'
+  : '0x6707275495aa281436219e97eB45B2a09053Ac04';
 
 export const API_URL = IS_LOCAL
   ? 'http://localhost:8080'
@@ -71,6 +75,7 @@ export const CHAIN_ID = {
   ARBITRUM: 42161,
   ZKSCROLL: 534353,
 };
+export const DEFAULT_CHAIN_ID = CHAIN_ID.GOERLI;
 
 export const DATE_FORMATTER = {
   MMM_d_yyyy: 'MMM d, yyyy',
