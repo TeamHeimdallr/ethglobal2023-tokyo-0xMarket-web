@@ -96,3 +96,5 @@ export const DATE_FORMATTER = {
 };
 
 export const DEFAULT_DECIMAL = 18;
+
+export const LISTED_LOCAL_KEY = '0xMarketAccounts';

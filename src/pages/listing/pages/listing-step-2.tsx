@@ -1,4 +1,6 @@
+import { useCallback } from 'react';
 import tw from 'twin.macro';
+import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
 
 import {
   useAccountInGameInfosQuery,
@@ -28,6 +30,10 @@ import { parseLidoStakingAsset } from '~/utils/token';
 import { parseTxHistory } from '~/utils/transactions';
 import { useListingDataState } from '~/states/listing-data';
 
+import { Account, CATEGORIES } from '~/types';
+
+import { LISTED_LOCAL_KEY } from '~/constants';
+
 import { BackButton } from '../components/back-button';
 import { ListingInputs } from '../components/lising-inputs';
 import { ListedAccountAbstract } from '../components/listed-account-abstract';
@@ -36,6 +42,9 @@ import { ListingUma } from '../components/listing-uma';
 export const ListingStep2 = () => {
   const { data } = useListingDataState();
   const { address } = data;
+  const currentListedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, saveStorage] = useLocalStorage<Account[]>(LISTED_LOCAL_KEY, currentListedAccount || []);
 
   const { data: inGameInfo } = useAccountInGameInfosQuery(address ?? '', {
     cacheTime: Infinity,
@@ -106,8 +115,26 @@ export const ListingStep2 = () => {
     address: (address as `0x${string}`) ?? '0x',
   });
 
+  const handleSaveInfo = useCallback(() => {
+    const typedData = {
+      id: data.id || '',
+      address: data.address || '',
+      receivingAddress: data.receivingAddress || '',
+      title: data.title || '',
+      description: data.description || '',
+      category: data.category || CATEGORIES.GENERAL,
+      price: data.price || 0,
+      tokenValue: data.tokenValue || 0,
+      verified: data.verified || [],
+      hidded: data.hidden || false,
+    };
+
+    saveStorage([...(currentListedAccount || []), typedData]);
+  }, [currentListedAccount, data, saveStorage]);
+
   const handleListing = async () => {
     await listAsync?.();
+    handleSaveInfo();
   };
 
   const handleDepositing = async () => {

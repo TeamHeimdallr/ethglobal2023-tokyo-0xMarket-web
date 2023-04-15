@@ -64,9 +64,10 @@ export interface Account {
   hidden?: boolean;
 }
 
-export type AccountDiscover = Pick<Account, 'id' | 'title' | 'category' | 'price' | 'tokenValue'>;
-
-export type ListingAccount = Partial<Omit<Account, 'id'>>;
+export type AccountDiscover = Pick<
+  Account,
+  'id' | 'address' | 'title' | 'category' | 'price' | 'tokenValue'
+>;
 
 export interface AccountEthBalance {
   decimals: string;
@@ -86,7 +87,7 @@ interface GameItem {
 
 export interface AccountUmaVerified {
   id: string;
-  status: UMA_VERIFY_STATUS;
+  status: string;
   text: string;
 
   date?: Date;

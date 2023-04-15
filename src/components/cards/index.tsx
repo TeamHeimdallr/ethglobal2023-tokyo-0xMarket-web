@@ -18,7 +18,7 @@ interface Props extends HTMLMotionProps<'div'> {
   tokenValue?: number;
 }
 
-export const Card = ({ category, title, price, tokenValue, ...rest }: Props) => {
+export const Card = ({ category, title, price, tokenValue, onClick }: Props) => {
   const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
 
   return (
@@ -27,7 +27,7 @@ export const Card = ({ category, title, price, tokenValue, ...rest }: Props) => 
         y: -12,
         transition: { ease: [0.4, 0, 0.2, 1], duration: 0.2 },
       }}
-      {...rest}
+      onClick={onClick}
     >
       <TopWrapper>
         <Image src={categoryData.image} />

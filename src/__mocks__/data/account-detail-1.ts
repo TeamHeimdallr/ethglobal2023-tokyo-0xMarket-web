@@ -2,8 +2,10 @@ import { sub } from 'date-fns';
 
 import { Account, CATEGORIES, UMA_VERIFY_STATUS } from '~/types';
 
+import { MOCK_USER } from '~/constants';
+
 export const accountDetail: Account = {
-  id: '0x48DBa2D1b6C89Bf8234C2B63554369aDC7Ae32581',
+  id: MOCK_USER.USER_1,
 
   address: '0x48DBa2D1b6C89Bf8234C2B63554369aDC7Ae3258',
   receivingAddress: '0x9DCD43faB2CF8104cb2ff53CF4C051842C125EE0',

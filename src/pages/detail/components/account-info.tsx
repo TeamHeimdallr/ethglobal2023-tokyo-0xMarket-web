@@ -4,9 +4,9 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { InjectedConnector } from '@wagmi/core';
 import tw from 'twin.macro';
+import { useReadLocalStorage } from 'usehooks-ts';
 import { useAccount, useConnect } from 'wagmi';
 
-import { useAccountQuery } from '~/api/accounts';
 import { useAllowance, useTokenApprove } from '~/api/contract/approve';
 import { useContractBuy } from '~/api/contract/buy';
 
@@ -15,9 +15,9 @@ import { Category } from '~/components/category';
 
 import { parseNumberCommaSeperator } from '~/utils/number';
 
-import { CATEGORIES } from '~/types';
+import { Account, CATEGORIES } from '~/types';
 
-import { CategoriesMap, DEFAULT_DECIMAL } from '~/constants';
+import { CategoriesMap, DEFAULT_DECIMAL, LISTED_LOCAL_KEY } from '~/constants';
 
 import { BackButton } from './back-button';
 
@@ -30,13 +30,10 @@ export const AccountInfo = () => {
     connector: new InjectedConnector(),
   });
 
-  const { data } = useAccountQuery(id ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!id,
-  });
+  const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
+  const account = (listedAccount?.find(account => account.id === id) as Account) || undefined;
 
-  const account = data?.data;
+  // const account = data?.data;
   const categoryData = CategoriesMap[account?.category ?? CATEGORIES.GENERAL];
 
   const {

@@ -5,6 +5,9 @@ import { useAccountDiscoversQuery } from '~/api/accounts';
 
 import { Card } from '~/components/cards';
 
+import { accountDetail as accountDetail1 } from '~/__mocks__/data/account-detail-1';
+import { accountDetail as accountDetail2 } from '~/__mocks__/data/account-detail-2';
+
 export const AccountDiscovers = () => {
   const navigate = useNavigate();
 
@@ -20,6 +23,8 @@ export const AccountDiscovers = () => {
         <Title>Discover Accounts</Title>
       </TitleWrapper>
       <CardWrapper>
+        <Card onClick={() => navigate(`/${accountDetail1.id}`)} {...accountDetail1} />
+        <Card onClick={() => navigate(`/${accountDetail2.id}`)} {...accountDetail2} />
         {accountDiscovers?.map(accountDiscover => (
           <Card
             key={accountDiscover.id}

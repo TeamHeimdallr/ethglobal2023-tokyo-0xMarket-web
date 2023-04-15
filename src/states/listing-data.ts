@@ -3,11 +3,11 @@ import { immer } from 'zustand/middleware/immer';
 
 import { logger } from '~/states/middleware/logger';
 
-import { ListingAccount } from '~/types';
+import { Account } from '~/types';
 
 export interface ListingDataState {
-  data: ListingAccount;
-  setData: (data: ListingAccount) => void;
+  data: Partial<Account>;
+  setData: (data: Partial<Account>) => void;
   resetData: () => void;
 }
 
@@ -16,7 +16,7 @@ export const useListingDataState = create<ListingDataState>()(
     logger(set => ({
       name: 'listing-data-store',
       data: {},
-      setData: (data: ListingAccount) => set(state => ({ data: { ...state.data, ...data } })),
+      setData: (data: Partial<Account>) => set(state => ({ data: { ...state.data, ...data } })),
       resetData: () => set({ data: {} }),
     }))
   )
