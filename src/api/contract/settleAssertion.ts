@@ -10,7 +10,7 @@ export const useContractSettleAssertion = ({ assertionId }: SettleAssertionParam
   const { config } = usePrepareContractWrite({
     address: OOV3_CONTRACT_ADDRESS,
     abi: OOV3_ABI,
-    functionName: 'asssettleAssertion',
+    functionName: 'settleAssertion',
     args: [
       assertionId,
       //   {
