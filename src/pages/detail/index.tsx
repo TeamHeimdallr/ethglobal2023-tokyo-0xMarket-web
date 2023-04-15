@@ -42,7 +42,6 @@ const DetailPage = () => {
   const { address: addressParams } = params;
 
   const address = addressParams ?? '';
-  const enabled = !!address && ethers.utils.isAddress(address);
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   const account = (listedAccount?.find(account => account.id === address) as Account) || undefined;
 
@@ -66,25 +65,25 @@ const DetailPage = () => {
     enabled: false,
   });
 
-  const { data: firstTxData } = useFirstTxQuery(address, {
+  const { data: firstTxData } = useFirstTxQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress,
   });
-  const { data: allTxData } = useAllTxQuery(address, {
+  const { data: allTxData } = useAllTxQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress,
   });
-  const { data: tokenTxData } = useTokenTxQuery(address, {
+  const { data: tokenTxData } = useTokenTxQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress,
   });
-  const { data: nftTxData } = useNftTxQuery(address, {
+  const { data: nftTxData } = useNftTxQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress,
   });
 
   const { data: inGameInfo } = useAccountInGameInfosQuery(address, {

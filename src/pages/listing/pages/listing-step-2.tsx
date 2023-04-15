@@ -61,7 +61,6 @@ export const ListingStep2 = () => {
 
   const { address: addressData } = data;
   const address = addressData ?? '';
-  const enabled = !!address && ethers.utils.isAddress(address);
 
   const { data: ethBalance } = useBalance({
     chainId: DEFAULT_CHAIN_ID,
@@ -92,25 +91,25 @@ export const ListingStep2 = () => {
     enabled: false,
   });
 
-  const { data: firstTxData } = useFirstTxQuery(address, {
+  const { data: firstTxData } = useFirstTxQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress,
   });
-  const { data: allTxData } = useAllTxQuery(address, {
+  const { data: allTxData } = useAllTxQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress,
   });
-  const { data: tokenTxData } = useTokenTxQuery(address, {
+  const { data: tokenTxData } = useTokenTxQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress,
   });
-  const { data: nftTxData } = useNftTxQuery(address, {
+  const { data: nftTxData } = useNftTxQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: !!tokenQueryAddress,
   });
 
   const tokens = tokenData?.erc20?.data;
