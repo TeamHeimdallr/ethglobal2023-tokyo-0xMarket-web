@@ -5,6 +5,7 @@
   "scripts": {
     "start": "pm2-dev ./pm2-mock.config.js",
     "start:local": "pm2-dev ./pm2-local.config.js",
+    "start:dev": "pm2-dev ./pm2-dev.config.js",
     "start:storybook": "pm2-dev ./pm2-storybook.config.js",
     "build:dev": "dotenv -e .env.dev -- craco build",
     "build:css": "postcss ./src/styles/base/index.css --output ./src/styles/build/index.css",

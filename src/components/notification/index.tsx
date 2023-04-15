@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useQueryClient } from '@tanstack/react-query';
 import tw from 'twin.macro';
 import { useOnClickOutside } from 'usehooks-ts';
 
-import { useNotificationsQuery, useReadNotificationsMutate } from '~/api/notifications';
+import { useNotificationsQuery } from '~/api/notifications';
 
 import { COLOR } from '~/assets/colors';
 import { ButtonIconLarge } from '~/components/buttons';
@@ -14,31 +13,20 @@ import { IconNew, IconNoti } from '~/components/icons';
 import { elapsedTime } from '~/utils/date';
 
 export const Notification = () => {
-  const queryClient = useQueryClient();
-
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, open] = useState(false);
 
   const { data } = useNotificationsQuery({
     staleTime: 60 * 1000,
     cacheTime: 60 * 1000,
+    enabled: false,
   });
-  const { mutateAsync } = useReadNotificationsMutate();
 
   const notifications = data?.data;
   const hasNotification = notifications && notifications?.length > 0;
   const hasNewNotification = notifications?.find(n => n.isNew) ?? false;
 
   useOnClickOutside(ref, () => open(false));
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    setTimeout(async () => {
-      await mutateAsync(null);
-      queryClient.invalidateQueries(['notifications', 'get-notifications']);
-    }, 1000);
-  }, [isOpen, mutateAsync, queryClient]);
 
   return (
     <Wrapper>

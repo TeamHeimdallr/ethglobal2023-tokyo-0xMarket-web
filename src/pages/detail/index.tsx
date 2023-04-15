@@ -61,7 +61,7 @@ const DetailPage = () => {
   const { data: lockupTokens } = useAccountLockupTokensQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: false,
   });
 
   const { data: firstTxData } = useFirstTxQuery(address, {
@@ -84,10 +84,11 @@ const DetailPage = () => {
     staleTime: Infinity,
     enabled,
   });
+
   const { data: inGameInfo } = useAccountInGameInfosQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: false,
   });
 
   const tokens = tokenData?.data?.data?.erc20?.data;

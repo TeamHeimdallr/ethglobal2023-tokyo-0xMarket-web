@@ -31,13 +31,13 @@ export const ListedAccountAbstract = () => {
   const { data: lockupTokens } = useAccountLockupTokensQuery(address ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled: !!address,
+    enabled: false,
   });
 
-  const tokens = tokenData?.data.data.erc20.data;
+  const tokens = tokenData?.data?.data?.erc20?.data;
   // const nfts = tokenData?.data.data.erc721.data;
 
-  const lido = tokens?.find(t => t.token.symbol === 'stETH');
+  const lido = tokens?.find(t => t?.token?.symbol === 'stETH');
   const stakingAssets = useMemo(() => (lido ? [parseLidoStakingAsset(lido)] : []), [lido]);
 
   const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];

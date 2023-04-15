@@ -14,11 +14,12 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const CardToken = ({ image, token, tokenValue, ...rest }: Props) => {
+  const parsedTokenValue = Number(Number(token.value).toFixed(4));
   return (
     <Wrapper {...rest}>
       <Image src={image} />
       <TokenContent>
-        <TokenAmount>{`${token.value} ${token.name}`}</TokenAmount>
+        <TokenAmount>{`${parsedTokenValue} ${token.name}`}</TokenAmount>
         <TokenValue>{`${parseNumberCommaSeperator({
           number: tokenValue,
           prefix: '$',

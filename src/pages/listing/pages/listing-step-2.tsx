@@ -76,8 +76,9 @@ export const ListingStep2 = () => {
   const { data: inGameInfo } = useAccountInGameInfosQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: false,
   });
+
   const { data: tokenData } = useAccountTokensQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -87,7 +88,7 @@ export const ListingStep2 = () => {
   const { data: lockupTokens } = useAccountLockupTokensQuery(address, {
     cacheTime: Infinity,
     staleTime: Infinity,
-    enabled,
+    enabled: false,
   });
 
   const { data: firstTxData } = useFirstTxQuery(address, {
@@ -111,9 +112,9 @@ export const ListingStep2 = () => {
     enabled,
   });
 
-  const tokens = tokenData?.data.data.erc20.data;
-  const nfts = tokenData?.data.data.erc721.data;
-  const sbts = tokenData?.data.data.poap.data;
+  const tokens = tokenData?.data?.data?.erc20?.data;
+  const nfts = tokenData?.data?.data?.erc721?.data;
+  const sbts = tokenData?.data?.data?.poap?.data;
 
   const firstTx = firstTxData?.result?.[0];
   const allTx = allTxData?.result;
