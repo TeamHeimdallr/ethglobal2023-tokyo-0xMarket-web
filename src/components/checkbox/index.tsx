@@ -24,21 +24,21 @@ const Wrapper = styled.div<WrapperProps>(({ selected, error }) => [
   // normal
   !(selected || error)
     ? tw`
-      flex-center w-24 h-24 rounded-4 clickable bg-grayscale-6 hover:bg-grayscale-5
+      flex-center w-20 h-20 rounded-4 clickable bg-grayscale-6 hover:bg-grayscale-5
     `
     : ``,
 
   // selected
   selected
     ? tw`
-      flex-center w-24 h-24 rounded-4 clickable bg-blue hover:bg-light-blue
+      flex-center w-20 h-20 rounded-4 clickable bg-blue hover:bg-light-blue
     `
     : ``,
 
   // error
   error
     ? tw`
-      flex-center w-24 h-24 rounded-4 clickable bg-grayscale-6 hover:bg-grayscale-5
+      flex-center w-20 h-20 rounded-4 clickable bg-grayscale-6 hover:bg-grayscale-5
       border-1 border-solid border-red
     `
     : ``,

@@ -56,7 +56,7 @@ export interface Account {
   tokenValue: number;
 
   verified?: boolean;
-  hidded?: boolean;
+  hidden?: boolean;
 }
 
 export type AccountDiscover = Pick<

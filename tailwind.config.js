@@ -15,7 +15,7 @@ const spacing = [
   // 600~700
   ...[700, 780],
   // 800~
-  ...[960, 1440],
+  ...[886, 960, 1440],
 ];
 
 const convertSpacing = spacing =>
