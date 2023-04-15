@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-import { GnbMain } from '~/components/gnb';
+import { GnbListing, GnbMain } from '~/components/gnb';
 
 import mockAPIs from '~/__mocks__/api';
 
@@ -12,6 +12,7 @@ export default {
 export const _Gnb = () => (
   <Wrapper>
     <GnbMain />
+    <GnbListing />
   </Wrapper>
 );
 
