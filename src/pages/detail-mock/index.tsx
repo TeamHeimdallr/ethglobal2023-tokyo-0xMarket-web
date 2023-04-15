@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import { Footer } from '~/components/footer';
