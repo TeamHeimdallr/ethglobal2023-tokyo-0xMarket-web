@@ -85,6 +85,7 @@ export const CategoriesMap: CategoryMap = {
 };
 
 export const CHAIN_ID = {
+  ETH: 1,
   GOERLI: 5,
   POLYGON: 137,
   ARBITRUM: 42161,

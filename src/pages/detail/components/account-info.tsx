@@ -20,7 +20,7 @@ import { parseNumberCommaSeperator } from '~/utils/number';
 import { Account, CATEGORIES } from '~/types';
 
 import { price } from '~/__mocks__/data/token-price';
-import { CategoriesMap, DEFAULT_CHAIN_ID, DEFAULT_DECIMAL, LISTED_LOCAL_KEY } from '~/constants';
+import { CategoriesMap, CHAIN_ID, DEFAULT_DECIMAL, LISTED_LOCAL_KEY } from '~/constants';
 
 import { BackButton } from './back-button';
 
@@ -40,13 +40,13 @@ export const AccountInfo = () => {
 
   const categoryData = CategoriesMap[account?.category ?? CATEGORIES.GENERAL];
 
+  const tokenQueryAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
   const { data: ethBalance } = useBalance({
-    chainId: DEFAULT_CHAIN_ID,
-    address: address as `0x{string}`,
-    enabled: !!address && ethers.utils.isAddress(address),
+    chainId: CHAIN_ID.ETH,
+    address: tokenQueryAddress,
+    enabled: !!tokenQueryAddress,
   });
 
-  const tokenQueryAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
   const { data: tokenData } = useAccountTokensQuery(tokenQueryAddress ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,

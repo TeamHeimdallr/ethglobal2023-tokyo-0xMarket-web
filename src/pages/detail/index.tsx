@@ -31,7 +31,7 @@ import { parseTxHistory } from '~/utils/transactions';
 
 import { Account, AccountEthBalance } from '~/types';
 
-import { DEFAULT_CHAIN_ID, LISTED_LOCAL_KEY } from '~/constants';
+import { CHAIN_ID, LISTED_LOCAL_KEY } from '~/constants';
 
 import { AccountInfo } from './components/account-info';
 import { UmaVerified } from './components/uma-verified';
@@ -45,13 +45,12 @@ const DetailPage = () => {
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   const account = (listedAccount?.find(account => account.id === address) as Account) || undefined;
 
-  const { data: ethBalance } = useBalance({
-    chainId: DEFAULT_CHAIN_ID,
-    address: account?.address as `0x{string}`,
-    enabled: !!account?.address && ethers.utils.isAddress(account?.address),
-  });
-
   const tokenQueryAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
+  const { data: ethBalance } = useBalance({
+    chainId: CHAIN_ID.ETH,
+    address: tokenQueryAddress,
+    enabled: !!tokenQueryAddress,
+  });
 
   const { data: tokenData } = useAccountTokensQuery(tokenQueryAddress, {
     cacheTime: Infinity,
@@ -106,8 +105,6 @@ const DetailPage = () => {
   const histories = parseTxHistory({ firstTx, allTx, tokenTx, nftTx });
 
   const verified = account?.verified?.filter(v => !!v.text);
-
-  console.log(tokenData);
 
   return (
     <Wrapper>

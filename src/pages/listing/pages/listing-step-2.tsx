@@ -45,7 +45,7 @@ import {
 } from '~/types';
 
 import { price } from '~/__mocks__/data/token-price';
-import { DEFAULT_CHAIN_ID, LISTED_LOCAL_KEY } from '~/constants';
+import { CHAIN_ID, LISTED_LOCAL_KEY } from '~/constants';
 
 import { BackButton } from '../components/back-button';
 import { ListingInputs } from '../components/lising-inputs';
@@ -62,10 +62,11 @@ export const ListingStep2 = () => {
   const { address: addressData } = data;
   const address = addressData ?? '';
 
+  const tokenQueryAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
   const { data: ethBalance } = useBalance({
-    chainId: DEFAULT_CHAIN_ID,
-    address: address as `0x{string}`,
-    enabled: !!address && ethers.utils.isAddress(address),
+    chainId: CHAIN_ID.ETH,
+    address: tokenQueryAddress,
+    enabled: !!tokenQueryAddress,
   });
 
   const currentListedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
@@ -78,7 +79,6 @@ export const ListingStep2 = () => {
     enabled: false,
   });
 
-  const tokenQueryAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
   const { data: tokenData } = useAccountTokensQuery(tokenQueryAddress, {
     cacheTime: Infinity,
     staleTime: Infinity,

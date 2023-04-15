@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ethers } from 'ethers';
 import tw from 'twin.macro';
 import { useBalance } from 'wagmi';
 
@@ -18,19 +17,19 @@ import { useListingDataState } from '~/states/listing-data';
 import { CATEGORIES } from '~/types';
 
 import { price } from '~/__mocks__/data/token-price';
-import { CategoriesMap, DEFAULT_CHAIN_ID } from '~/constants';
+import { CategoriesMap, CHAIN_ID } from '~/constants';
 
 export const ListedAccountAbstract = () => {
   const { data, setData } = useListingDataState();
   const { address, category } = data;
 
+  const tokenQueryAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
   const { data: ethBalance } = useBalance({
-    chainId: DEFAULT_CHAIN_ID,
-    address: address as `0x{string}`,
-    enabled: !!address && ethers.utils.isAddress(address),
+    chainId: CHAIN_ID.ETH,
+    address: tokenQueryAddress,
+    enabled: !!tokenQueryAddress,
   });
 
-  const tokenQueryAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
   const { data: tokenData } = useAccountTokensQuery(tokenQueryAddress ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
