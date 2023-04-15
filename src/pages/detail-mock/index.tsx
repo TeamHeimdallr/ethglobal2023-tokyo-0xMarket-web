@@ -1,4 +1,5 @@
 import tw from 'twin.macro';
+import { useReadLocalStorage } from 'usehooks-ts';
 
 import { Footer } from '~/components/footer';
 import { GnbMain } from '~/components/gnb';
@@ -11,6 +12,8 @@ import {
   PortfolioTokens,
   PortfolioTxHistories,
 } from '~/components/portfolios';
+
+import { Account } from '~/types';
 
 import {
   accountInGameInfos as accountInGameInfos1,
@@ -26,14 +29,18 @@ import {
   accountTokens as accountTokens2,
   accountTxHistories as accountTxHistories2,
 } from '~/__mocks__/data/account-portfolios-2';
-import { MOCK_USER } from '~/constants';
+import { LISTED_LOCAL_KEY, MOCK_USER } from '~/constants';
 
 import { AccountInfo } from './components/account-info';
+import { UmaVerified } from './components/uma-verified';
 
 interface Props {
   id: string;
 }
 const DetailPageMock = ({ id }: Props) => {
+  const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
+  const account = (listedAccount?.find(account => account.id === id) as Account) || undefined;
+
   const tokenData = id === MOCK_USER.USER_1 ? accountTokens1 : accountTokens2;
   const lockupTokens = id === MOCK_USER.USER_1 ? accountLockupTokens1 : accountLockupTokens2;
   const inGameInfo = id === MOCK_USER.USER_1 ? accountInGameInfos1 : accountInGameInfos2;
@@ -45,6 +52,8 @@ const DetailPageMock = ({ id }: Props) => {
   const stakingAssets = id === MOCK_USER.USER_1 ? accountStakingAssets1 : accountStakingAssets2;
   const histories = id === MOCK_USER.USER_1 ? accountTxHistories1 : accountTxHistories2;
 
+  const verified = account?.verified;
+
   return (
     <Wrapper>
       <GnbMain />
@@ -52,6 +61,9 @@ const DetailPageMock = ({ id }: Props) => {
         <DetailWrapper>
           <AccountInfo />
         </DetailWrapper>
+        <UmaWrapper>
+          {verified && verified.length > 0 && <UmaVerified verified={verified} />}
+        </UmaWrapper>
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
@@ -87,6 +99,10 @@ const ContentWrapper = tw.div`
 
 const DetailWrapper = tw.div`
   w-886 flex flex-col flex-1 flex-shrink-0 gap-48
+`;
+
+const UmaWrapper = tw.div`
+  w-886 flex-shrink-0
 `;
 
 const Divider = tw.div`

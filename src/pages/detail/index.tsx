@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
+import { useReadLocalStorage } from 'usehooks-ts';
 
 import {
   useAccountInGameInfosQuery,
@@ -26,11 +27,19 @@ import {
 import { parseLidoStakingAsset } from '~/utils/token';
 import { parseTxHistory } from '~/utils/transactions';
 
+import { Account } from '~/types';
+
+import { LISTED_LOCAL_KEY } from '~/constants';
+
 import { AccountInfo } from './components/account-info';
+import { UmaVerified } from './components/uma-verified';
 
 const DetailPage = () => {
   const params = useParams();
   const { id } = params;
+
+  const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
+  const account = (listedAccount?.find(account => account.id === id) as Account) || undefined;
 
   const { data: tokenData } = useAccountTokensQuery(id ?? '', {
     cacheTime: Infinity,
@@ -83,6 +92,8 @@ const DetailPage = () => {
   const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];
   const histories = parseTxHistory({ firstTx, allTx, tokenTx, nftTx });
 
+  const verified = account?.verified;
+
   return (
     <Wrapper>
       <GnbMain />
@@ -90,6 +101,9 @@ const DetailPage = () => {
         <DetailWrapper>
           <AccountInfo />
         </DetailWrapper>
+        <UmaWrapper>
+          {verified && verified.length > 0 && <UmaVerified verified={verified} />}
+        </UmaWrapper>
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
@@ -125,6 +139,10 @@ const ContentWrapper = tw.div`
 
 const DetailWrapper = tw.div`
   w-886 flex flex-col flex-1 flex-shrink-0 gap-48
+`;
+
+const UmaWrapper = tw.div`
+  w-886 flex-shrink-0
 `;
 
 const Divider = tw.div`

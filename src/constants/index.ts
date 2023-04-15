@@ -93,8 +93,10 @@ export const DEFAULT_CHAIN_ID = CHAIN_ID.GOERLI;
 
 export const DATE_FORMATTER = {
   MMM_d_yyyy: 'MMM d, yyyy',
+  HHMM_AA_mm_dd: 'h:mm aa, MMM d',
 };
 
 export const DEFAULT_DECIMAL = 18;
 
 export const LISTED_LOCAL_KEY = '0xMarketAccounts';
+export const LISTED_UMA_LOCAL_KEY = '0xMarketAccountsUma';

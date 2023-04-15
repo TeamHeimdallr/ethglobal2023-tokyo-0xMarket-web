@@ -30,7 +30,7 @@ import { parseTxHistory } from '~/utils/transactions';
 import { useListingDataState } from '~/states/listing-data';
 import { useListingUmaState } from '~/states/listing-uma';
 
-import { Account, CATEGORIES } from '~/types';
+import { Account, AccountUmaVerified, CATEGORIES, UMA_VERIFY_STATUS } from '~/types';
 
 import { LISTED_LOCAL_KEY } from '~/constants';
 
@@ -118,12 +118,12 @@ export const ListingStep2 = () => {
   });
 
   const handleSaveInfo = () => {
-    const typedUmaData = umaData
+    const typedUmaData: AccountUmaVerified[] = umaData
       ? Object.keys(umaData).map(key => {
           const value = umaData[key];
           return {
             id: key.toString(),
-            status: 'PENDING',
+            status: UMA_VERIFY_STATUS.PENDING,
             text: value || '',
             date: new Date(),
           };

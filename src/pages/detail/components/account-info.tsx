@@ -33,7 +33,6 @@ export const AccountInfo = () => {
   const listedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   const account = (listedAccount?.find(account => account.id === id) as Account) || undefined;
 
-  // const account = data?.data;
   const categoryData = CategoriesMap[account?.category ?? CATEGORIES.GENERAL];
 
   const {
