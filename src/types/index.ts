@@ -41,3 +41,58 @@ export enum LOCKUP_TYPE {
   UNLOCKED = 'UNLOCKED',
   AIRDROP = 'AIRDROP',
 }
+
+export interface Account {
+  address: string;
+  receivingAddress: string;
+
+  title: string;
+  description: string;
+  category: CATEGORIES;
+
+  price: number;
+  tokenValue: number;
+
+  verified?: boolean;
+  hidded?: boolean;
+}
+
+export type AccountDiscover = Pick<
+  Account,
+  'title' | 'category' | 'price' | 'tokenValue' | 'verified'
+>;
+
+export interface AccountInGameInfo {
+  title: string;
+}
+export interface AccountNftSbt {
+  image: string;
+  token: NFT;
+  tokenValue?: Token;
+}
+export interface AccountToken {
+  image: string;
+  token: Token;
+  tokenValue: Token;
+}
+export interface AccountLockupToken {
+  image: string;
+  type: LOCKUP_TYPE;
+
+  token: Token;
+  tokenValue: Token;
+
+  totalToken?: Token;
+  date: Date;
+}
+export interface AccountStakingAsset {
+  image: string;
+  token: Token;
+  tokenValue: Token;
+  stakedAt: string;
+}
+export interface AccountTxHistory {
+  image: string;
+  title: string;
+  description: string;
+}
