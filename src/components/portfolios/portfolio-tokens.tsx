@@ -21,7 +21,8 @@ export const PortfolioTokens = ({ data }: Props) => {
     () =>
       data?.reduce((res, d) => {
         const tokenPrice =
-          Number(price.find(p => p.symbol === d.token.symbol)?.lastPriceUSD || 0) || 0;
+          Number(price.find(p => p.symbol === d.token.symbol)?.lastPriceUSD || 0) *
+            d.formattedAmount || 0;
 
         return (res += tokenPrice);
       }, 0) ?? 0,

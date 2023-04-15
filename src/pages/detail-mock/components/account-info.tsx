@@ -26,7 +26,7 @@ export const AccountInfo = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
@@ -86,8 +86,8 @@ export const AccountInfo = () => {
   }, [buyAsync, connect, isConnected, isLoading]);
 
   useEffect(() => {
-    allowanceRefetch();
-  }, [approveSuccess, allowanceRefetch]);
+    if (isConnected && address) allowanceRefetch();
+  }, [approveSuccess, allowanceRefetch, isConnected, address]);
 
   useEffect(() => {
     if (isSuccess) navigate('/');
