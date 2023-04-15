@@ -18,7 +18,7 @@ export const CategoryCard = ({ category, selected, ...rest }: Props) => {
   return (
     <Wrapper
       color={categoryData.color ?? '#1F2732'}
-      textColor={categoryData.textColor ?? '#fff'}
+      textcolor={categoryData.textColor ?? '#fff'}
       selected={selected}
       whileHover={{ y: -12, transition: { ease: [0.4, 0, 0.2, 1], duration: 0.2 } }}
       {...rest}
@@ -31,10 +31,10 @@ export const CategoryCard = ({ category, selected, ...rest }: Props) => {
 
 interface WrapperProps {
   color: string;
-  textColor: string;
+  textcolor: string;
   selected?: boolean;
 }
-const Wrapper = styled(motion.div)<WrapperProps>(({ color, textColor, selected }) => [
+const Wrapper = styled(motion.div)<WrapperProps>(({ color, textcolor, selected }) => [
   tw`
     flex-center flex-col gap-32 bg-grayscale-7 rounded-24 text-white clickable
     w-158 h-220 transition-color
@@ -42,7 +42,7 @@ const Wrapper = styled(motion.div)<WrapperProps>(({ color, textColor, selected }
   selected
     ? css`
         background-color: ${color};
-        color: ${textColor};
+        color: ${textcolor};
         transform: translateY(-12px) !important;
       `
     : css`

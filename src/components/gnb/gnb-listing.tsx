@@ -7,6 +7,7 @@ import tw from 'twin.macro';
 import { ButtonMediumDefault, ButtonMediumPrimary } from '~/components/buttons';
 import { Logo } from '~/components/logo';
 
+import { useListingDataState } from '~/states/listing-data';
 import { useListingProgressState } from '~/states/listing-progress';
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 export const GnbListing = ({ handleListing }: Props) => {
   const navigate = useNavigate();
   const { progress, setProgress, resetProgress } = useListingProgressState();
+  const { data } = useListingDataState();
 
   const nextButtonText = useMemo(() => {
     if (progress === 0) return 'Continue';
@@ -24,9 +26,9 @@ export const GnbListing = ({ handleListing }: Props) => {
   }, [progress]);
 
   const nextButtonDisabled = useMemo(() => {
-    if (progress === 0) return false; // TODO;
+    if (progress === 0) return !data.address || !data.category;
     if (progress === 1) return true; // TODO;
-  }, [progress]);
+  }, [data, progress]);
 
   const handleNextButtonClick = useCallback(async () => {
     if (progress === 0) setProgress(1);
@@ -68,8 +70,9 @@ const Wrapper = styled.div(() => [
 const LogoWrapper = tw.div`
   flex-center
 `;
+
 const ButtonWrapper = tw.div`
   flex gap-8
   sm:hidden
-  md:block
+  md:flex
 `;

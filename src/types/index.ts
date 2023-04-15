@@ -64,6 +64,8 @@ export type AccountDiscover = Pick<
   'id' | 'title' | 'category' | 'price' | 'tokenValue' | 'verified'
 >;
 
+export type ListingAccount = Partial<Omit<Account, 'id'>>;
+
 export interface AccountInGameInfo {
   title: string;
 }
