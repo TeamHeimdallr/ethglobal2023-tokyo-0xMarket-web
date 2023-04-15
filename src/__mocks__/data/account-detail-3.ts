@@ -8,16 +8,13 @@ export const accountDetail: Account = {
   address: '0x1884e327984E12b8ce525D2AC3B7aa08271c83f4',
   receivingAddress: '0x9DCD43faB2CF8104cb2ff53CF4C051842C125EE0',
 
-  title: 'Demo for airstack',
+  title: "[Demo for Airstack] The value of Vitalik's assets and histories",
   description:
-    'This account is a account to receive $TOKYO token vesting from the angel investment a year ago.\n' +
-    'We have received 100,000 $TOKYO until now and waiting for the next drop in April 28th, 2023.\n' +
-    'Remaining drops will be 50,000 $TOKYO for 6 linear month.\n' +
-    'We will submit our contract copy for verification from the UMA optimistic oracle with the transaction history for last one year on $TOKYO token',
+    "It is a demo page only for Airstack. Other page and original demo were in Goerli testnet, but this page is connected to Ethereum mainnet for proving our implementation about Airstack. We queried Vitalik's assets and histories using Airstack. Thank you Airstack! We'd love it.",
   category: CATEGORIES.TOKEN,
 
-  price: 15000,
-  tokenValue: 511.57311,
+  price: 100000000,
+  tokenValue: 1185603,
 
   verified: [],
 };
