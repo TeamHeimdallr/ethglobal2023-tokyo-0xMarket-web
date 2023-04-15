@@ -1,3 +1,5 @@
+import { ethers } from 'ethers';
+
 import iconEth from '~/assets/icons/icon-eth.png';
 
 import { AccountStakingAsset, AccountToken } from '~/types';
@@ -22,7 +24,7 @@ export const parseLidoStakingAsset = (lido: AccountToken | undefined): AccountSt
 };
 
 export const parseToken = (token: string, decimals = '18'): number => {
-  const divisor = BigInt(10) ** BigInt(decimals);
-  const result = BigInt(token) / divisor;
+  const divider = ethers.BigNumber.from(10).pow(decimals);
+  const result = ethers.BigNumber.from(token).div(divider);
   return parseFloat(result.toString());
 };
