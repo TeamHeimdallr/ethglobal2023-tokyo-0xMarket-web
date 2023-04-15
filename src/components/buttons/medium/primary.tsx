@@ -26,7 +26,7 @@ export const ButtonMediumPrimary = ({ text, loading, ...rest }: Props) => {
     return () => {
       lottie.destroy();
     };
-  }, []);
+  }, [loading]);
 
   return (
     <Wrapper isLoading={loading} {...rest}>

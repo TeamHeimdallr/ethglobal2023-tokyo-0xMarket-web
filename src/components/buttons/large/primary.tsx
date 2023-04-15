@@ -26,7 +26,7 @@ export const ButtonLargePrimary = ({ text, loading, ...rest }: Props) => {
     return () => {
       lottie.destroy();
     };
-  }, []);
+  }, [loading]);
 
   return (
     <Wrapper isLoading={loading} {...rest}>
