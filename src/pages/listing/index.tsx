@@ -21,7 +21,7 @@ const ListingPage = () => {
   return (
     <Wrapper>
       {progress === 0 && <ListingStep1 />}
-      {progress === 1 && <ListingStep2 />}
+      {(progress === 1 || progress === 2) && <ListingStep2 />}
     </Wrapper>
   );
 };
