@@ -15,7 +15,7 @@ export const Category = ({ category, ...rest }: Props) => {
   const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
 
   return (
-    <Wrapper color={categoryData.color} {...rest}>
+    <Wrapper color={categoryData.color} textColor={categoryData.textColor} {...rest}>
       {categoryData.text}
     </Wrapper>
   );
@@ -23,13 +23,20 @@ export const Category = ({ category, ...rest }: Props) => {
 
 interface WrapperProps {
   color?: string;
+  textColor?: string;
 }
-const Wrapper = styled.div<WrapperProps>(({ color }) => [
+const Wrapper = styled.div<WrapperProps>(({ color, textColor }) => [
   tw`
     flex-center px-12 py-2 rounded-12 font-sb-12 text-white
   `,
-  color &&
-    css`
-      background-color: ${color};
-    `,
+  color
+    ? css`
+        background-color: ${color};
+      `
+    : ``,
+  textColor
+    ? css`
+        color: ${textColor};
+      `
+    : ``,
 ]);

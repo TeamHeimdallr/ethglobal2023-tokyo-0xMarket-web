@@ -1,9 +1,8 @@
-import { bsc, bscTestnet } from '@wagmi/chains';
-import { configureChains, createClient, goerli, mainnet } from 'wagmi';
+import { configureChains, createClient, goerli } from 'wagmi';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { publicProvider } from 'wagmi/providers/public';
 
-const chains = [bscTestnet, bsc, goerli, mainnet];
+const chains = [goerli];
 const { provider, webSocketProvider } = configureChains(chains, [publicProvider()]);
 
 const client = createClient({
