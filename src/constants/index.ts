@@ -15,7 +15,9 @@ export const IS_LOCAL = process.env.REACT_APP_START_ENV === 'local';
 
 export const IS_MAINNET = IS_PROD;
 
-export const MARKET_CONTRACT_ADDRESS = IS_MAINNET ? '0x' : '0x';
+export const MARKET_CONTRACT_ADDRESS = IS_MAINNET
+  ? '0x'
+  : '0xc11d1b8cD63DA35BE5461bF75c879A8410740E1C';
 
 export const API_URL = IS_LOCAL
   ? 'http://localhost:8080'
@@ -73,3 +75,5 @@ export const CHAIN_ID = {
 export const DATE_FORMATTER = {
   MMM_d_yyyy: 'MMM d, yyyy',
 };
+
+export const DEFAULT_DECIMAL = 18;

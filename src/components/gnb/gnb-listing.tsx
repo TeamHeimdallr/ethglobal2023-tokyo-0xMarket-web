@@ -1,8 +1,10 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
+
+import { useContractOwnerQuery } from '~/api/contract/change-owner';
 
 import { ButtonMediumDefault, ButtonMediumPrimary } from '~/components/buttons';
 import { Logo } from '~/components/logo';
@@ -10,25 +12,42 @@ import { Logo } from '~/components/logo';
 import { useListingDataState } from '~/states/listing-data';
 import { useListingProgressState } from '~/states/listing-progress';
 
+import { MARKET_CONTRACT_ADDRESS } from '~/constants';
+
 interface Props {
   // TODO return listed data
   handleListing?: () => Promise<void>;
+  handleDepositing?: () => Promise<void>;
+  isLoading?: boolean;
+  isDepositSuccess?: boolean;
+  isListSuccess?: boolean;
 }
 
-export const GnbListing = ({ handleListing }: Props) => {
+export const GnbListing = ({
+  handleListing,
+  handleDepositing,
+  isLoading,
+  isDepositSuccess,
+  isListSuccess,
+}: Props) => {
   const navigate = useNavigate();
   const { progress, setProgress, resetProgress } = useListingProgressState();
   const { data } = useListingDataState();
 
+  const { refetch, owner } = useContractOwnerQuery({
+    address: (data?.address as `0x${string}`) ?? '0x',
+  });
+
   const nextButtonText = useMemo(() => {
     if (progress === 0) return 'Continue';
-    if (progress === 1) return 'List now';
+    if (progress === 2 || owner === MARKET_CONTRACT_ADDRESS) return 'List now';
+    if (progress === 1) return 'Deposit';
     return 'Continue';
-  }, [progress]);
+  }, [owner, progress]);
 
   const nextButtonDisabled = useMemo(() => {
     if (progress === 0) return !data.address || !data.category;
-    if (progress === 1)
+    if (progress === 1 || progress === 2 || owner === MARKET_CONTRACT_ADDRESS)
       return (
         !data.address ||
         !data.category ||
@@ -37,17 +56,30 @@ export const GnbListing = ({ handleListing }: Props) => {
         !data.description ||
         !data.price
       );
-  }, [data, progress]);
+  }, [data, progress, owner]);
 
   const handleNextButtonClick = useCallback(async () => {
     if (progress === 0) setProgress(1);
-    if (progress === 1) {
-      await handleListing?.();
+    if (progress === 2 || owner === MARKET_CONTRACT_ADDRESS) await handleListing?.();
+    else if (progress === 1) await handleDepositing?.();
+  }, [progress, setProgress, owner, handleListing, handleDepositing]);
 
+  useEffect(() => {
+    if (isListSuccess) {
       navigate('/1'); // TODO
       resetProgress();
     }
-  }, [handleListing, navigate, progress, resetProgress, setProgress]);
+  }, [isListSuccess, navigate, resetProgress]);
+
+  useEffect(() => {
+    if (isDepositSuccess) {
+      setProgress(2);
+    }
+  }, [isDepositSuccess, setProgress]);
+
+  useEffect(() => {
+    if (data.address !== '0x') refetch();
+  }, [data, data.address, refetch]);
 
   return (
     <Wrapper>
@@ -60,6 +92,7 @@ export const GnbListing = ({ handleListing }: Props) => {
           text={nextButtonText}
           disabled={nextButtonDisabled}
           onClick={handleNextButtonClick}
+          loading={isLoading}
         />
       </ButtonWrapper>
     </Wrapper>

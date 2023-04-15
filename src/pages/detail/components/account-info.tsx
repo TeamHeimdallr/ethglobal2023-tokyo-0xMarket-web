@@ -68,7 +68,7 @@ export const AccountInfo = () => {
             <Price>
               {parseNumberCommaSeperator({
                 number: account?.price ?? 0,
-                prefix: '$',
+                suffix: 'USDC',
               })}
             </Price>
             <ButtonLargePrimary text="Buy now" onClick={handleBuy} />

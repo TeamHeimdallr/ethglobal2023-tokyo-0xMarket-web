@@ -9,6 +9,8 @@ import {
   useAccountTokensQuery,
   useAccountTxHistoriesQuery,
 } from '~/api/account-portfolios';
+import { useContractDeposit } from '~/api/contract/change-owner';
+import { useContractList } from '~/api/contract/list';
 
 import { Footer } from '~/components/footer';
 import { GnbListing } from '~/components/gnb';
@@ -69,9 +71,41 @@ export const ListingStep2 = () => {
     enabled: !!address,
   });
 
+  const {
+    writeAsync: listAsync,
+    isLoading: isListLoading,
+    isSuccess: isListSuccess,
+  } = useContractList({
+    address: address ?? '',
+    receiver: data?.receivingAddress ?? '',
+    price: data?.price ?? 0,
+  });
+
+  const {
+    writeAsync: depositAsync,
+    isLoading: isDepositLoading,
+    isSuccess: isDepositSuccess,
+  } = useContractDeposit({
+    address: (address as `0x${string}`) ?? '0x',
+  });
+
+  const handleListing = async () => {
+    await listAsync?.();
+  };
+
+  const handleDepositing = async () => {
+    await depositAsync?.();
+  };
+
   return (
     <Wrapper>
-      <GnbListing />
+      <GnbListing
+        handleListing={handleListing}
+        handleDepositing={handleDepositing}
+        isLoading={isListLoading || isDepositLoading}
+        isListSuccess={isListSuccess}
+        isDepositSuccess={isDepositSuccess}
+      />
       <ContentWrapper>
         <InputWrapper>
           <BackButton />

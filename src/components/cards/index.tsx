@@ -54,7 +54,7 @@ export const Card = ({ category, title, price, tokenValue, verified, ...rest }: 
             <Verified>Verified</Verified>
           </VerifiedWrapper>
         )}
-        <Price>{parseNumberCommaSeperator({ number: price ?? 0, prefix: '$' })}</Price>
+        <Price>{parseNumberCommaSeperator({ number: price ?? 0, suffix: 'USDC' })}</Price>
       </BottomWrapper>
     </Wrapper>
   );
