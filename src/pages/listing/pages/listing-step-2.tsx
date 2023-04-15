@@ -134,8 +134,6 @@ export const ListingStep2 = () => {
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
-            <PortfolioInGameInfos data={inGameInfo?.data} />
-            <Divider />
             <PortfolioTokens data={tokens} />
             <Divider />
             <PortfolioSbts data={sbts} />
@@ -147,6 +145,8 @@ export const ListingStep2 = () => {
             <PortfolioStakingAssets data={stakingAssets} />
             <Divider />
             <PortfolioTxHistories data={histories} />
+            <Divider />
+            <PortfolioInGameInfos data={inGameInfo?.data} />
           </PortfolioInnerWrapper>
         </PortfolioWrapper>
       </ContentWrapper>
