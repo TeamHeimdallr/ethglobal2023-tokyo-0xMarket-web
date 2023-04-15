@@ -17,7 +17,7 @@ export const ListingInputs = () => {
       <InnerWrapper>
         <TextFieldNumber
           suffix="USDC"
-          placeholder="Price"
+          placeholder="Enter the price"
           onChange={value => setData({ price: value.floatValue })}
         />
         <TextField

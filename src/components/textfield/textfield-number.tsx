@@ -4,12 +4,16 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
+import { useListingDataState } from '~/states/listing-data';
+
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'> {
   suffix?: string;
   defaultValue?: number;
   onChange?: (value: NumberFormatValues) => void;
 }
 export const TextFieldNumber = ({ suffix, defaultValue, placeholder, onChange }: Props) => {
+  const { data } = useListingDataState();
+
   return (
     <Wrapper>
       <NumericFormat
@@ -18,20 +22,22 @@ export const TextFieldNumber = ({ suffix, defaultValue, placeholder, onChange }:
         onValueChange={values => {
           onChange?.(values);
         }}
-        maxLength={18}
+        maxLength={13}
         allowLeadingZeros
         thousandSeparator=","
       />
-      {suffix && <Suffix>{suffix}</Suffix>}
+      {suffix && data.price && <Suffix>{suffix}</Suffix>}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div(() => [
   tw`
-   flex w-full gap-8
+   flex gap-8 
   `,
   css`
+    width: fit-content;
+
     & > input {
       background: transparent !important;
       border: none !important;
@@ -41,7 +47,7 @@ const Wrapper = styled.div(() => [
       display: flex;
       align-items: center;
 
-      width: 100%;
+      width: 172px;
 
       color: #fff;
       font-weight: 600;
@@ -65,5 +71,5 @@ const Wrapper = styled.div(() => [
 ]);
 
 const Suffix = tw.div`
-  font-sb-24 text-grayscale-4
+  font-sb-24 text-grayscale-5
 `;
