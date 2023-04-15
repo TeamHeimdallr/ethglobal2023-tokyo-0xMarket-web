@@ -23,8 +23,8 @@ export const useMockUser = () => {
         description: 'sample description',
         category: CATEGORIES.SBT,
 
-        price: 999999,
-        tokenValue: 999999,
+        price: 999,
+        tokenValue: 999,
 
         verified: [],
         hidden: false,

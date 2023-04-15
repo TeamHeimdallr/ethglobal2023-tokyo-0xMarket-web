@@ -13,11 +13,13 @@ import { Logo } from '~/components/logo';
 import { useListingDataState } from '~/states/listing-data';
 import { useListingProgressState } from '~/states/listing-progress';
 
+import { Account } from '~/types';
+
 import { MARKET_CONTRACT_ADDRESS } from '~/constants';
 
 interface Props {
   // TODO return listed data
-  handleListing?: () => Promise<void>;
+  handleListing?: (data: Partial<Account>) => Promise<void>;
   handleDepositing?: () => Promise<void>;
   isLoading?: boolean;
   isDepositSuccess?: boolean;
@@ -61,16 +63,16 @@ export const GnbListing = ({
 
   const handleNextButtonClick = useCallback(async () => {
     if (progress === 0) setProgress(1);
-    if (progress === 2 || owner === MARKET_CONTRACT_ADDRESS) await handleListing?.();
+    if (progress === 2 || owner === MARKET_CONTRACT_ADDRESS) await handleListing?.(data);
     else if (progress === 1) await handleDepositing?.();
-  }, [progress, setProgress, owner, handleListing, handleDepositing]);
+  }, [progress, setProgress, owner, handleListing, data, handleDepositing]);
 
   useEffect(() => {
     if (isListSuccess) {
-      navigate('/1'); // TODO
+      navigate(`/${data.id}`);
       resetProgress();
     }
-  }, [isListSuccess, navigate, resetProgress]);
+  }, [data.id, isListSuccess, navigate, resetProgress]);
 
   useEffect(() => {
     if (isDepositSuccess) {

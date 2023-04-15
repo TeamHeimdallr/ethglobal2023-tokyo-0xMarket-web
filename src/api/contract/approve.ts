@@ -41,12 +41,12 @@ export const useTokenApprove = () => {
   });
   const { data, writeAsync } = useContractWrite(config);
 
-  const { isLoading, isSuccess } = useWaitForTransaction({
+  const { isLoading, isSuccess, isFetching } = useWaitForTransaction({
     hash: data?.hash,
     enabled: !!data?.hash,
   });
 
-  return { allowance, isLoading, isSuccess, data, writeAsync };
+  return { allowance, isLoading: isLoading || isFetching, isSuccess, data, writeAsync };
 };
 
 export const useAllowance = () => {

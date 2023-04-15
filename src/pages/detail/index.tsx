@@ -47,8 +47,8 @@ const DetailPage = () => {
 
   const { data: ethBalance } = useBalance({
     chainId: DEFAULT_CHAIN_ID,
-    address: account.address as `0x{string}`,
-    enabled: !!account.address && ethers.utils.isAddress(account.address),
+    address: account?.address as `0x{string}`,
+    enabled: !!account?.address && ethers.utils.isAddress(account?.address),
   });
 
   const { data: tokenData } = useAccountTokensQuery(address, {

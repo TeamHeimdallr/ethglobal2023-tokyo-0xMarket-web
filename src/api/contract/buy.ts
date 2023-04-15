@@ -27,10 +27,10 @@ export const useContractBuy = ({ address }: BuyParam) => {
   });
   const { data, writeAsync } = useContractWrite(config);
 
-  const { isLoading, isSuccess } = useWaitForTransaction({
+  const { isLoading, isSuccess, isFetching } = useWaitForTransaction({
     hash: data?.hash,
     enabled: !!data?.hash,
   });
 
-  return { isLoading, isSuccess, data, writeAsync };
+  return { isLoading: isLoading || isFetching, isSuccess, data, writeAsync };
 };

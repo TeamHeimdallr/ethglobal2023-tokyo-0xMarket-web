@@ -131,11 +131,12 @@ export const AccountInfo = () => {
                 suffix: ' USDC',
               })}
             </Price>
-            {!allowance ? (
-              <ButtonLargePrimary loading={isLoading} text="Approve" onClick={handleApprove} />
-            ) : (
-              <ButtonLargePrimary loading={isLoading} text="Buy now" onClick={handleBuy} />
-            )}
+            {account &&
+              (!allowance ? (
+                <ButtonLargePrimary loading={isLoading} text="Approve" onClick={handleApprove} />
+              ) : (
+                <ButtonLargePrimary loading={isLoading} text="Buy now" onClick={handleBuy} />
+              ))}
           </BottomRightWrapper>
         </BottomWrapper>
       </AccountWrapper>

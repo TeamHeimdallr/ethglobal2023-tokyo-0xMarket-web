@@ -8,7 +8,7 @@ interface Props {
   data?: AccountTxHistory[];
 }
 export const PortfolioTxHistories = ({ data }: Props) => {
-  const isEmpty = !data || data?.length === 0;
+  const isEmpty = !data || data?.length === 0 || data?.filter(d => !!d.id)?.length === 0;
 
   return (
     <Wrapper>

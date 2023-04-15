@@ -11,12 +11,7 @@ export const useContractSettleAssertion = ({ assertionId }: SettleAssertionParam
     address: OOV3_CONTRACT_ADDRESS,
     abi: OOV3_ABI,
     functionName: 'settleAssertion',
-    args: [
-      assertionId,
-      //   {
-      //     gasLimit: 1300000, // TODO
-      //   },
-    ],
+    args: [assertionId],
 
     chainId: DEFAULT_CHAIN_ID,
     enabled: !!assertionId,
@@ -26,10 +21,10 @@ export const useContractSettleAssertion = ({ assertionId }: SettleAssertionParam
   });
   const { data, writeAsync } = useContractWrite(config);
 
-  const { isLoading, isSuccess } = useWaitForTransaction({
+  const { isLoading, isSuccess, isFetching } = useWaitForTransaction({
     hash: data?.hash,
     enabled: !!data?.hash,
   });
 
-  return { isLoading, isSuccess, data, writeAsync };
+  return { isLoading: isLoading || isFetching, isSuccess, data, writeAsync };
 };
