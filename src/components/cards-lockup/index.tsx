@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 import { format } from 'date-fns';
 import tw from 'twin.macro';
 
+import { parseNumberCommaSeperator } from '~/utils/number';
+
 import { LOCKUP_TYPE, Token } from '~/types';
 
 import { DATE_FORMATTER } from '~/constants';
@@ -39,14 +41,17 @@ export const CardLockup = ({
           <Image src={image} />
           <TokenContent>
             <TokenAmount>{`${token.value} ${token.name}`}</TokenAmount>
-            <TokenValue>{`$${tokenValue}`}</TokenValue>
+            <TokenValue>{`${parseNumberCommaSeperator({
+              number: tokenValue,
+              prefix: '$',
+            })}`}</TokenValue>
           </TokenContent>
         </TokenOuterWrapper>
       </UpperWrapper>
       <BottomWrapper>
         <BottomInnerWraper>
           <BottomLabel>{dateLabel}</BottomLabel>
-          <BottomValue>{format(date, DATE_FORMATTER.MMM_d_yyyy)}</BottomValue>
+          <BottomValue>{format(new Date(date), DATE_FORMATTER.MMM_d_yyyy)}</BottomValue>
         </BottomInnerWraper>
         {totalToken && (
           <BottomInnerWraper>

@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
+import { parseNumberCommaSeperator } from '~/utils/number';
+
 import { Token } from '~/types';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -20,7 +22,10 @@ export const CardStaking = ({ image, token, tokenValue, stakedAt, ...rest }: Pro
           <Image src={image} />
           <TokenContent>
             <TokenAmount>{`${token.value} ${token.name}`}</TokenAmount>
-            <TokenValue>{`$${tokenValue}`}</TokenValue>
+            <TokenValue>{`${parseNumberCommaSeperator({
+              number: tokenValue,
+              prefix: '$',
+            })}`}</TokenValue>
           </TokenContent>
         </TokenOuterWrapper>
       </UpperWrapper>
