@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import tw from 'twin.macro';
 import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
 
@@ -29,6 +28,7 @@ import {
 import { parseLidoStakingAsset } from '~/utils/token';
 import { parseTxHistory } from '~/utils/transactions';
 import { useListingDataState } from '~/states/listing-data';
+import { useListingUmaState } from '~/states/listing-uma';
 
 import { Account, CATEGORIES } from '~/types';
 
@@ -41,6 +41,8 @@ import { ListingUma } from '../components/listing-uma';
 
 export const ListingStep2 = () => {
   const { data } = useListingDataState();
+  const { data: umaData } = useListingUmaState();
+
   const { address } = data;
   const currentListedAccount = useReadLocalStorage<Account[]>(LISTED_LOCAL_KEY);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -115,9 +117,21 @@ export const ListingStep2 = () => {
     address: (address as `0x${string}`) ?? '0x',
   });
 
-  const handleSaveInfo = useCallback(() => {
+  const handleSaveInfo = () => {
+    const typedUmaData = umaData
+      ? Object.keys(umaData).map(key => {
+          const value = umaData[key];
+          return {
+            id: key.toString(),
+            status: 'PENDING',
+            text: value || '',
+            date: new Date(),
+          };
+        })
+      : [];
+
     const typedData = {
-      id: data.id || '',
+      id: data.id || data.address || '',
       address: data.address || '',
       receivingAddress: data.receivingAddress || '',
       title: data.title || '',
@@ -125,12 +139,12 @@ export const ListingStep2 = () => {
       category: data.category || CATEGORIES.GENERAL,
       price: data.price || 0,
       tokenValue: data.tokenValue || 0,
-      verified: data.verified || [],
+      verified: typedUmaData,
       hidded: data.hidden || false,
     };
 
     saveStorage([...(currentListedAccount || []), typedData]);
-  }, [currentListedAccount, data, saveStorage]);
+  };
 
   const handleListing = async () => {
     await listAsync?.();
