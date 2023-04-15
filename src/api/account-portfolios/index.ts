@@ -68,11 +68,9 @@ export const useAccountTokensQuery = (
   );
 
 interface EtherscanTxResponse {
-  data: {
-    status: string;
-    message: string;
-    result: EtherscanTx[];
-  };
+  status: string;
+  message: string;
+  result: EtherscanTx[];
 }
 export const useFirstTxQuery = (
   account?: string,
@@ -105,11 +103,9 @@ export const useAllTxQuery = (
   );
 
 interface EtherscanTokenTxResponse {
-  data: {
-    status: string;
-    message: string;
-    result: EtherscanTokenTx[];
-  };
+  status: string;
+  message: string;
+  result: EtherscanTokenTx[];
 }
 export const useTokenTxQuery = (
   account?: string,
@@ -127,11 +123,9 @@ export const useTokenTxQuery = (
   );
 
 interface EtherscanNftTxResponse {
-  data: {
-    status: string;
-    message: string;
-    result: EtherscanNftTx[];
-  };
+  status: string;
+  message: string;
+  result: EtherscanNftTx[];
 }
 export const useNftTxQuery = (
   account?: string,

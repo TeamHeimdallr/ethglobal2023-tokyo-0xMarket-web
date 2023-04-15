@@ -89,14 +89,14 @@ const DetailPage = () => {
     enabled,
   });
 
-  const tokens = tokenData?.data.data.erc20.data;
-  const nfts = tokenData?.data.data.erc721.data;
-  const sbts = tokenData?.data.data.poap.data;
+  const tokens = tokenData?.data?.data?.erc20?.data;
+  const nfts = tokenData?.data?.data?.erc721?.data;
+  const sbts = tokenData?.data?.data?.poap?.data;
 
-  const firstTx = firstTxData?.data.result?.[0];
-  const allTx = allTxData?.data.result;
-  const tokenTx = tokenTxData?.data.result;
-  const nftTx = nftTxData?.data.result;
+  const firstTx = firstTxData?.result?.[0];
+  const allTx = allTxData?.result;
+  const tokenTx = tokenTxData?.result;
+  const nftTx = nftTxData?.result;
 
   const lido = tokens?.find(t => t.token.symbol === 'stETH');
   const stakingAssets = lido ? [parseLidoStakingAsset(lido)] : [];

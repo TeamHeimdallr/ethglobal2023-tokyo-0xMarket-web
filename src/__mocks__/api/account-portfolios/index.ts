@@ -83,7 +83,7 @@ export const apiAccountPortfolios = [
       resData = account === '1' ? data1 : data2;
     }
 
-    return res(ctx.status(200), ctx.json({ data: resData }));
+    return res(ctx.status(200), ctx.json(resData));
   }),
 
   rest.get(`${API_URL}/account/:id/portfolio/lock-up-tokens`, (req, res, ctx) => {
