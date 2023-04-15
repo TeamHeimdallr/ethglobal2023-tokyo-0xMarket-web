@@ -1,7 +1,7 @@
 import { graphql, rest } from 'msw';
 
 import {
-  accountAllTx,
+  accountAllTx as accountAllTx1,
   accountFirstTx as accountFirstTx1,
   accountInGameInfos as accountInGameInfos1,
   accountLockupTokens as accountLockupTokens1,
@@ -11,10 +11,14 @@ import {
   accountTokenTx as accountTokenTx1,
 } from '~/__mocks__/data/account-portfolios-1';
 import {
+  accountAllTx as accountAllTx2,
+  accountFirstTx as accountFirstTx2,
   accountInGameInfos as accountInGameInfos2,
   accountLockupTokens as accountLockupTokens2,
+  accountNftTx as accountNftTx2,
   accountStakingAssets as accountStakingAssets2,
   accountTokens as accountTokens2,
+  accountTokenTx as accountTokenTx2,
 } from '~/__mocks__/data/account-portfolios-2';
 import { API_URL, API_URL_ETHERSCAN } from '~/constants';
 
@@ -40,28 +44,43 @@ export const apiAccountPortfolios = [
 
     let resData = {};
     if (action === 'txlist') {
-      const data = {
+      const data1 = {
         status: '1',
         message: 'OK',
-        result: offset === '1' ? [accountFirstTx1] : accountAllTx,
+        result: offset === '1' ? [accountFirstTx1] : accountAllTx1,
       };
-      resData = account === '1' ? data : data;
+      const data2 = {
+        status: '1',
+        message: 'OK',
+        result: offset === '1' ? [accountFirstTx2] : accountAllTx2,
+      };
+      resData = account === '1' ? data1 : data2;
     }
     if (action === 'tokentx') {
-      const data = {
+      const data1 = {
         status: '1',
         message: 'OK',
         result: accountTokenTx1,
       };
-      resData = account === '1' ? data : data;
+      const data2 = {
+        status: '1',
+        message: 'OK',
+        result: accountTokenTx2,
+      };
+      resData = account === '1' ? data1 : data2;
     }
     if (action === 'tokennfttx') {
-      const data = {
+      const data1 = {
         status: '1',
         message: 'OK',
         result: accountNftTx1,
       };
-      resData = account === '1' ? data : data;
+      const data2 = {
+        status: '1',
+        message: 'OK',
+        result: accountNftTx2,
+      };
+      resData = account === '1' ? data1 : data2;
     }
 
     return res(ctx.status(200), ctx.json({ data: resData }));

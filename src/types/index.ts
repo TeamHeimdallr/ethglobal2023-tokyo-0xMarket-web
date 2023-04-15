@@ -65,10 +65,31 @@ export type AccountDiscover = Pick<
 
 export type ListingAccount = Partial<Omit<Account, 'id'>>;
 
+interface GameItem {
+  value: string;
+  logo?: {
+    src: string;
+    width?: number;
+    height?: number;
+  };
+}
 export interface AccountInGameInfo {
   id: string;
-
-  title: string;
+  user: string;
+  game: {
+    name: string;
+    logo: string;
+  };
+  infos?: {
+    label: string;
+    value: string;
+    logo?: string;
+  }[];
+  items?: {
+    label: string;
+    items: GameItem[];
+    type?: 'row' | 'col';
+  }[];
 }
 
 export interface AccountTokenAll {

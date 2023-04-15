@@ -1,5 +1,26 @@
+import IconAxie from '~/assets/icons/icon-axie.png';
+import IconTier from '~/assets/icons/icon-axie-tier.png';
+import IconBelongingWeek from '~/assets/icons/icon-belonging-week-memorabilia.png';
+import IconCataCommon from '~/assets/icons/icon-cata-common.png';
+import IconCataEpic from '~/assets/icons/icon-cata-epic.png';
+import IconCataLegendary from '~/assets/icons/icon-cata-legendary.png';
+import IconCataRare from '~/assets/icons/icon-cata-rare.png';
+import IconCharm from '~/assets/icons/icon-charm.png';
 import IconEth from '~/assets/icons/icon-eth.png';
+import IconGemDefense from '~/assets/icons/icon-gem-defense.png';
+import IconGemLuck from '~/assets/icons/icon-gem-luck.png';
+import IconGemMagic from '~/assets/icons/icon-gem-magic.png';
+import IconGemPower from '~/assets/icons/icon-gem-power.png';
+import IconGemSpeed from '~/assets/icons/icon-gem-speed.png';
+import IconGucciVault from '~/assets/icons/icon-gucci-vault.png';
+import IconKverse from '~/assets/icons/icon-kverse.png';
 import IconMatic from '~/assets/icons/icon-matic.png';
+import IconMaxs from '~/assets/icons/icon-maxs.png';
+import IconMoonshard from '~/assets/icons/icon-moonshard.png';
+import IconRune from '~/assets/icons/icon-rune.png';
+import IconSandbox from '~/assets/icons/icon-sanbox.png';
+import IconSlp from '~/assets/icons/icon-slp.png';
+import IconSportsland from '~/assets/icons/icon-sportsland-event.png';
 
 import { randomDate } from '~/utils/date';
 
@@ -11,17 +32,6 @@ import {
   CURRENCY,
   LOCKUP_TYPE,
 } from '~/types';
-
-export const accountInGameInfos: AccountInGameInfo[] = [
-  {
-    id: '1',
-    title: '',
-  },
-  {
-    id: '2',
-    title: '',
-  },
-];
 
 export const accountTokens: AccountTokenAll = {
   data: {
@@ -785,3 +795,115 @@ export const accountNftTx: EtherscanNftTx[] = [...Array(12).keys()]
     };
   })
   .sort((a, b) => Number(a.timeStamp) - Number(b.timeStamp));
+
+export const accountInGameInfos: AccountInGameInfo[] = [
+  {
+    id: '1',
+    user: '@kenzo456',
+    game: {
+      name: 'Axie infinity',
+      logo: IconAxie,
+    },
+    infos: [
+      { label: 'Tier', value: 'Challenger 0', logo: IconTier },
+      { label: 'Rating', value: '2042' },
+      { label: 'Rank', value: '#45' },
+      { label: 'WinRate', value: '84%' },
+      { label: 'Crafting Level', value: '89' },
+    ],
+    items: [
+      {
+        label: 'In-game Assets',
+        items: [
+          { value: '169,359 mAXS', logo: { src: IconMaxs, width: 24, height: 24 } },
+          { value: '8,274 SLP', logo: { src: IconSlp, width: 24, height: 24 } },
+          {
+            value: '610 Moonshards',
+            logo: { src: IconMoonshard, width: 24, height: 24 },
+          },
+          {
+            value: 'Runes (Season 3)',
+            logo: { src: IconRune, width: 24, height: 24 },
+          },
+          {
+            value: 'Charms (Season 3)',
+            logo: { src: IconCharm, width: 24, height: 24 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: '2',
+    user: '@kenzo456',
+    game: {
+      name: 'The Sandbox',
+      logo: IconSandbox,
+    },
+    items: [
+      {
+        label: 'Badges',
+        type: 'col',
+        items: [
+          {
+            value: 'Memorabilia',
+            logo: { src: IconSportsland, width: 48, height: 48 },
+          },
+          {
+            value: 'Kverse Mini Event',
+            logo: { src: IconKverse, width: 48, height: 48 },
+          },
+          {
+            value: 'Belonging Week Momorabilia',
+            logo: { src: IconBelongingWeek, width: 48, height: 48 },
+          },
+          {
+            value: 'Gucci Vault Event',
+            logo: { src: IconGucciVault, width: 48, height: 48 },
+          },
+          {
+            value: 'Sportsland Event',
+            logo: { src: IconSportsland, width: 48, height: 48 },
+          },
+        ],
+      },
+      {
+        label: 'My Gems',
+        items: [
+          {
+            value: 'Power 5',
+            logo: { src: IconGemPower, width: 24, height: 24 },
+          },
+          {
+            value: 'Defense 10',
+            logo: { src: IconGemDefense, width: 24, height: 24 },
+          },
+          { value: 'Speed 7', logo: { src: IconGemSpeed, width: 24, height: 24 } },
+          {
+            value: 'Magic 1',
+            logo: { src: IconGemMagic, width: 24, height: 24 },
+          },
+          { value: 'Luck', logo: { src: IconGemLuck, width: 24, height: 24 } },
+        ],
+      },
+      {
+        label: 'My Catalysts',
+        items: [
+          {
+            value: 'Legendary 0',
+            logo: { src: IconCataLegendary, width: 24, height: 24 },
+          },
+          {
+            value: 'Epic 7',
+            logo: { src: IconCataEpic, width: 24, height: 24 },
+          },
+          { value: 'Rare 16', logo: { src: IconCataRare, width: 24, height: 24 } },
+          {
+            value: 'Common 55',
+            logo: { src: IconCataCommon, width: 24, height: 24 },
+          },
+        ],
+      },
+    ],
+  },
+];

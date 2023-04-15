@@ -32,11 +32,6 @@ const DetailPage = () => {
   const params = useParams();
   const { id } = params;
 
-  const { data: inGameInfo } = useAccountInGameInfosQuery(id ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!id,
-  });
   const { data: tokenData } = useAccountTokensQuery(id ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -69,6 +64,11 @@ const DetailPage = () => {
     staleTime: Infinity,
     enabled: !!id,
   });
+  const { data: inGameInfo } = useAccountInGameInfosQuery(id ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!id,
+  });
 
   const tokens = tokenData?.data.data.erc20.data;
   const nfts = tokenData?.data.data.erc721.data;
@@ -93,8 +93,6 @@ const DetailPage = () => {
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
-            <PortfolioInGameInfos data={inGameInfo?.data} />
-            <Divider />
             <PortfolioTokens data={tokens} />
             <Divider />
             <PortfolioSbts data={sbts} />
@@ -106,6 +104,8 @@ const DetailPage = () => {
             <PortfolioStakingAssets data={stakingAssets} />
             <Divider />
             <PortfolioTxHistories data={histories} />
+            <Divider />
+            <PortfolioInGameInfos data={inGameInfo?.data} />
           </PortfolioInnerWrapper>
         </PortfolioWrapper>
       </ContentWrapper>
