@@ -25,26 +25,36 @@ export const CategoriesMap: CategoryMap = {
     key: CATEGORIES.GAME,
     text: 'Game',
     color: COLOR.GAME().toHexString(),
+    textColor: '#FFF',
+    image: '',
   },
   [CATEGORIES.WHITELIST]: {
     key: CATEGORIES.WHITELIST,
     text: 'Whitelist',
     color: COLOR.WHITELIST().toHexString(),
+    textColor: '#000',
+    image: '',
   },
   [CATEGORIES.SBT]: {
     key: CATEGORIES.SBT,
     text: 'SBT',
     color: COLOR.SBT().toHexString(),
+    textColor: '#FFF',
+    image: '',
   },
   [CATEGORIES.TOKEN]: {
     key: CATEGORIES.TOKEN,
     text: 'Token',
     color: COLOR.TOKEN().toHexString(),
+    textColor: '#FFF',
+    image: '',
   },
   [CATEGORIES.GENERAL]: {
     key: CATEGORIES.GENERAL,
     text: 'General',
     color: COLOR.GENERAL().toHexString(),
+    textColor: '#FFF',
+    image: '',
   },
 };
 
