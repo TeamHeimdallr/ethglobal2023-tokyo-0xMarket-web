@@ -6,7 +6,7 @@
 using ERC-4337, creating new value streams for users. Trade whitelist spots or early vesting wallets
 and find your ideal wallet to easily adapt to the web3 ecosystem.
 
-[DEMO]("https://demo.0xmarket.place/")
+[DEMO](https://demo.0xmarket.place/)
 
 ## Description
 
