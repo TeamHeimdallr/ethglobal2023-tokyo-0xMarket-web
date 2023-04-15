@@ -1,30 +1,28 @@
 import tw from 'twin.macro';
 
-import { useAccountTxHistoriesQuery } from '~/api/account-portfolios';
-
 import { CardTxHistory } from '~/components/cards-tx-history';
 
-import { useListingDataState } from '~/states/listing-data';
+import { AccountTxHistory } from '~/types';
 
-export const PortfolioTxHistories = () => {
-  const { data } = useListingDataState();
-  const { address } = data;
+interface Props {
+  data?: AccountTxHistory[];
+}
+export const PortfolioTxHistories = ({ data }: Props) => {
+  const isEmpty = data?.length === 0;
 
-  const { data: histories } = useAccountTxHistoriesQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>Tx History</Title>
+        {isEmpty && <TotalValueEmpty>No assets</TotalValueEmpty>}
       </TitleWrapper>
-      <CardWrapper>
-        {histories?.data?.map(history => (
-          <CardTxHistory key={history.id} {...history} />
-        ))}
-      </CardWrapper>
+      {!isEmpty && (
+        <CardWrapper>
+          {data?.map(history => (
+            <CardTxHistory key={history.id} {...history} />
+          ))}
+        </CardWrapper>
+      )}
     </Wrapper>
   );
 };
@@ -39,6 +37,10 @@ const TitleWrapper = tw.div`
 
 const Title = tw.div`
   font-sb-18 text-white
+`;
+
+const TotalValueEmpty = tw.div`
+  font-r-16 text-grayscale-4
 `;
 
 const CardWrapper = tw.div`

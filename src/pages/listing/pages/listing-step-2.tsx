@@ -1,5 +1,15 @@
 import tw from 'twin.macro';
 
+import {
+  useAccountInGameInfosQuery,
+  useAccountLockupTokensQuery,
+  useAccountNftsQuery,
+  useAccountSbtsQuery,
+  useAccountStakingAssetsQuery,
+  useAccountTokensQuery,
+  useAccountTxHistoriesQuery,
+} from '~/api/account-portfolios';
+
 import { Footer } from '~/components/footer';
 import { GnbListing } from '~/components/gnb';
 import {
@@ -12,12 +22,53 @@ import {
   PortfolioTxHistories,
 } from '~/components/portfolios';
 
+import { useListingDataState } from '~/states/listing-data';
+
 import { BackButton } from '../components/back-button';
 import { ListingInputs } from '../components/lising-inputs';
 import { ListedAccountAbstract } from '../components/listed-account-abstract';
 import { ListingVerify } from '../components/listing-verify';
 
 export const ListingStep2 = () => {
+  const { data } = useListingDataState();
+  const { address } = data;
+
+  const { data: inGameInfo } = useAccountInGameInfosQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: tokens } = useAccountTokensQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: nfts } = useAccountNftsQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: sbts } = useAccountSbtsQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: lockupTokens } = useAccountLockupTokensQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: stakingAssets } = useAccountStakingAssetsQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+  const { data: txHistories } = useAccountTxHistoriesQuery(address ?? '', {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    enabled: !!address,
+  });
+
   return (
     <Wrapper>
       <GnbListing />
@@ -32,19 +83,19 @@ export const ListingStep2 = () => {
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
             <PortfolioTitle>Portfolio</PortfolioTitle>
-            <PortfolioInGameInfos />
+            <PortfolioInGameInfos data={inGameInfo?.data} />
             <Divider />
-            <PortfolioTokens />
+            <PortfolioTokens data={tokens?.data} />
             <Divider />
-            <PortfolioSbts />
+            <PortfolioSbts data={sbts?.data} />
             <Divider />
-            <PortfolioNfts />
+            <PortfolioNfts data={nfts?.data} />
             <Divider />
-            <PortfolioLockupTokens />
+            <PortfolioLockupTokens data={lockupTokens?.data} />
             <Divider />
-            <PortfolioStakingAssets />
+            <PortfolioStakingAssets data={stakingAssets?.data} />
             <Divider />
-            <PortfolioTxHistories />
+            <PortfolioTxHistories data={txHistories?.data} />
           </PortfolioInnerWrapper>
         </PortfolioWrapper>
       </ContentWrapper>

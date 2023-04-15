@@ -22,50 +22,50 @@ import { API_URL } from '~/constants';
 
 export const apiAccountPortfolios = [
   rest.get(`${API_URL}/account/:id/portfolio/in-game-infos`, (req, res, ctx) => {
-    const id = Number(req.params.id);
-    const data = id === 1 ? accountInGameInfos1 : accountInGameInfos2;
+    const id = req.params.id;
+    const data = id === '1' ? accountInGameInfos1 : accountInGameInfos2;
 
     return res(ctx.status(200), ctx.json({ data }));
   }),
 
   rest.get(`${API_URL}/account/:id/portfolio/tokens`, (req, res, ctx) => {
-    const id = Number(req.params.id);
-    const data = id === 1 ? accountTokens1 : accountTokens2;
+    const id = req.params.id;
+    const data = id === '1' ? accountTokens1 : accountTokens2;
 
     return res(ctx.status(200), ctx.json({ data }));
   }),
 
   rest.get(`${API_URL}/account/:id/portfolio/nfts`, (req, res, ctx) => {
-    const id = Number(req.params.id);
-    const data = id === 1 ? accountNfts1 : accountNfts2;
+    const id = req.params.id;
+    const data = id === '1' ? accountNfts1 : accountNfts2;
 
     return res(ctx.status(200), ctx.json({ data }));
   }),
 
   rest.get(`${API_URL}/account/:id/portfolio/sbts`, (req, res, ctx) => {
-    const id = Number(req.params.id);
-    const data = id === 1 ? accountSbts1 : accountSbts2;
+    const id = req.params.id;
+    const data = id === '1' ? accountSbts1 : accountSbts2;
 
     return res(ctx.status(200), ctx.json({ data }));
   }),
 
   rest.get(`${API_URL}/account/:id/portfolio/lock-up-tokens`, (req, res, ctx) => {
-    const id = Number(req.params.id);
-    const data = id === 1 ? accountLockupTokens1 : accountLockupTokens2;
+    const id = req.params.id;
+    const data = id === '1' ? accountLockupTokens1 : accountLockupTokens2;
 
     return res(ctx.status(200), ctx.json({ data }));
   }),
 
   rest.get(`${API_URL}/account/:id/portfolio/staking-assets`, (req, res, ctx) => {
-    const id = Number(req.params.id);
-    const data = id === 1 ? accountStakingAssets1 : accountStakingAssets2;
+    const id = req.params.id;
+    const data = id === '1' ? accountStakingAssets1 : accountStakingAssets2;
 
     return res(ctx.status(200), ctx.json({ data }));
   }),
 
   rest.get(`${API_URL}/account/:id/portfolio/tx-histories`, (req, res, ctx) => {
-    const id = Number(req.params.id);
-    const data = id === 1 ? accountTxHistories1 : accountTxHistories2;
+    const id = req.params.id;
+    const data = id === '1' ? accountTxHistories1 : accountTxHistories2;
 
     return res(ctx.status(200), ctx.json({ data }));
   }),

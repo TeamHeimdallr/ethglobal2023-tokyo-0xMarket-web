@@ -1,27 +1,23 @@
 import tw from 'twin.macro';
 
-import { useAccountSbtsQuery } from '~/api/account-portfolios';
-
 import { CardNFT } from '~/components/cards-nft';
 
-import { useListingDataState } from '~/states/listing-data';
+import { AccountNftSbt } from '~/types';
 
-export const PortfolioSbts = () => {
-  const { data } = useListingDataState();
-  const { address } = data;
+interface Props {
+  data?: AccountNftSbt[];
+}
+export const PortfolioSbts = ({ data }: Props) => {
+  const isEmpty = data?.length === 0;
 
-  const { data: sbts } = useAccountSbtsQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>SBTs</Title>
+        {isEmpty && <TotalValueEmpty>No assets</TotalValueEmpty>}
       </TitleWrapper>
       <CardWrapper>
-        {sbts?.data?.map(sbt => (
+        {data?.map(sbt => (
           <CardNFT key={sbt.id} sbt image={sbt.image} nft={sbt.token} />
         ))}
       </CardWrapper>
@@ -40,7 +36,9 @@ const TitleWrapper = tw.div`
 const Title = tw.div`
   font-sb-18 text-white
 `;
-
+const TotalValueEmpty = tw.div`
+  font-r-16 text-grayscale-4
+`;
 const CardWrapper = tw.div`
   grid grid-cols-5 gap-24
 `;

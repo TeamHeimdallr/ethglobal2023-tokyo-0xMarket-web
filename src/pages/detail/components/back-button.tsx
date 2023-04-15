@@ -1,17 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
 import { IconBack } from '~/components/icons';
 
-import { useListingProgressState } from '~/states/listing-progress';
-
 export const BackButton = () => {
-  const { setProgress } = useListingProgressState();
+  const navigate = useNavigate();
 
   return (
     <Wrapper>
-      <Button onClick={() => setProgress(0)}>
+      <Button onClick={() => navigate('/')}>
         <IconBack width={24} height={24} color="#6D7684" />
         Back
       </Button>

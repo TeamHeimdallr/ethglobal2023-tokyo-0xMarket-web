@@ -82,14 +82,14 @@ export const ListedAccountAbstract = () => {
 };
 
 const Wrapper = tw.div`
-  flex items-start gap-16
+  flex items-start gap-16 justify-between
 `;
 
 const LeftWrapper = tw.div`
-  flex flex-shrink-0 gap-20
+  flex gap-20
 `;
 const RightWrapper = tw.div`
-  flex flex-1 flex-col items-end py-5
+  flex flex-col flex-shrink-0 items-end py-5 w-279
 `;
 
 interface ImageProps {

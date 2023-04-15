@@ -1,38 +1,36 @@
 import { useMemo } from 'react';
 import tw from 'twin.macro';
 
-import { useAccountStakingAssetsQuery } from '~/api/account-portfolios';
-
 import { CardStaking } from '~/components/cards-staking';
 
 import { parseNumberCommaSeperator } from '~/utils/number';
-import { useListingDataState } from '~/states/listing-data';
 
-export const PortfolioStakingAssets = () => {
-  const { data } = useListingDataState();
-  const { address } = data;
+import { AccountStakingAsset } from '~/types';
 
-  const { data: tokens } = useAccountStakingAssetsQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
-  const totalValue = useMemo(
-    () => tokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0,
-    [tokens?.data]
-  );
+interface Props {
+  data?: AccountStakingAsset[];
+}
+export const PortfolioStakingAssets = ({ data }: Props) => {
+  const isEmpty = data?.length === 0;
+  const totalValue = useMemo(() => data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0, [data]);
 
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>Staking Assets</Title>
-        <TotalValue>{parseNumberCommaSeperator({ number: totalValue, prefix: '$' })}</TotalValue>
+        {isEmpty ? (
+          <TotalValueEmpty>No assets</TotalValueEmpty>
+        ) : (
+          <TotalValue>{parseNumberCommaSeperator({ number: totalValue, prefix: '$' })}</TotalValue>
+        )}
       </TitleWrapper>
-      <CardWrapper>
-        {tokens?.data?.map(token => (
-          <CardStaking key={token.id} {...token} />
-        ))}
-      </CardWrapper>
+      {!isEmpty && (
+        <CardWrapper>
+          {data?.map(token => (
+            <CardStaking key={token.id} {...token} />
+          ))}
+        </CardWrapper>
+      )}
     </Wrapper>
   );
 };
@@ -53,6 +51,9 @@ const TotalValue = tw.div`
   font-sb-16 text-white
 `;
 
+const TotalValueEmpty = tw.div`
+  font-r-16 text-grayscale-4
+`;
 const CardWrapper = tw.div`
   grid grid-cols-3 gap-24
 `;

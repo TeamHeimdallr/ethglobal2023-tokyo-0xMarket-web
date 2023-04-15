@@ -1,12 +1,20 @@
 import tw from 'twin.macro';
 
-export const PortfolioInGameInfos = () => {
+import { AccountInGameInfo } from '~/types';
+
+interface Props {
+  data?: AccountInGameInfo[];
+}
+export const PortfolioInGameInfos = ({ data }: Props) => {
+  const isEmpty = data?.length === 0;
+
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>In-game info</Title>
+        {isEmpty && <TotalValueEmpty>No assets</TotalValueEmpty>}
       </TitleWrapper>
-      <CardWrapper></CardWrapper>
+      {!isEmpty && <CardWrapper></CardWrapper>}
     </Wrapper>
   );
 };
@@ -21,6 +29,10 @@ const TitleWrapper = tw.div`
 
 const Title = tw.div`
   font-sb-18 text-white
+`;
+
+const TotalValueEmpty = tw.div`
+  font-r-16 text-grayscale-4
 `;
 
 const CardWrapper = tw.div`

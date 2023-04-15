@@ -1,38 +1,37 @@
 import { useMemo } from 'react';
 import tw from 'twin.macro';
 
-import { useAccountLockupTokensQuery } from '~/api/account-portfolios';
-
 import { CardLockup } from '~/components/cards-lockup';
 
 import { parseNumberCommaSeperator } from '~/utils/number';
-import { useListingDataState } from '~/states/listing-data';
 
-export const PortfolioLockupTokens = () => {
-  const { data } = useListingDataState();
-  const { address } = data;
+import { AccountLockupToken } from '~/types';
 
-  const { data: tokens } = useAccountLockupTokensQuery(address ?? '', {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    enabled: !!address,
-  });
-  const totalValue = useMemo(
-    () => tokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0,
-    [tokens?.data]
-  );
+interface Props {
+  data?: AccountLockupToken[];
+}
+
+export const PortfolioLockupTokens = ({ data }: Props) => {
+  const isEmpty = data?.length === 0;
+  const totalValue = useMemo(() => data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0, [data]);
 
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>Lock-up Tokens</Title>
-        <TotalValue>{parseNumberCommaSeperator({ number: totalValue, prefix: '$' })}</TotalValue>
+        {isEmpty ? (
+          <TotalValueEmpty>No assets</TotalValueEmpty>
+        ) : (
+          <TotalValue>{parseNumberCommaSeperator({ number: totalValue, prefix: '$' })}</TotalValue>
+        )}
       </TitleWrapper>
-      <CardWrapper>
-        {tokens?.data?.map(token => (
-          <CardLockup key={token.id} {...token} />
-        ))}
-      </CardWrapper>
+      {!isEmpty && (
+        <CardWrapper>
+          {data?.map(token => (
+            <CardLockup key={token.id} {...token} />
+          ))}
+        </CardWrapper>
+      )}
     </Wrapper>
   );
 };
@@ -51,6 +50,10 @@ const Title = tw.div`
 
 const TotalValue = tw.div`
   font-sb-16 text-white
+`;
+
+const TotalValueEmpty = tw.div`
+  font-r-16 text-grayscale-4
 `;
 
 const CardWrapper = tw.div`
