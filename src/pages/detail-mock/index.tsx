@@ -35,6 +35,7 @@ import { LISTED_LOCAL_KEY, MOCK_USER } from '~/constants';
 
 import { AccountInfo } from './components/account-info';
 import { UmaVerified } from './components/uma-verified';
+import { UmaVerify } from './components/uma-verify';
 
 interface Props {
   id: string;
@@ -66,6 +67,9 @@ const DetailPageMock = ({ id }: Props) => {
         </DetailWrapper>
         <UmaWrapper>
           {verified && verified.length > 0 && <UmaVerified verified={verified} />}
+        </UmaWrapper>
+        <UmaWrapper>
+          <UmaVerify />
         </UmaWrapper>
         <PortfolioWrapper>
           <PortfolioInnerWrapper>
