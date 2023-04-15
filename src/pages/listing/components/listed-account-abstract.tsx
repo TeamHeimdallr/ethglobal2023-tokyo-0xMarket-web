@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { ethers } from 'ethers';
 import tw from 'twin.macro';
+import { useBalance } from 'wagmi';
 
 import { useAccountLockupTokensQuery, useAccountTokensQuery } from '~/api/account-portfolios';
 
@@ -16,12 +18,17 @@ import { useListingDataState } from '~/states/listing-data';
 import { CATEGORIES } from '~/types';
 
 import { price } from '~/__mocks__/data/token-price';
-import { CategoriesMap } from '~/constants';
+import { CategoriesMap, DEFAULT_CHAIN_ID } from '~/constants';
 
 export const ListedAccountAbstract = () => {
   const { data, setData } = useListingDataState();
   const { address, category } = data;
 
+  const { data: ethBalance } = useBalance({
+    chainId: DEFAULT_CHAIN_ID,
+    address: address as `0x{string}`,
+    enabled: !!address && ethers.utils.isAddress(address),
+  });
   const { data: tokenData } = useAccountTokensQuery(address ?? '', {
     cacheTime: Infinity,
     staleTime: Infinity,
@@ -41,6 +48,12 @@ export const ListedAccountAbstract = () => {
   const stakingAssets = useMemo(() => (lido ? [parseLidoStakingAsset(lido)] : []), [lido]);
 
   const categoryData = CategoriesMap[category ?? CATEGORIES.GENERAL];
+
+  const ethTokenValue = ethBalance
+    ? Number(price.find(p => p.symbol === ethBalance?.symbol)?.lastPriceUSD || 0) || 0
+    : 0;
+  const ethTotalValue = Number(ethBalance?.formatted ?? 0) * ethTokenValue;
+
   const totalValue = useMemo(() => {
     const tokensValue =
       tokens?.reduce((res, d) => {
@@ -53,8 +66,8 @@ export const ListedAccountAbstract = () => {
     const lockTokenValue = lockupTokens?.data?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
     const stakingAssetValue = stakingAssets?.reduce((res, d) => (res += d.tokenValue), 0) ?? 0;
 
-    return tokensValue + nftValue + lockTokenValue + stakingAssetValue;
-  }, [lockupTokens?.data, stakingAssets, tokens]);
+    return ethTotalValue + tokensValue + nftValue + lockTokenValue + stakingAssetValue;
+  }, [ethTotalValue, lockupTokens?.data, stakingAssets, tokens]);
 
   return (
     <Wrapper>

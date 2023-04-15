@@ -68,6 +68,7 @@ export const AccountInfo = () => {
         return (res += tokenPrice);
       }, 0) ?? 0;
 
+    console.log(tokenValues + ethTotalValue);
     return tokenValues + ethTotalValue;
   };
 
