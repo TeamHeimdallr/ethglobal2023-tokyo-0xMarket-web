@@ -15,12 +15,13 @@ import { useListingProgressState } from '~/states/listing-progress';
 
 import { Account } from '~/types';
 
+import { MARKET_CONTRACT_ADDRESS } from '~/constants';
+
 interface Props {
   handleListing?: (data: Partial<Account>) => Promise<void>;
   handleDepositing?: () => Promise<void>;
   isLoading?: boolean;
   isDepositSuccess?: boolean;
-  isListSuccess?: boolean;
 }
 
 export const GnbListing = ({
@@ -28,13 +29,12 @@ export const GnbListing = ({
   handleDepositing,
   isLoading,
   isDepositSuccess,
-  isListSuccess,
 }: Props) => {
   const navigate = useNavigate();
-  const { progress, setProgress, resetProgress } = useListingProgressState();
+  const { progress, setProgress } = useListingProgressState();
   const { data } = useListingDataState();
 
-  const { refetch } = useContractOwnerQuery({
+  const { refetch, owner } = useContractOwnerQuery({
     address: (data?.address as `0x${string}`) ?? '',
   });
 
@@ -65,13 +65,6 @@ export const GnbListing = ({
   }, [progress, setProgress, handleListing, data, handleDepositing]);
 
   useEffect(() => {
-    if (isListSuccess) {
-      navigate(`/${data.id}`);
-      resetProgress();
-    }
-  }, [data.id, isListSuccess, navigate, resetProgress]);
-
-  useEffect(() => {
     if (isDepositSuccess) {
       setProgress(2);
     }
@@ -80,6 +73,12 @@ export const GnbListing = ({
   useEffect(() => {
     if (!!data.address && ethers.utils.isAddress(data.address)) refetch();
   }, [data.address, refetch]);
+
+  useEffect(() => {
+    if (owner === MARKET_CONTRACT_ADDRESS && progress !== 2) {
+      setProgress(2);
+    }
+  }, [owner, progress, setProgress]);
 
   return (
     <Wrapper>

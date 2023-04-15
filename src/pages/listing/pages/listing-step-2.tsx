@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
 import tw from 'twin.macro';
 import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
@@ -32,6 +33,7 @@ import {
 import { parseLidoStakingAsset } from '~/utils/token';
 import { parseTxHistory } from '~/utils/transactions';
 import { useListingDataState } from '~/states/listing-data';
+import { useListingProgressState } from '~/states/listing-progress';
 import { useListingUmaState } from '~/states/listing-uma';
 
 import {
@@ -51,6 +53,9 @@ import { ListedAccountAbstract } from '../components/listed-account-abstract';
 import { ListingUma } from '../components/listing-uma';
 
 export const ListingStep2 = () => {
+  const navigate = useNavigate();
+  const { setProgress, resetProgress } = useListingProgressState();
+
   const { data } = useListingDataState();
   const { data: umaData } = useListingUmaState();
 
@@ -183,6 +188,11 @@ export const ListingStep2 = () => {
     saveStorage([...(currentListedAccount || []), typedData]);
   };
 
+  const statement = useMemo(
+    () => (umaData ? Object.keys(umaData).map(key => umaData[key])[0] ?? '' : ''),
+    [umaData]
+  );
+
   const handleListing = async () => {
     await listAsync?.();
     handleSaveInfo();
@@ -190,10 +200,16 @@ export const ListingStep2 = () => {
 
   const handleDepositing = async () => {
     await depositAsync?.();
+    navigate('/listing');
+    setProgress(2);
   };
 
-  const { writeAsync: assertAsync, isLoading: isAssertLoading } = useContractAssert({
-    statement: umaData ? Object.keys(umaData).map(key => umaData[key])[0] ?? '' : '', // only for first statement
+  const {
+    writeAsync: assertAsync,
+    isLoading: isAssertLoading,
+    isSuccess: isAssertSuccess,
+  } = useContractAssert({
+    statement,
     asserter: address ?? '',
   });
 
@@ -206,13 +222,19 @@ export const ListingStep2 = () => {
     }
   }, [assertAsync, isAssertLoading, isListSuccess]);
 
+  useEffect(() => {
+    if (isAssertSuccess || (isListSuccess && !statement)) {
+      navigate(`/${data.id}`);
+      resetProgress();
+    }
+  }, [data.id, statement, isListSuccess, isAssertSuccess, navigate, resetProgress]);
+
   return (
     <Wrapper>
       <GnbListing
         handleListing={handleListing}
         handleDepositing={handleDepositing}
         isLoading={isListLoading || isDepositLoading || isAssertLoading}
-        isListSuccess={isListSuccess}
         isDepositSuccess={isDepositSuccess}
       />
       <ContentWrapper>

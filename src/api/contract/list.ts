@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 
 import { MARKETPLACE_ABI } from '~/abi/marketplace';
-import { DEFAULT_CHAIN_ID, DEFAULT_DECIMAL, MARKET_CONTRACT_ADDRESS } from '~/constants';
+import { DEFAULT_CHAIN_ID, MARKET_CONTRACT_ADDRESS } from '~/constants';
 
 interface ListParam {
   address: string;
@@ -14,9 +14,16 @@ export const useContractList = ({ address, receiver, price }: ListParam) => {
     address: MARKET_CONTRACT_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'list',
-    args: [address, receiver, BigInt(price * 10 ** DEFAULT_DECIMAL).toString()],
+    args: [
+      address as `0x${string}`,
+      receiver as `0x${string}`,
+      ethers.utils.parseEther(price.toString()),
+    ],
     chainId: DEFAULT_CHAIN_ID,
     enabled: !!address && ethers.utils.isAddress(address) && !!receiver && !!price,
+    onError(error) {
+      console.log('error', error);
+    },
   });
   const { data, writeAsync } = useContractWrite(config);
 
