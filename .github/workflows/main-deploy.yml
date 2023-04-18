@@ -9,6 +9,14 @@ jobs:
     name: Deploy
     runs-on: ubuntu-20.04
     steps:
+
+      - name: Create .env
+        shell: bash
+        env:
+          ENV_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+        run: |
+          echo API_KEY="$ENV_API_KEY" >> .env.dev
+
       - name: Checkout source code
         uses: actions/checkout@master
 
