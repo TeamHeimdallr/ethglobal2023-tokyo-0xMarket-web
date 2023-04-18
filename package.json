@@ -103,7 +103,8 @@
     "twin.macro": "^3.3.0",
     "typescript": "^5.0.3",
     "webpack": "^5.78.0",
-    "webpackbar": "^5.0.2"
+    "webpackbar": "^5.0.2",
+    "yarn-audit-fix": "^9.3.10"
   },
   "resolutions": {
     "@types/react": "18.0.0",
