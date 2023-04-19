@@ -10,13 +10,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
 
-      - name: Create .env
-        shell: bash
-        run: |
-          echo "REACT_APP_ETHERSCAN_API_KEY=${{ secrets.ETHERSCAN_API_KEY }}" >> .env.dev
-          echo "REACT_APP_ETHERSCAN_API_KEY=${{ secrets.ETHERSCAN_API_KEY }}" >> .env.local
-          echo "REACT_APP_ETHERSCAN_API_KEY=${{ secrets.ETHERSCAN_API_KEY }}" >> .env.prod
-
       - name: Checkout source code
         uses: actions/checkout@master
 
@@ -27,6 +20,13 @@ jobs:
 
       - name: Install packages
         run: yarn
+
+      - name: Create .env
+        shell: bash
+        run: |
+          echo "REACT_APP_ETHERSCAN_API_KEY=${{ secrets.ETHERSCAN_API_KEY }}" >> .env.dev
+          echo "REACT_APP_ETHERSCAN_API_KEY=${{ secrets.ETHERSCAN_API_KEY }}" >> .env.local
+          echo "REACT_APP_ETHERSCAN_API_KEY=${{ secrets.ETHERSCAN_API_KEY }}" >> .env.prod
 
       - name: Build
         run: yarn run build:css && yarn run build:dev
